@@ -5,7 +5,7 @@
   --surface-2: #eef1f8;
   --ink: #14213d;
   --ink-soft: #42506b;
-  --muted: #6b7894;
+  --muted: #5b6884;
   --line: #dfe5f0;
   --accent: #1f5fbf;
   --accent-ink: #ffffff;
@@ -63,8 +63,7 @@ body {
   padding: 14px 0;
   margin-bottom: 28px;
   border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  backdrop-filter: blur(8px);
+  background-color: var(--bg);
 }
 .site-title {
   font-family: var(--font-serif);
