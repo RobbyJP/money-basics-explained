@@ -102,6 +102,13 @@ h3 {
   margin: 1.8em 0 0.4em;
 }
 p { margin: 0.9em 0; }
+.byline {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0 0 1.5em;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.9em;
+}
 strong { color: var(--ink); }
 a { color: var(--accent); }
 hr {
