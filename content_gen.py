@@ -38,7 +38,10 @@ and specific (use realistic example numbers), avoid vague filler, and \
 write at a level accessible to someone with no finance background. \
 Do not fabricate specific statistics, rates, or figures - if a number \
 matters, describe it in general/relative terms instead (e.g. "typically \
-higher than" rather than a specific invented percentage)."""
+higher than" rather than a specific invented percentage). Never use \
+LaTeX or math markup (no \frac, \text, $$...$$, \times, etc.) - write any \
+formulas as plain text using normal symbols like x, /, +, = (e.g. \
+"THR Amount = (Months of Service / 12) x One Month's Wages")."""
 
 
 def load_keywords():
@@ -54,6 +57,33 @@ def save_keywords(rows):
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
+
+
+_LATEX_REPLACEMENTS = [
+    (re.compile(r"\\times"), "x"),
+    (re.compile(r"\\div|\\divide"), "/"),
+    (re.compile(r"\\text\{([^}]*)\}"), r"\1"),
+    (re.compile(r"\\frac\{([^}]*)\}\{([^}]*)\}"), r"(\1 / \2)"),
+    (re.compile(r"\\left|\\right|\\cdot|\\approx|\\sum|\\sqrt|\\%"), ""),
+    (re.compile(r"\\\$"), "$"),
+    (re.compile(r"\\([a-zA-Z]+)"), ""),
+    (re.compile(r"[{}]"), ""),
+]
+
+
+def _strip_latex(text: str) -> str:
+    def replace_block(m):
+        inner = m.group(1) or m.group(2) or ""
+        for pat, repl in _LATEX_REPLACEMENTS:
+            inner = pat.sub(repl, inner)
+        inner = inner.strip()
+        inner = re.sub(r"\(\s*\(", "(", inner)
+        inner = re.sub(r"\)\s*\)", ")", inner)
+        return inner.strip()
+
+    text = re.sub(r"\$\$(.+?)\$\$", replace_block, text, flags=re.DOTALL)
+    text = re.sub(r"\\\(|\\\)", "", text)
+    return text
 
 
 def slugify(text: str) -> str:
@@ -95,6 +125,7 @@ Do not include any disclaimer - that will be added automatically."""
     body = "\n".join(body_lines).strip()
     while body.startswith("---"):
         body = body[3:].lstrip("\n")
+    body = _strip_latex(body)
     body = body.strip() + DISCLAIMER
 
     return {
