@@ -40,13 +40,13 @@ seed keywords.
 
 ### Build the static site
 ```bash
-python site_builder.py   # converts articles/*.md -> public/*.html
+python site_builder.py   # converts articles/*.md -> docs/*.html
 ```
-Outputs to `public/` — this is what you deploy.
+Outputs to `docs/` (set `PUBLIC_DIR` in `.env` to change) — this is what you deploy.
 
 ### Publish
 ```bash
-python publish.py   # git add/commit/push public/ to your Pages branch
+python publish.py   # git add/commit/push docs/ to your Pages branch
 ```
 Requires the repo to already be connected to GitHub Pages or Cloudflare
 Pages (one-time manual setup — see "Hosting setup" below).
@@ -59,11 +59,10 @@ python main.py --once --count 2   # generate 2 new articles, rebuild, publish
 ## Hosting setup (one-time, manual)
 
 1. Create a GitHub repo, push this project.
-2. **GitHub Pages**: Settings → Pages → deploy from `public/` folder on
-   your main branch (or a dedicated `gh-pages` branch — adjust
-   `publish.py` if so).
+2. **GitHub Pages**: Settings → Pages → deploy from `docs/` folder on
+   your main branch.
    **OR Cloudflare Pages**: connect the repo, set build output directory
-   to `public/`. Slightly better performance/analytics than GitHub Pages,
+   to `docs/`. Slightly better performance/analytics than GitHub Pages,
    still free tier.
 3. Point a custom domain at it if you want (optional, ~$10-15/year — this
    is the one cost worth spending on early since domain age helps SEO and

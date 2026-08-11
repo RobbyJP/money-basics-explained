@@ -20,6 +20,7 @@ jobs:
       - run: python main.py --once --count 2
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PUBLIC_DIR: docs
           SITE_NAME: ${{ vars.SITE_NAME }}
           SITE_URL: ${{ vars.SITE_URL }}
           SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION }}
