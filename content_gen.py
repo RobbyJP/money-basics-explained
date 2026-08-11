@@ -77,15 +77,7 @@ the options
 
 Do not include any disclaimer - that will be added automatically."""
 
-    response = client.models.generate_content(
-        model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash"),
-        contents=user_prompt,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_PROMPT,
-            max_output_tokens=8000,
-        ),
-    )
-    text = response.text
+    text = _generate_with_retry(client, user_prompt).text
 
     lines = text.split("\n")
     title = ""
@@ -112,6 +104,47 @@ Do not include any disclaimer - that will be added automatically."""
         "slug": slugify(keyword),
         "keyword": keyword,
     }
+
+
+def _retry_delay(exc) -> float:
+    import re as _re
+    hint = getattr(exc, "message", "") or ""
+    m = _re.search(r"retry in ([0-9.]+)s", hint, _re.IGNORECASE)
+    if m:
+        return max(float(m.group(1)), 5.0)
+    for detail in getattr(exc, "details", None) or []:
+        delay = detail.get("retryDelay", "")
+        m = _re.search(r"([0-9.]+)s", delay)
+        if m:
+            return max(float(m.group(1)), 5.0)
+    return 0.0
+
+
+def _generate_with_retry(client, user_prompt: str, max_retries: int = 5):
+    model = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
+    config = types.GenerateContentConfig(
+        system_instruction=SYSTEM_PROMPT,
+        max_output_tokens=8000,
+    )
+    for attempt in range(1, max_retries + 1):
+        try:
+            return client.models.generate_content(
+                model=model,
+                contents=user_prompt,
+                config=config,
+            )
+        except Exception as exc:
+            if getattr(exc, "code", None) in (400, 401, 403, 404):
+                raise
+            wait = _retry_delay(exc)
+            if not wait:
+                wait = 45.0
+            print(
+                f"[content_gen] API error (attempt {attempt}/{max_retries}): "
+                f"{type(exc).__name__} code={getattr(exc, 'code', '?')}; retrying in {wait:.0f}s"
+            )
+            time.sleep(wait)
+    raise RuntimeError(f"gave up generating after {max_retries} retries")
 
 
 def write_article_file(article: dict):
@@ -158,8 +191,7 @@ def main():
         article = generate_article(client, row["keyword"], row.get("intent", "educational"))
         write_article_file(article)
         row["used"] = "yes"
-
-    save_keywords(rows)
+        save_keywords(rows)
 
 
 if __name__ == "__main__":
