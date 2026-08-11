@@ -59,6 +59,7 @@ def render_page(
     calculator_html: str = "",
     calculator_script: str = "",
     json_ld: str = "",
+    css_version: str = "",
 ) -> str:
     base = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
     import datetime
@@ -72,6 +73,7 @@ def render_page(
         .replace("{{ calculator_html }}", calculator_html)
         .replace("{{ calculator_script }}", calculator_script)
         .replace("{{ json_ld }}", json_ld)
+        .replace("{{ css_version }}", css_version)
         .replace("{{ year }}", str(datetime.date.today().year))
     )
 
@@ -152,6 +154,10 @@ def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "
 
 
 def build():
+    import datetime
+
+    today = datetime.date.today().isoformat()
+    css_version = today.replace("-", "")
     if PUBLIC_DIR.exists():
         shutil.rmtree(PUBLIC_DIR)
     PUBLIC_DIR.mkdir(parents=True)
@@ -179,9 +185,6 @@ def build():
         print(f"[site_builder] wrote robots.txt (sitemap: {sitemap_url})")
 
     sitemap_entries = []
-    import datetime
-
-    today = datetime.date.today().isoformat()
 
     def add_sitemap(path: str, lastmod: str = ""):
         sitemap_entries.append((path, lastmod or today))
@@ -217,6 +220,7 @@ def build():
             page_title=f"{fm.get('title', md_path.stem)} | {SITE_NAME}",
             meta_description=fm.get("description", SITE_DESCRIPTION),
             prefix=base_prefix(p),
+            css_version=css_version,
             calculator_html=calc_html,
             calculator_script=calc_script,
             json_ld=json_ld_article(
@@ -268,6 +272,7 @@ def build():
             page_title=SITE_NAME,
             meta_description=SITE_DESCRIPTION,
             prefix="",
+            css_version=css_version,
             json_ld=json_ld_website(),
         ),
         encoding="utf-8",
@@ -282,6 +287,7 @@ def build():
             page_title=f"Calculators | {SITE_NAME}",
             meta_description="Free interactive personal finance calculators.",
             prefix="../",
+            css_version=css_version,
             json_ld=json_ld_article(
                 "Calculators — Money Basics Explained",
                 "Free interactive personal finance calculators.",

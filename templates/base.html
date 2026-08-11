@@ -9,7 +9,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ meta_description }}">
-<link rel="stylesheet" href="{{ base_prefix }}style.css">
+<link rel="stylesheet" href="{{ base_prefix }}style.css?v={{ css_version }}">
 {{ json_ld }}
 <!-- AdSense: paste your approved AdSense snippet here once approved.
      Gate ad loading on consent: only run the AdSense loader when
@@ -60,6 +60,7 @@
   }
   document.getElementById("consent-accept").addEventListener("click", function () { choose("accepted"); });
   document.getElementById("consent-decline").addEventListener("click", function () { choose("declined"); });
+  banner.hidden = false;
   banner.classList.add("consent-visible");
 })();
 </script>
