@@ -1,84 +1,63 @@
 ---
-title: "How Compound Interest Works: A Beginner's Guide"
-description: "Discover how compound interest works to grow your savings over time. Learn the difference between simple and compound interest with clear, real-world examples."
+title: "Compound Interest Calculator — How Compound Interest Works"
+description: "Free compound interest calculator with monthly contributions, growth chart, and a clear explanation of how compound interest works."
 slug: "how-compound-interest-works"
 keyword: "how compound interest works"
+path: "calculators/compound-interest"
+calculator: "compound-interest"
 date: "2026-08-11"
 ---
 
-***
+# How Compound Interest Works
 
-At its core, interest is the price paid for using someone else's money. When money is deposited into a savings account, the bank pays interest for the right to use those funds. When money is borrowed, the borrower pays interest to the lender. 
+Compound interest is interest earned on top of interest. When you invest, your returns are reinvested, and those returns then earn their own returns. Over long periods, this effect turns steady contributions into significantly larger sums.
 
-But not all interest is calculated the same way. To understand how wealth grows over the long term, it is essential to understand **how compound interest works**. Often described as "interest on interest," compounding is one of the most powerful concepts in personal finance.
+## Simple vs compound interest
 
----
+| | Simple interest | Compound interest |
+|---|---|---|
+| Interest calculated on | Original principal only | Principal + accumulated interest |
+| Growth pattern | Linear | Exponential |
+| Real-world use | Some loans, short-term products | Investments, savings, most long-term products |
 
-## Simple Interest vs. Compound Interest
+With simple interest, a Rp 10,000,000 deposit at 7% earns Rp 700,000 every year — forever. With compounding, the second year's interest is calculated on Rp 10,700,000, the third on Rp 11,449,000, and so on. The difference grows with every period.
 
-To understand compounding, it helps to first look at its simpler counterpart: simple interest.
+## How the calculator works
 
-*   **Simple Interest:** This is calculated solely on the original amount of money deposited or borrowed (known as the principal). No matter how much time passes, the interest earned each period remains exactly the same.
-*   **Compound Interest:** This is calculated on the principal amount plus any interest that has already accumulated. Because the account balance grows with each interest payment, the amount of interest earned in the next period becomes slightly larger.
+The tool above projects the future value of an initial investment plus regular monthly contributions. It converts the nominal annual rate into an effective monthly rate based on the compounding frequency you choose, then compounds monthly — which matches how most investment products and index funds actually accrue.
 
-Over a short period, the difference between the two might seem negligible. Over decades, however, the gap between simple and compound growth becomes massive.
+**Assumptions built in:**
+- Contributions are made at the end of each month.
+- The annual return stays constant for the whole period (no tax, fees, or inflation).
+- Returns are reinvested automatically.
 
----
+The "gains" figure is simply final value minus everything you put in. In the chart, the gap between the blue balance line and the gray contribution line is exactly what compounding adds.
 
-## A Concrete Example of Compounding in Action
+## Nominal vs effective rate
 
-To see this process in action, imagine a hypothetical scenario. 
+Banks and products often advertise a *nominal* (stated) annual rate, but what matters for your wallet is the *effective* rate — what compounding actually does to it. Compounding more frequently (monthly vs annually) increases the effective rate. The calculator handles this conversion for you; the difference matters most at higher rates and longer periods.
 
-Suppose an individual deposits **$10,000** into a savings account with a **5% annual interest rate** that compounds once a year. 
+## A worked example
 
-*   **Year 1:** The interest is calculated on the original $10,000 principal. 5% of $10,000 is $500. At the end of the year, the account balance is **$10,500**.
-*   **Year 2:** Instead of calculating interest on the original $10,000, the bank calculates it on the new balance of $10,500. 5% of $10,500 is $525. The new balance is **$11,025**.
-*   **Year 3:** The interest is calculated on $11,025. 5% of this amount is $551.25, bringing the total to **$11,576.25**.
+A 25-year-old invests Rp 1,000,000 once and adds Rp 500,000 every month, with an average annual return of 7% compounded monthly. After 20 years:
 
-If this account earned only *simple* interest, the owner would receive exactly $500 every year. After three years, they would have $11,500. Thanks to compounding, they have $11,576.25. 
+- Total contributions: Rp 121,000,000
+- Final value: roughly Rp 270,000,000
+- Gains: roughly Rp 149,000,000 — more than the money put in
 
-While an extra $76.25 over three years might seem small, watch what happens to that same $10,000 over a longer period at the same 5% rate:
+The same contributions with **no** compounding (a plain savings pile) would be worth exactly what was put in: Rp 121,000,000. That difference is the entire point of investing early and staying invested.
 
-*   **After 10 Years:** The balance grows to **$16,288.95**.
-*   **After 20 Years:** The balance grows to **$26,532.98**.
-*   **After 30 Years:** The balance reaches **$43,219.42**.
+## Limitations to keep in mind
 
-Without adding a single extra dollar of their own money, the account owner has more than quadrupled their original deposit. This exponential growth is the core of how compound interest works.
+- Returns are never guaranteed or constant — markets fluctuate, and past performance does not predict future results. The calculator is a planning tool, not a prediction.
+- Inflation reduces real purchasing power; a nominal 7% return is not 7% in real terms.
+- Taxes and fees can meaningfully reduce what you keep — see the [expense ratio explainer](../what-is-an-expense-ratio.html) for how ongoing fees eat into compounding, and [what is dollar-cost averaging](../what-is-dollar-cost-averaging.html) for how regular investing interacts with market timing.
 
----
+## Related reading
 
-## Key Factors That Drive Compounding
-
-The speed and scale of compounding depend on three primary variables: time, rate, and frequency.
-
-### 1. Time (The Runway)
-Time is the most crucial ingredient in compounding. In the early years of an investment, the growth curve is relatively flat. It takes time for the accumulated interest to become large enough to generate substantial interest of its own. Because of this, leaving money untouched for decades tends to yield the most dramatic results. 
-
-### 2. The Interest Rate
-A higher interest rate or rate of return means the balance grows faster, which in turn accelerates the compounding process. Even a small difference in the rate can lead to vastly different outcomes over 20 or 30 years.
-
-### 3. Compounding Frequency
-Interest does not have to compound just once a year. Depending on the financial product, it can compound semi-annually, quarterly, monthly, or even daily. 
-
-The more frequently interest compounds, the faster the balance grows. For example, if that same $10,000 earning 5% compounded monthly instead of annually, the balance after 30 years would be **$44,677.44**—roughly $1,458 more than annual compounding would yield.
-
----
-
-## Where to Find Compound Interest in Daily Life
-
-For those looking to benefit from compounding, several financial options utilize this mechanism:
-
-*   **High-Yield Savings Accounts (HYSAs):** These accounts typically offer interest rates that are much higher than traditional brick-and-mortar savings accounts, with interest compounding monthly or daily.
-*   **Certificates of Deposit (CDs):** A CD requires locking money away for a set term in exchange for a fixed interest rate that usually compounds periodically.
-*   **Investment Accounts:** While stock market returns are not guaranteed like bank interest, reinvesting dividends and capital gains allows an investment portfolio to compound in a very similar fashion over time.
-
----
-
-## The Flip Side: Compounding Debt
-
-While compounding is a powerful ally for savers, it can be a significant obstacle for borrowers. Credit cards, personal loans, and student loans often use compounding interest to calculate what is owed. 
-
-If a credit card balance is not paid in full each month, the interest charges are added to the principal balance. The following month, interest is charged on that interest. Because credit card interest typically compounds daily and carries relatively high rates, debt can snowball quickly if it is not managed carefully. Understanding this mechanism is key to making informed decisions about borrowing and repayment strategies.
+- [Index funds vs mutual funds](../index-funds-vs-mutual-funds.html) — where most people put money they plan to compound
+- [What is an expense ratio](../what-is-an-expense-ratio.html) — the fee that silently reduces compounding
+- [What is dollar-cost averaging](../what-is-dollar-cost-averaging.html) — steady monthly contributions, explained
 
 ---
 

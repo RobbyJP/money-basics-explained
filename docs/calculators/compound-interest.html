@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Interest Calculator — How Compound Interest Works | Money Basics Explained</title>
+<meta name="description" content="Free compound interest calculator with monthly contributions, growth chart, and a clear explanation of how compound interest works.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="Compound Interest Calculator">
+  <h2>Compound Interest Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="ci-initial">Initial investment</label>
+      <input id="ci-initial" type="number" min="0" step="any" value="1000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-monthly">Monthly contribution</label>
+      <input id="ci-monthly" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-rate">Annual return (%)</label>
+      <input id="ci-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-years">Investment period (years)</label>
+      <input id="ci-years" type="number" min="1" max="60" step="1" value="20">
+    </div>
+    <div class="calc-row">
+      <label for="ci-frequency">Compounding frequency</label>
+      <select id="ci-frequency">
+        <option value="1">Annually</option>
+        <option value="2">Semi-annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12" selected>Monthly</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ci-currency">Currency</label>
+      <select id="ci-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result"><span class="calc-label">Total contributions</span><span id="ci-contributed" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Investment gains</span><span id="ci-gains" class="calc-value">-</span></div>
+    <div class="calc-result calc-result-main"><span class="calc-label">Final value</span><span id="ci-final" class="calc-value">-</span></div>
+  </div>
+  <canvas id="ci-chart" height="260" aria-label="Growth chart"></canvas>
+  <p class="calc-note">Estimates assume contributions at the end of each month, a constant annual return, and no taxes or inflation. See the guide below for limitations.</p>
+</section>
+
+<h1>How Compound Interest Works</h1>
+<p>Compound interest is interest earned on top of interest. When you invest, your returns are reinvested, and those returns then earn their own returns. Over long periods, this effect turns steady contributions into significantly larger sums.</p>
+<h2>Simple vs compound interest</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Simple interest</th>
+<th>Compound interest</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interest calculated on</td>
+<td>Original principal only</td>
+<td>Principal + accumulated interest</td>
+</tr>
+<tr>
+<td>Growth pattern</td>
+<td>Linear</td>
+<td>Exponential</td>
+</tr>
+<tr>
+<td>Real-world use</td>
+<td>Some loans, short-term products</td>
+<td>Investments, savings, most long-term products</td>
+</tr>
+</tbody>
+</table>
+<p>With simple interest, a Rp 10,000,000 deposit at 7% earns Rp 700,000 every year — forever. With compounding, the second year's interest is calculated on Rp 10,700,000, the third on Rp 11,449,000, and so on. The difference grows with every period.</p>
+<h2>How the calculator works</h2>
+<p>The tool above projects the future value of an initial investment plus regular monthly contributions. It converts the nominal annual rate into an effective monthly rate based on the compounding frequency you choose, then compounds monthly — which matches how most investment products and index funds actually accrue.</p>
+<p><strong>Assumptions built in:</strong>
+- Contributions are made at the end of each month.
+- The annual return stays constant for the whole period (no tax, fees, or inflation).
+- Returns are reinvested automatically.</p>
+<p>The "gains" figure is simply final value minus everything you put in. In the chart, the gap between the blue balance line and the gray contribution line is exactly what compounding adds.</p>
+<h2>Nominal vs effective rate</h2>
+<p>Banks and products often advertise a <em>nominal</em> (stated) annual rate, but what matters for your wallet is the <em>effective</em> rate — what compounding actually does to it. Compounding more frequently (monthly vs annually) increases the effective rate. The calculator handles this conversion for you; the difference matters most at higher rates and longer periods.</p>
+<h2>A worked example</h2>
+<p>A 25-year-old invests Rp 1,000,000 once and adds Rp 500,000 every month, with an average annual return of 7% compounded monthly. After 20 years:</p>
+<ul>
+<li>Total contributions: Rp 121,000,000</li>
+<li>Final value: roughly Rp 270,000,000</li>
+<li>Gains: roughly Rp 149,000,000 — more than the money put in</li>
+</ul>
+<p>The same contributions with <strong>no</strong> compounding (a plain savings pile) would be worth exactly what was put in: Rp 121,000,000. That difference is the entire point of investing early and staying invested.</p>
+<h2>Limitations to keep in mind</h2>
+<ul>
+<li>Returns are never guaranteed or constant — markets fluctuate, and past performance does not predict future results. The calculator is a planning tool, not a prediction.</li>
+<li>Inflation reduces real purchasing power; a nominal 7% return is not 7% in real terms.</li>
+<li>Taxes and fees can meaningfully reduce what you keep — see the <a href="../what-is-an-expense-ratio.html">expense ratio explainer</a> for how ongoing fees eat into compounding, and <a href="../what-is-dollar-cost-averaging.html">what is dollar-cost averaging</a> for how regular investing interacts with market timing.</li>
+</ul>
+<h2>Related reading</h2>
+<ul>
+<li><a href="../index-funds-vs-mutual-funds.html">Index funds vs mutual funds</a> — where most people put money they plan to compound</li>
+<li><a href="../what-is-an-expense-ratio.html">What is an expense ratio</a> — the fee that silently reduces compounding</li>
+<li><a href="../what-is-dollar-cost-averaging.html">What is dollar-cost averaging</a> — steady monthly contributions, explained</li>
+</ul>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="compound-interest.js" defer></script>
+</body>
+</html>

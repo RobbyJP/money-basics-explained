@@ -1,0 +1,44 @@
+<section class="calc-card" aria-label="Compound Interest Calculator">
+  <h2>Compound Interest Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="ci-initial">Initial investment</label>
+      <input id="ci-initial" type="number" min="0" step="any" value="1000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-monthly">Monthly contribution</label>
+      <input id="ci-monthly" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-rate">Annual return (%)</label>
+      <input id="ci-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-years">Investment period (years)</label>
+      <input id="ci-years" type="number" min="1" max="60" step="1" value="20">
+    </div>
+    <div class="calc-row">
+      <label for="ci-frequency">Compounding frequency</label>
+      <select id="ci-frequency">
+        <option value="1">Annually</option>
+        <option value="2">Semi-annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12" selected>Monthly</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ci-currency">Currency</label>
+      <select id="ci-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result"><span class="calc-label">Total contributions</span><span id="ci-contributed" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Investment gains</span><span id="ci-gains" class="calc-value">-</span></div>
+    <div class="calc-result calc-result-main"><span class="calc-label">Final value</span><span id="ci-final" class="calc-value">-</span></div>
+  </div>
+  <canvas id="ci-chart" height="260" aria-label="Growth chart"></canvas>
+  <p class="calc-note">Estimates assume contributions at the end of each month, a constant annual return, and no taxes or inflation. See the guide below for limitations.</p>
+</section>
