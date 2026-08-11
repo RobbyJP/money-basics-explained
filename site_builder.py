@@ -73,11 +73,15 @@ def build():
         articles.append(fm | {"filename": out_path.name})
         print(f"[site_builder] built {out_path}")
 
-    # Build index page
+    # Build index page (exclude meta pages like privacy policy)
     list_items = "\n".join(
         f'<a href="{a["filename"]}">{a.get("title", a["filename"])}</a>'
         f'<p>{a.get("description", "")}</p>'
-        for a in sorted(articles, key=lambda a: a.get("date", ""), reverse=True)
+        for a in sorted(
+            [a for a in articles if a.get("slug") != "privacy-policy"],
+            key=lambda a: a.get("date", ""),
+            reverse=True,
+        )
     )
     index_content = f'<h1>{SITE_NAME}</h1><p>{SITE_DESCRIPTION}</p><div class="article-list">{list_items}</div>'
     index_html = render_page(index_content, page_title=SITE_NAME, meta_description=SITE_DESCRIPTION)
