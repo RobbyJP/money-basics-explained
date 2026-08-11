@@ -21,6 +21,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PUBLIC_DIR: docs
+          CNAME: ${{ vars.CNAME }}
           SITE_NAME: ${{ vars.SITE_NAME }}
           SITE_URL: ${{ vars.SITE_URL }}
           SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION }}

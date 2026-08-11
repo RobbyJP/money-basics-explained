@@ -104,6 +104,9 @@ def build():
     PUBLIC_DIR.mkdir(parents=True)
     shutil.copy(TEMPLATES_DIR / "style.css", PUBLIC_DIR / "style.css")
     (PUBLIC_DIR / ".nojekyll").write_text("", encoding="utf-8")
+    cname = os.getenv("CNAME", "")
+    if cname:
+        (PUBLIC_DIR / "CNAME").write_text(cname.strip(), encoding="utf-8")
     ads_src = Path("ads") / "ads.txt"
     if ads_src.exists():
         shutil.copy(ads_src, PUBLIC_DIR / "ads.txt")
