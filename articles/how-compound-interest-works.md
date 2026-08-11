@@ -51,13 +51,13 @@ The same contributions with **no** compounding (a plain savings pile) would be w
 
 - Returns are never guaranteed or constant — markets fluctuate, and past performance does not predict future results. The calculator is a planning tool, not a prediction.
 - Inflation reduces real purchasing power; a nominal 7% return is not 7% in real terms.
-- Taxes and fees can meaningfully reduce what you keep — see the [expense ratio explainer](../what-is-an-expense-ratio.html) for how ongoing fees eat into compounding, and [what is dollar-cost averaging](../what-is-dollar-cost-averaging.html) for how regular investing interacts with market timing.
+- Taxes and fees can meaningfully reduce what you keep — see the [expense ratio explainer](../calculators/expense-ratio.html) for how ongoing fees eat into compounding, and the [DCA calculator](../calculators/dollar-cost-averaging.html) for how regular investing interacts with market timing.
 
 ## Related reading
 
 - [Index funds vs mutual funds](../index-funds-vs-mutual-funds.html) — where most people put money they plan to compound
-- [What is an expense ratio](../what-is-an-expense-ratio.html) — the fee that silently reduces compounding
-- [What is dollar-cost averaging](../what-is-dollar-cost-averaging.html) — steady monthly contributions, explained
+- [Expense ratio calculator](../calculators/expense-ratio.html) — the fee that silently reduces compounding
+- [Dollar-cost averaging calculator](../calculators/dollar-cost-averaging.html) — steady monthly contributions, explained
 
 ---
 

@@ -1,0 +1,32 @@
+<section class="calc-card" aria-label="Debt Payoff Calculator">
+  <h2>Debt Payoff Calculator — Snowball vs Avalanche</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="dp-extra">Extra payment per month</label>
+      <input id="dp-extra" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dp-currency">Currency</label>
+      <select id="dp-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div id="dp-debts"></div>
+  <button id="dp-add" type="button" class="calc-btn">Add a debt</button>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Snowball (smallest balance first)</span>
+      <span id="dp-snow-time" class="calc-value">-</span>
+      <span id="dp-snow-interest" class="calc-value-sub">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Avalanche (highest APR first)</span>
+      <span id="dp-ava-time" class="calc-value">-</span>
+      <span id="dp-ava-interest" class="calc-value-sub">-</span>
+    </div>
+  </div>
+  <p id="dp-saved" class="calc-note"></p>
+  <p class="calc-note">Simulation assumes: interest accrues monthly on the remaining balance, you always pay every minimum payment, and all extra money plus freed-up minimums go to the target debt. No fees, penalties, or balance changes over time.</p>
+</section>

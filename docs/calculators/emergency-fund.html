@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Calculator — How Much Is Enough? | Money Basics Explained</title>
+<meta name="description" content="Interactive emergency fund calculator that estimates a sensible buffer for your situation: expenses, income stability, dependents, and insurance.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="Emergency Fund Calculator">
+  <h2>Emergency Fund Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="ef-expenses">Monthly essential expenses</label>
+      <input id="ef-expenses" type="number" min="0" step="any" value="4000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ef-stability">Income stability</label>
+      <select id="ef-stability">
+        <option value="stable">Very stable (permanent job)</option>
+        <option value="typical" selected>Typical (steady income, no guarantee)</option>
+        <option value="volatile">Volatile (freelance, commission, seasonal)</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-dependents">People depending on your income</label>
+      <select id="ef-dependents">
+        <option value="0" selected>None — just me</option>
+        <option value="1">One (partner or child)</option>
+        <option value="2">Two</option>
+        <option value="3">Three or more</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-insurance">Other safety nets</label>
+      <select id="ef-insurance">
+        <option value="good">Strong (health + income insurance)</option>
+        <option value="partial" selected>Partial (some cover)</option>
+        <option value="none">None to speak of</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-currency">Currency</label>
+      <select id="ef-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main">
+      <span class="calc-label">Recommended fund size</span>
+      <span id="ef-months" class="calc-value">-</span>
+      <span id="ef-money" class="calc-value-sub">-</span>
+    </div>
+  </div>
+  <p id="ef-reason" class="calc-note"></p>
+  <p class="calc-note">This is a starting point based on general guidance, not personalized advice. Every situation differs — adjust based on how long it realistically takes you to find comparable income where you live.</p>
+</section>
+
+<h1>Emergency Fund — How Much Is Enough?</h1>
+<p>An emergency fund is cash set aside for <strong>income shocks and unexpected costs</strong>: losing a job, sudden illness, a major repair. It is not an investment — its job is to be there, in full, when something breaks. The question everyone asks is how much is enough, and the honest answer is: <strong>it depends</strong>, but there are useful conventions.</p>
+<h2>The conventional ranges</h2>
+<p>The common guidance is <strong>3–6 months of essential expenses</strong>, scaled by how fragile your situation is:</p>
+<ul>
+<li><strong>3 months</strong> — stable income, few dependents, decent insurance.</li>
+<li><strong>6 months</strong> — typical income stability, some responsibilities.</li>
+<li><strong>9–12 months</strong> — volatile income (freelance, commission, seasonal work), dependents, or thin insurance.</li>
+</ul>
+<p>What matters is <em>essential</em> expenses — housing, food, utilities, minimum debt payments — not your full lifestyle spend. Rent and groceries still need paying whether or not you're earning.</p>
+<h2>What the calculator considers</h2>
+<p>The tool above combines four factors into a recommended range of months (and the rupiah amount that represents):</p>
+<ol>
+<li><strong>Monthly essential expenses</strong> — the base of the calculation.</li>
+<li><strong>Income stability</strong> — how easily you could replace your income.</li>
+<li><strong>Dependents</strong> — people who depend on your paycheck extend the buffer.</li>
+<li><strong>Insurance</strong> — strong health/income cover means the fund carries less risk alone.</li>
+</ol>
+<p>The output is a <strong>range</strong>, not a single magic number, because a single number would be false precision. If your situation falls in the middle, treat the top of the range as the goal and the bottom as the minimum.</p>
+<h2>Emergency fund vs sinking fund</h2>
+<p>A common mistake is using one pot for everything. An emergency fund handles <em>unknown</em> shocks; a sinking fund handles <em>predictable</em> expenses you can see coming — a new laptop next year, annual insurance premiums, a wedding. Keeping them separate makes both easier to reason about: see the <a href="../sinking-fund-vs-emergency-fund.html">sinking fund vs emergency fund</a> comparison.</p>
+<h2>Practical notes</h2>
+<ul>
+<li>Keep the fund somewhere liquid and low-risk — an ordinary savings or deposit account. You are not trying to earn returns here; you are buying resilience.</li>
+<li>Rebuild it if you ever use it; it is a recurring cost of financial safety, not a one-time setup.</li>
+<li>The fund's size should grow with your expenses, so re-run the calculator when your essential costs change.</li>
+</ul>
+<h2>Related reading</h2>
+<ul>
+<li><a href="../sinking-fund-vs-emergency-fund.html">Sinking fund vs emergency fund</a> — separating shocks from planned spending</li>
+<li><a href="../calculators/debt-payoff.html">Debt payoff calculator</a> — an emergency fund protects you from creating debt when things go wrong</li>
+<li><a href="../503020-budget-rule-explained.html">The 50/30/20 budget rule</a> — where the savings for this fund fits in a budget</li>
+</ul>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="emergency-fund.js" defer></script>
+</body>
+</html>

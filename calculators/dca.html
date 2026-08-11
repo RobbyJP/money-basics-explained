@@ -1,0 +1,50 @@
+<section class="calc-card" aria-label="Dollar-Cost Averaging Calculator">
+  <h2>Dollar-Cost Averaging Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="dca-initial">Initial investment</label>
+      <input id="dca-initial" type="number" min="0" step="any" value="0" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-monthly">Monthly contribution</label>
+      <input id="dca-monthly" type="number" min="0" step="any" value="1000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-rate">Expected annual return (%)</label>
+      <input id="dca-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-years">Investment period (years)</label>
+      <input id="dca-years" type="number" min="1" max="60" step="1" value="15">
+    </div>
+    <div class="calc-row">
+      <label for="dca-growth">Annual contribution growth (%)</label>
+      <input id="dca-growth" type="number" min="0" step="any" value="0" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-currency">Currency</label>
+      <select id="dca-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Total invested</span>
+      <span id="dca-invested" class="calc-value">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">DCA final value</span>
+      <span id="dca-final" class="calc-value">-</span>
+      <span id="dca-gains" class="calc-value-sub">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Lump-sum final value</span>
+      <span id="dca-lump" class="calc-value">-</span>
+      <span class="calc-value-sub">same money, all invested at start</span>
+    </div>
+  </div>
+  <p id="dca-note" class="calc-note"></p>
+  <p class="calc-note">Assumptions: contributions at the end of each month, a constant annual return compounded monthly, no taxes or inflation. The lump-sum figure invests the entire total up front at the same average return — it tends to come out ahead in steadily rising markets, which is not a reason to avoid DCA; it is a trade-off between expected return and emotional risk tolerance.</p>
+</section>

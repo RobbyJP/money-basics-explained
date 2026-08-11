@@ -1,86 +1,55 @@
 ---
-title: "Debt Snowball vs Debt Avalanche: Which Payoff Strategy is Right for You?"
-description: "Compare the debt snowball vs debt avalanche methods to find the best way to pay off your debt. Learn how each strategy works, their pros and cons, and how to choose the right approach for your budget."
+title: "Debt Payoff Calculator — Snowball vs Avalanche Compared"
+description: "Interactive debt payoff calculator that compares the snowball and avalanche methods: payoff time, total interest, and which strategy fits your situation."
 slug: "debt-snowball-vs-debt-avalanche"
 keyword: "debt snowball vs debt avalanche"
+path: "calculators/debt-payoff"
+calculator: "debt-payoff"
 date: "2026-08-11"
 ---
 
-When facing multiple balances—such as credit cards, student loans, car payments, or medical bills—deciding how to allocate extra funds can feel overwhelming. Two of the most popular strategies for systematic debt repayment are the debt snowball and the debt avalanche. 
+# Debt Snowball vs Debt Avalanche
 
-Both methods require making the minimum payment on all outstanding accounts while directing any extra money toward a single "target" debt. However, they differ entirely in how they choose that target. Understanding the mechanics of the debt snowball vs debt avalanche can help determine which approach aligns best with your financial habits and psychological motivators.
+When you owe money on several debts at once, there are two well-known strategies for paying them off. Both work; they differ in *which debt you attack first with extra payments* — and that difference shapes how the journey feels.
 
----
+## The two strategies
 
-## What is the Debt Snowball Method?
+| | Debt snowball | Debt avalanche |
+|---|---|---|
+| Pay minimums on | all debts | all debts |
+| Extra money targets | the **smallest balance** | the **highest interest rate (APR)** |
+| First debt cleared | fastest (smallest) | not necessarily |
+| Total interest paid | usually more | usually less |
+| Where it shines | motivation and momentum | math and total cost |
 
-The debt snowball method focuses on the size of the outstanding balances. With this approach, a borrower lists all debts from the smallest dollar amount to the largest, regardless of the interest rates. 
+The snowball's idea is psychological: clearing a small debt quickly feels like a win, which keeps people motivated to continue. The avalanche's idea is mathematical: paying the highest-APR debt first minimizes the interest that accumulates while you pay.
 
-### How it Works:
-1. List all debts in order from the smallest balance to the largest balance.
-2. Pay the minimum required amount on every debt except the smallest one.
-3. Throw any extra funds (from a side hustle, budgeting cuts, or savings) toward the smallest debt.
-4. Once the smallest debt is fully paid off, take the entire amount previously dedicated to it (its minimum payment plus any extra funds) and apply it to the next-smallest debt. 
+## How the calculator works
 
-As each balance is eliminated, the monthly amount available to put toward the next debt grows larger—like a snowball rolling down a hill.
+Enter each debt's balance, APR, and minimum payment, plus an extra monthly payment you can afford. The simulation runs both strategies month by month: interest accrues on each remaining balance, minimums are always paid, and every extra rupiah (plus each freed-up minimum once a debt is cleared) goes to the target debt.
 
-### An Illustrative Example:
-Imagine a borrower with the following three debts:
-*   **Debt A (Medical Bill):** $400 balance (0% interest)
-*   **Debt B (Credit Card):** $2,500 balance (22% interest)
-*   **Debt C (Personal Loan):** $8,000 balance (8% interest)
+**Key assumptions:** interest compounds monthly on the remaining balance, minimum payments stay constant, and no new debt is added. Real life often involves the last assumption failing — which matters more than the strategy you pick.
 
-Using the debt snowball, the focus is entirely on **Debt A** first because it has the smallest balance ($400), even though it carries no interest. Once the medical bill is gone, the borrower redirects those funds to **Debt B**, and finally to **Debt C**.
+## What the numbers usually show
 
-This approach tends to work well for people who are highly motivated by quick, tangible wins. Seeing an entire account close within a month or two can provide a powerful psychological boost that encourages continued progress.
+The avalanche typically finishes first and pays less interest — the exact amount depends on your rates. The snowball usually takes a bit longer but delivers early wins. The "interest saved" figure the calculator shows is the *difference* between the two; it is real but it is also the price of motivation, and motivation is worth something.
 
----
+The honest answer: **the best strategy is the one you will actually stick to.** People who abandon their plan halfway pay far more than the small difference between these two methods.
 
-## What is the Debt Avalanche Method?
+## A worked example
 
-The debt avalanche method prioritizes interest rates over balance sizes. With this strategy, a borrower lists all debts from the highest interest rate to the lowest interest rate, regardless of the total balance size.
+Suppose two debts: a credit card with a Rp 10,000,000 balance at 24% APR (Rp 400,000 minimum) and a vehicle loan with Rp 20,000,000 at 12% (Rp 800,000 minimum), with Rp 500,000 extra per month.
 
-### How it Works:
-1. List all debts in order from the highest interest rate to the lowest interest rate.
-2. Pay the minimum required amount on every debt except the one with the highest interest rate.
-3. Direct all extra repayment funds toward the debt with the highest interest rate.
-4. Once that high-interest debt is paid off, roll that entire monthly payment into the debt with the next-highest interest rate.
+- **Snowball** targets the credit card first: it is cleared quickly, then its minimum rolls into the vehicle loan.
+- **Avalanche** targets the card too here (it has the higher rate) — but if the rates were reversed, the two strategies would diverge.
 
-### An Illustrative Example:
-Using the same debts from the previous scenario:
-*   **Debt B (Credit Card):** $2,500 balance (22% interest)
-*   **Debt C (Personal Loan):** $8,000 balance (8% interest)
-*   **Debt A (Medical Bill):** $400 balance (0% interest)
+Try both with your own numbers above — seeing your own debts and dates makes the trade-off concrete.
 
-Under the debt avalanche method, the target is **Debt B** first because of its high 22% interest rate. Once that is eliminated, the focus shifts to **Debt C**, leaving the interest-free medical bill (**Debt A**) for last.
+## Related reading
 
-Mathematically, the debt avalanche is the most cost-effective strategy. By targeting high-interest debt first, the borrower minimizes the total amount of interest that accrues over the lifetime of the debt payoff journey.
-
----
-
-## Debt Snowball vs. Debt Avalanche: A Side-by-Side Comparison
-
-| Feature | Debt Snowball | Debt Avalanche |
-| :--- | :--- | :--- |
-| **Primary Focus** | Smallest balance first | Highest interest rate first |
-| **Primary Benefit** | Psychological motivation and quick wins | Maximizes interest savings over time |
-| **Speed of First Win** | Fast (typically within the first few months) | Varies (depends on the size of the highest-interest debt) |
-| **Total Cost to Pay Off** | Typically higher (due to carrying high-interest debt longer) | Mathematically the lowest possible cost |
-| **Best For** | Individuals who need quick visual progress to stay on track | Analytical thinkers motivated by mathematical efficiency |
-
----
-
-## How to Choose the Right Strategy for Your Situation
-
-Because both methods are effective, choosing between them is less about finding the "correct" financial formula and more about understanding your personal psychology.
-
-### Why Some Choose the Debt Snowball
-Many behavioral psychologists and financial planners favor the debt snowball because personal finance is often more about behavior than math. If a borrower has a large number of separate debts, paying off three or four small accounts quickly can simplify their financial life and build momentum. This approach is highly effective for individuals who have struggled to stick to a budget in the past and need immediate reinforcement to stay committed.
-
-### Why Some Choose the Debt Avalanche
-For those who are highly analytical, the debt avalanche is often the preferred choice. If the knowledge that you are paying unnecessary interest is stressful, the avalanche method provides peace of mind. This strategy tends to work best for individuals with stable incomes who do not need immediate psychological validation to stay disciplined over several years.
-
-Ultimately, the most successful debt payoff strategy is the one that a borrower can stick to consistently until the balances reach zero.
+- [Emergency fund calculator](../calculators/emergency-fund.html) — build a buffer so unexpected costs don't create new debt
+- [Sinking fund vs emergency fund](../sinking-fund-vs-emergency-fund.html) — the difference between saving for shocks and saving for planned expenses
+- [Compound interest calculator](../calculators/compound-interest.html) — what the same monthly amount could do on the investment side
 
 ---
 

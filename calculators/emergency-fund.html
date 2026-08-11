@@ -1,0 +1,50 @@
+<section class="calc-card" aria-label="Emergency Fund Calculator">
+  <h2>Emergency Fund Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="ef-expenses">Monthly essential expenses</label>
+      <input id="ef-expenses" type="number" min="0" step="any" value="4000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ef-stability">Income stability</label>
+      <select id="ef-stability">
+        <option value="stable">Very stable (permanent job)</option>
+        <option value="typical" selected>Typical (steady income, no guarantee)</option>
+        <option value="volatile">Volatile (freelance, commission, seasonal)</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-dependents">People depending on your income</label>
+      <select id="ef-dependents">
+        <option value="0" selected>None — just me</option>
+        <option value="1">One (partner or child)</option>
+        <option value="2">Two</option>
+        <option value="3">Three or more</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-insurance">Other safety nets</label>
+      <select id="ef-insurance">
+        <option value="good">Strong (health + income insurance)</option>
+        <option value="partial" selected>Partial (some cover)</option>
+        <option value="none">None to speak of</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ef-currency">Currency</label>
+      <select id="ef-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main">
+      <span class="calc-label">Recommended fund size</span>
+      <span id="ef-months" class="calc-value">-</span>
+      <span id="ef-money" class="calc-value-sub">-</span>
+    </div>
+  </div>
+  <p id="ef-reason" class="calc-note"></p>
+  <p class="calc-note">This is a starting point based on general guidance, not personalized advice. Every situation differs — adjust based on how long it realistically takes you to find comparable income where you live.</p>
+</section>

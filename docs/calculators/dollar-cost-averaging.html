@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dollar-Cost Averaging (DCA) Calculator — How It Works | Money Basics Explained</title>
+<meta name="description" content="Dollar-cost averaging calculator with monthly contributions, contribution growth, and an honest DCA vs lump-sum comparison.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="Dollar-Cost Averaging Calculator">
+  <h2>Dollar-Cost Averaging Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="dca-initial">Initial investment</label>
+      <input id="dca-initial" type="number" min="0" step="any" value="0" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-monthly">Monthly contribution</label>
+      <input id="dca-monthly" type="number" min="0" step="any" value="1000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-rate">Expected annual return (%)</label>
+      <input id="dca-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-years">Investment period (years)</label>
+      <input id="dca-years" type="number" min="1" max="60" step="1" value="15">
+    </div>
+    <div class="calc-row">
+      <label for="dca-growth">Annual contribution growth (%)</label>
+      <input id="dca-growth" type="number" min="0" step="any" value="0" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dca-currency">Currency</label>
+      <select id="dca-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Total invested</span>
+      <span id="dca-invested" class="calc-value">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">DCA final value</span>
+      <span id="dca-final" class="calc-value">-</span>
+      <span id="dca-gains" class="calc-value-sub">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Lump-sum final value</span>
+      <span id="dca-lump" class="calc-value">-</span>
+      <span class="calc-value-sub">same money, all invested at start</span>
+    </div>
+  </div>
+  <p id="dca-note" class="calc-note"></p>
+  <p class="calc-note">Assumptions: contributions at the end of each month, a constant annual return compounded monthly, no taxes or inflation. The lump-sum figure invests the entire total up front at the same average return — it tends to come out ahead in steadily rising markets, which is not a reason to avoid DCA; it is a trade-off between expected return and emotional risk tolerance.</p>
+</section>
+
+<h1>What Is Dollar-Cost Averaging (DCA)?</h1>
+<p>Dollar-cost averaging is the practice of investing a <strong>fixed amount on a regular schedule</strong> — for example, Rp 1,000,000 every month — regardless of what the market is doing. It is one of the most common ways people build long-term investments, and its logic is deliberately humble: you don't need to predict when prices are low or high.</p>
+<h2>Why people use DCA</h2>
+<ul>
+<li><strong>Discipline over prediction.</strong> A fixed schedule removes emotion and guesswork from the decision of when to buy.</li>
+<li><strong>Natural averaging.</strong> Your money buys more units when prices are low and fewer when they are high, so your average purchase price smooths out.</li>
+<li><strong>Automatable.</strong> Contributions can be set up to leave your account automatically, which is how many people actually stick with investing.</li>
+</ul>
+<p>The DCA method does <strong>not</strong> claim to beat buying at the bottom — nobody reliably knows where the bottom is.</p>
+<h2>DCA vs lump sum — the honest comparison</h2>
+<p>If you already have a large sum sitting in cash, investing it all at once ("lump sum") has a higher <em>expected</em> value in steadily rising markets, because the entire amount is invested earlier and compounds longer. History has typically favored lump sum over spreading the same money out — but only on average, and the emotional experience is very different: a market drop right after you invest everything is hard to sit through.</p>
+<p>DCA is best understood not as the return-maximizing choice but as the <strong>behavioral</strong> choice: it converts a scary large decision into a series of small, manageable ones. The calculator above compares both paths using the same assumed constant return — a simplification that makes the mechanics visible, not a prediction of what markets will do.</p>
+<h2>How the calculator works</h2>
+<p>Enter your initial amount, monthly contribution, expected annual return, investment period, and optional contribution growth (if you plan to raise your contribution as your income grows). It compounds monthly and shows total invested, final value, and the lump-sum comparison.</p>
+<p><strong>Assumptions:</strong> contributions at month-end, constant annual return, no taxes or inflation. Real returns fluctuate, and the calculator is a planning tool, not a forecast.</p>
+<h2>Related reading</h2>
+<ul>
+<li><a href="../calculators/compound-interest.html">Compound interest calculator</a> — the engine behind any long-term plan</li>
+<li><a href="../calculators/expense-ratio.html">What is an expense ratio</a> — the fee that quietly reduces what compounding keeps</li>
+<li><a href="../index-funds-vs-mutual-funds.html">Index funds vs mutual funds</a> — what most DCA contributions end up buying</li>
+</ul>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="dca.js" defer></script>
+</body>
+</html>

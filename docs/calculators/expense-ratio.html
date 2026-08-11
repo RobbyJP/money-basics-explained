@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Ratio Calculator — What an Annual Fee Really Costs | Money Basics Explained</title>
+<meta name="description" content="Interactive investment fee calculator showing how small differences in annual fees compound into large differences in final value.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="Expense Ratio Calculator">
+  <h2>Investment Fee / Expense Ratio Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="er-initial">Initial investment</label>
+      <input id="er-initial" type="number" min="0" step="any" value="10000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-monthly">Monthly contribution</label>
+      <input id="er-monthly" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-rate">Expected annual return (%)</label>
+      <input id="er-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-feea">Fee A — annual fee (%)</label>
+      <input id="er-feea" type="number" min="0" step="any" value="0.2" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-feeb">Fee B — annual fee (%)</label>
+      <input id="er-feeb" type="number" min="0" step="any" value="1.5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-years">Investment period (years)</label>
+      <input id="er-years" type="number" min="1" max="60" step="1" value="25">
+    </div>
+    <div class="calc-row">
+      <label for="er-currency">Currency</label>
+      <select id="er-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Final value — Fee A</span>
+      <span id="er-fina" class="calc-value">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Final value — Fee B</span>
+      <span id="er-finb" class="calc-value">-</span>
+    </div>
+    <div class="calc-result calc-result-main">
+      <span class="calc-label">Cost of the fee difference</span>
+      <span id="er-diff" class="calc-value">-</span>
+    </div>
+  </div>
+  <p class="calc-note">Assumptions: fees deducted proportionally from the balance each year, contributions at month-end, constant return, no taxes or inflation. Higher fees must be justified by higher returns — which is harder than it sounds, as the guide below explains.</p>
+</section>
+
+<h1>What Is an Expense Ratio?</h1>
+<p>The expense ratio is the <strong>annual fee</strong> a fund charges to manage your money, expressed as a percentage of your invested balance. A 1% expense ratio means 1% of your account value is taken every year — every year, on the entire balance, forever. It is deducted automatically, which is precisely why most investors barely notice it, and why it matters more than it looks.</p>
+<h2>Why small numbers matter</h2>
+<p>Fees sound tiny: 0.2% versus 1.5% is a "small" difference. But fees compound <em>against</em> you in exactly the way returns compound for you. Over a 25-year investment horizon, that same "small" difference can consume a significant share of what your money would have grown into — often the difference between a comfortable result and a disappointing one.</p>
+<p>The calculator above shows the mechanics directly: enter the same investment twice with two different annual fees and watch the gap grow with the investment period. The "cost of the fee difference" is the money that silently went to the fund instead of staying in your account.</p>
+<p><strong>Assumptions:</strong> fees are deducted proportionally from the balance each year, contributions land at month-end, and the return is constant. Real funds have additional costs (trading, taxes, currency) on top.</p>
+<h2>Active vs passive: where fees come from</h2>
+<p>The fee debate usually sits between two approaches:</p>
+<ul>
+<li><strong>Index (passive) funds</strong> track a market index, cost little to run, and typically charge low fees (commonly under 0.5%).</li>
+<li><strong>Actively managed funds</strong> pay managers to pick investments and typically charge noticeably more.</li>
+</ul>
+<p>High fees are only worth paying if the fund reliably delivers higher <em>net</em> returns — and reliably beating the market after fees is rare and hard to predict. See <a href="../index-funds-vs-mutual-funds.html">index funds vs mutual funds</a> for how these categories actually relate.</p>
+<h2>Practical takeaways</h2>
+<ol>
+<li><strong>Check the expense ratio before buying any fund.</strong> It is one of the few costs you can fully control.</li>
+<li><strong>Compare funds on net returns</strong>, not gross performance claims.</li>
+<li><strong>Let the investment period do its work</strong> — the fee penalty grows with time, which is why long-horizon investors care most.</li>
+<li>The difference compounds alongside your returns: see the <a href="../calculators/compound-interest.html">compound interest calculator</a> for the return side of the same math, and the <a href="../calculators/dollar-cost-averaging.html">DCA calculator</a> for how regular contributions interact with it.</li>
+</ol>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="expense-ratio.js" defer></script>
+</body>
+</html>

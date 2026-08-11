@@ -1,0 +1,51 @@
+<section class="calc-card" aria-label="Expense Ratio Calculator">
+  <h2>Investment Fee / Expense Ratio Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="er-initial">Initial investment</label>
+      <input id="er-initial" type="number" min="0" step="any" value="10000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-monthly">Monthly contribution</label>
+      <input id="er-monthly" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-rate">Expected annual return (%)</label>
+      <input id="er-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-feea">Fee A — annual fee (%)</label>
+      <input id="er-feea" type="number" min="0" step="any" value="0.2" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-feeb">Fee B — annual fee (%)</label>
+      <input id="er-feeb" type="number" min="0" step="any" value="1.5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="er-years">Investment period (years)</label>
+      <input id="er-years" type="number" min="1" max="60" step="1" value="25">
+    </div>
+    <div class="calc-row">
+      <label for="er-currency">Currency</label>
+      <select id="er-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Final value — Fee A</span>
+      <span id="er-fina" class="calc-value">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Final value — Fee B</span>
+      <span id="er-finb" class="calc-value">-</span>
+    </div>
+    <div class="calc-result calc-result-main">
+      <span class="calc-label">Cost of the fee difference</span>
+      <span id="er-diff" class="calc-value">-</span>
+    </div>
+  </div>
+  <p class="calc-note">Assumptions: fees deducted proportionally from the balance each year, contributions at month-end, constant return, no taxes or inflation. Higher fees must be justified by higher returns — which is harder than it sounds, as the guide below explains.</p>
+</section>

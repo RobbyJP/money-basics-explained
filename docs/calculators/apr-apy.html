@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APR vs APY — What's the Difference? | Money Basics Explained</title>
+<meta name="description" content="APR vs APY explained, with a converter calculator showing how compounding frequency turns a nominal rate into an effective annual yield.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="APR vs APY Calculator">
+  <h2>APR / APY Converter</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="aa-nominal">Nominal annual rate (%)</label>
+      <input id="aa-nominal" type="number" min="0" step="any" value="6" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="aa-frequency">Compounding frequency</label>
+      <select id="aa-frequency">
+        <option value="1">Annually</option>
+        <option value="2">Semi-annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12" selected>Monthly</option>
+        <option value="365">Daily</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="aa-principal">Principal (for the example)</label>
+      <input id="aa-principal" type="number" min="0" step="any" value="10000000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="aa-currency">Currency</label>
+      <select id="aa-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main">
+      <span class="calc-label">Effective APY at this frequency</span>
+      <span id="aa-apy" class="calc-value">-</span>
+      <span id="aa-gain" class="calc-value-sub">-</span>
+    </div>
+  </div>
+  <table class="calc-note-table">
+    <caption>Effective annual yield at each compounding frequency</caption>
+    <thead>
+      <tr><th>Frequency</th><th>Effective APY</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Annually</td><td id="aa-f1">-</td></tr>
+      <tr><td>Quarterly</td><td id="aa-f4">-</td></tr>
+      <tr><td>Monthly</td><td id="aa-f12">-</td></tr>
+      <tr><td>Daily</td><td id="aa-f365">-</td></tr>
+    </tbody>
+  </table>
+  <p class="calc-note">APR is the stated nominal rate. APY is what that rate actually yields per year once compounding is counted. Loans quote APR (you pay interest on what you owe); savings quote APY (you earn interest on what compounds) — the same number means different things in each context, and fees on loans are not part of either number here.</p>
+</section>
+
+<h1>APR vs APY — What's the Difference?</h1>
+<p>APR and APY are two ways of quoting an interest rate, and confusing them is expensive in both directions: APR describes what a loan <strong>costs</strong> you, APY describes what savings <strong>pay</strong> you. The difference between them is compounding.</p>
+<ul>
+<li><strong>APR (Annual Percentage Rate)</strong> — the stated nominal rate, without compounding counted. You see APR on loans and credit cards.</li>
+<li><strong>APY (Annual Percentage Yield)</strong> — the rate you actually end up with over a year once compounding is counted. You see APY on savings products.</li>
+</ul>
+<h2>The compounding effect</h2>
+<p>Compounding frequency turns the same nominal rate into different real results. A 6% nominal rate compounded monthly is not 6% over a year — it is slightly more, because each month's interest starts earning interest itself. The table in the calculator above shows exactly how a single nominal rate changes as compounding gets more frequent (annual → quarterly → monthly → daily).</p>
+<p><strong>The rule of thumb:</strong> for a <em>borrower</em>, APR is the honest headline number (you pay interest on what you owe, usually without compounding in the quoted APR). For a <em>saver</em>, APY is the honest headline number (your interest compounds and that is included). Comparing a loan by its APY or a savings account by its APR will make either side look better or worse than it is — compare like with like.</p>
+<h2>What the converter does</h2>
+<p>Enter a nominal annual rate and the compounding frequency of the product you're looking at. The calculator returns the effective APY, the actual money a given principal earns in a year (and how much of that is purely from compounding), plus a reference table across frequencies.</p>
+<p><strong>A note on loans:</strong> the quoted APR on loans generally reflects the interest and mandatory fees the lender includes — it is not the same as APY, and it does not count penalties or optional charges. Always read what a lender counts in its APR before comparing.</p>
+<h2>Practical takeaways</h2>
+<ol>
+<li><strong>Savings: compare APY</strong>, not the nominal rate — that is the number your money actually grows at.</li>
+<li><strong>Borrowing: compare APR</strong>, and check what fees it includes.</li>
+<li><strong>The more frequent the compounding, the larger the gap</strong> between nominal rate and effective yield — the calculator table makes the gap concrete.</li>
+<li>For long-term investing, the same compounding math powers your returns: see the <a href="../calculators/compound-interest.html">compound interest calculator</a> and the <a href="../calculators/expense-ratio.html">expense ratio calculator</a> for what eats into that compounding.</li>
+</ol>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="apr-apy.js" defer></script>
+</body>
+</html>

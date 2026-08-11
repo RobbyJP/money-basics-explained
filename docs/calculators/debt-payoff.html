@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Payoff Calculator — Snowball vs Avalanche Compared | Money Basics Explained</title>
+<meta name="description" content="Interactive debt payoff calculator that compares the snowball and avalanche methods: payoff time, total interest, and which strategy fits your situation.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense: paste your approved AdSense snippet here once approved -->
+</head>
+<body>
+<header>
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+</header>
+<main>
+<section class="calc-card" aria-label="Debt Payoff Calculator">
+  <h2>Debt Payoff Calculator — Snowball vs Avalanche</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="dp-extra">Extra payment per month</label>
+      <input id="dp-extra" type="number" min="0" step="any" value="500000" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="dp-currency">Currency</label>
+      <select id="dp-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div id="dp-debts"></div>
+  <button id="dp-add" type="button" class="calc-btn">Add a debt</button>
+  <div class="calc-results" style="grid-template-columns:1fr 1fr;">
+    <div class="calc-result">
+      <span class="calc-label">Snowball (smallest balance first)</span>
+      <span id="dp-snow-time" class="calc-value">-</span>
+      <span id="dp-snow-interest" class="calc-value-sub">-</span>
+    </div>
+    <div class="calc-result">
+      <span class="calc-label">Avalanche (highest APR first)</span>
+      <span id="dp-ava-time" class="calc-value">-</span>
+      <span id="dp-ava-interest" class="calc-value-sub">-</span>
+    </div>
+  </div>
+  <p id="dp-saved" class="calc-note"></p>
+  <p class="calc-note">Simulation assumes: interest accrues monthly on the remaining balance, you always pay every minimum payment, and all extra money plus freed-up minimums go to the target debt. No fees, penalties, or balance changes over time.</p>
+</section>
+
+<h1>Debt Snowball vs Debt Avalanche</h1>
+<p>When you owe money on several debts at once, there are two well-known strategies for paying them off. Both work; they differ in <em>which debt you attack first with extra payments</em> — and that difference shapes how the journey feels.</p>
+<h2>The two strategies</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Debt snowball</th>
+<th>Debt avalanche</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pay minimums on</td>
+<td>all debts</td>
+<td>all debts</td>
+</tr>
+<tr>
+<td>Extra money targets</td>
+<td>the <strong>smallest balance</strong></td>
+<td>the <strong>highest interest rate (APR)</strong></td>
+</tr>
+<tr>
+<td>First debt cleared</td>
+<td>fastest (smallest)</td>
+<td>not necessarily</td>
+</tr>
+<tr>
+<td>Total interest paid</td>
+<td>usually more</td>
+<td>usually less</td>
+</tr>
+<tr>
+<td>Where it shines</td>
+<td>motivation and momentum</td>
+<td>math and total cost</td>
+</tr>
+</tbody>
+</table>
+<p>The snowball's idea is psychological: clearing a small debt quickly feels like a win, which keeps people motivated to continue. The avalanche's idea is mathematical: paying the highest-APR debt first minimizes the interest that accumulates while you pay.</p>
+<h2>How the calculator works</h2>
+<p>Enter each debt's balance, APR, and minimum payment, plus an extra monthly payment you can afford. The simulation runs both strategies month by month: interest accrues on each remaining balance, minimums are always paid, and every extra rupiah (plus each freed-up minimum once a debt is cleared) goes to the target debt.</p>
+<p><strong>Key assumptions:</strong> interest compounds monthly on the remaining balance, minimum payments stay constant, and no new debt is added. Real life often involves the last assumption failing — which matters more than the strategy you pick.</p>
+<h2>What the numbers usually show</h2>
+<p>The avalanche typically finishes first and pays less interest — the exact amount depends on your rates. The snowball usually takes a bit longer but delivers early wins. The "interest saved" figure the calculator shows is the <em>difference</em> between the two; it is real but it is also the price of motivation, and motivation is worth something.</p>
+<p>The honest answer: <strong>the best strategy is the one you will actually stick to.</strong> People who abandon their plan halfway pay far more than the small difference between these two methods.</p>
+<h2>A worked example</h2>
+<p>Suppose two debts: a credit card with a Rp 10,000,000 balance at 24% APR (Rp 400,000 minimum) and a vehicle loan with Rp 20,000,000 at 12% (Rp 800,000 minimum), with Rp 500,000 extra per month.</p>
+<ul>
+<li><strong>Snowball</strong> targets the credit card first: it is cleared quickly, then its minimum rolls into the vehicle loan.</li>
+<li><strong>Avalanche</strong> targets the card too here (it has the higher rate) — but if the rates were reversed, the two strategies would diverge.</li>
+</ul>
+<p>Try both with your own numbers above — seeing your own debts and dates makes the trade-off concrete.</p>
+<h2>Related reading</h2>
+<ul>
+<li><a href="../calculators/emergency-fund.html">Emergency fund calculator</a> — build a buffer so unexpected costs don't create new debt</li>
+<li><a href="../sinking-fund-vs-emergency-fund.html">Sinking fund vs emergency fund</a> — the difference between saving for shocks and saving for planned expenses</li>
+<li><a href="../calculators/compound-interest.html">Compound interest calculator</a> — what the same monthly amount could do on the investment side</li>
+</ul>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
+</main>
+<footer>
+  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+  <p><a href="../privacy-policy.html">Privacy Policy</a></p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="debt-payoff.js" defer></script>
+</body>
+</html>
