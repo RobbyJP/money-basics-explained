@@ -11,6 +11,32 @@
     return "$" + Number(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
+  function parseAmount(el) {
+    var v = String(el.value).replace(/\./g, "").replace(",", ".");
+    var n = parseFloat(v);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function wireThousands(el) {
+    el.addEventListener("input", function () {
+      var pos = el.selectionStart || el.value.length;
+      var raw = el.value;
+      var commaIdx = raw.indexOf(",");
+      var intPart = commaIdx === -1 ? raw : raw.slice(0, commaIdx);
+      var decPart = commaIdx === -1 ? "" : raw.slice(commaIdx + 1).replace(/[^\d]/g, "").slice(0, 2);
+      var digits = intPart.replace(/[^\d]/g, "");
+      var grouped = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      var beforeDigits = intPart.slice(0, pos).replace(/[^\d]/g, "").length;
+      var sepsBefore = (grouped.slice(0, beforeDigits).match(/\./g) || []).length;
+      var formatted = decPart ? grouped + "," + decPart : grouped;
+      if (formatted !== raw) {
+        el.value = formatted;
+        var newPos = Math.min(formatted.length, pos + sepsBefore);
+        el.setSelectionRange(newPos, newPos);
+      }
+    });
+  }
+
   function balanceAfterMonths(P, m, ratePct, months, periodsPerYear) {
     var r = ratePct / 100;
     if (r === 0) { return P + m * months; }
@@ -53,8 +79,8 @@
   }
 
   function update() {
-    var P = parseFloat($("ci-initial").value) || 0;
-    var m = parseFloat($("ci-monthly").value) || 0;
+    var P = parseAmount($("ci-initial"));
+    var m = parseAmount($("ci-monthly"));
     var rate = parseFloat($("ci-rate").value) || 0;
     var years = Math.max(0, Math.min(60, parseInt($("ci-years").value, 10) || 0));
     var periods = parseInt($("ci-frequency").value, 10) || 12;
@@ -70,6 +96,7 @@
 
   var ids = ["ci-initial", "ci-monthly", "ci-rate", "ci-years", "ci-frequency", "ci-currency"];
   for (var i = 0; i < ids.length; i++) {
+    if (ids[i] === "ci-initial" || ids[i] === "ci-monthly") { wireThousands($(ids[i])); }
     $(ids[i]).addEventListener("input", update);
     $(ids[i]).addEventListener("change", update);
   }

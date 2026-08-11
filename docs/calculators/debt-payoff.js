@@ -16,6 +16,32 @@
     return mo === 0 ? y + " yrs" : y + " yrs " + mo + " mo";
   }
 
+  function parseAmount(el) {
+    var v = String(el.value).replace(/\./g, "").replace(",", ".");
+    var n = parseFloat(v);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function wireThousands(el) {
+    el.addEventListener("input", function () {
+      var pos = el.selectionStart || el.value.length;
+      var raw = el.value;
+      var commaIdx = raw.indexOf(",");
+      var intPart = commaIdx === -1 ? raw : raw.slice(0, commaIdx);
+      var decPart = commaIdx === -1 ? "" : raw.slice(commaIdx + 1).replace(/[^\d]/g, "").slice(0, 2);
+      var digits = intPart.replace(/[^\d]/g, "");
+      var grouped = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      var beforeDigits = intPart.slice(0, pos).replace(/[^\d]/g, "").length;
+      var sepsBefore = (grouped.slice(0, beforeDigits).match(/\./g) || []).length;
+      var formatted = decPart ? grouped + "," + decPart : grouped;
+      if (formatted !== raw) {
+        el.value = formatted;
+        var newPos = Math.min(formatted.length, pos + sepsBefore);
+        el.setSelectionRange(newPos, newPos);
+      }
+    });
+  }
+
   function debtRow(index, data) {
     var d = data || { name: "", balance: "", apr: "", min: "" };
     var div = document.createElement("div");
@@ -24,9 +50,9 @@
     div.innerHTML =
       '<div class="dp-fields">' +
       '<div class="calc-row"><label>Debt name</label><input class="dp-name" type="text" value="' + d.name + '" placeholder="Credit card"></div>' +
-      '<div class="calc-row"><label>Balance</label><input class="dp-balance" type="number" min="0" step="any" value="' + d.balance + '" inputmode="decimal"></div>' +
+      '<div class="calc-row"><label>Balance</label><input class="dp-balance" type="text" inputmode="decimal" value="' + d.balance + '"></div>' +
       '<div class="calc-row"><label>APR (%)</label><input class="dp-apr" type="number" min="0" step="any" value="' + d.apr + '" inputmode="decimal"></div>' +
-      '<div class="calc-row"><label>Minimum payment</label><input class="dp-min" type="number" min="0" step="any" value="' + d.min + '" inputmode="decimal"></div>' +
+      '<div class="calc-row"><label>Minimum payment</label><input class="dp-min" type="text" inputmode="decimal" value="' + d.min + '"></div>' +
       '</div>' +
       '<button type="button" class="calc-btn calc-btn-small dp-remove" aria-label="Remove this debt">&times;</button>';
     div.querySelector(".dp-remove").addEventListener("click", function () {
@@ -34,6 +60,7 @@
       update();
     });
     div.querySelectorAll("input").forEach(function (inp) {
+      if (inp.classList.contains("dp-balance") || inp.classList.contains("dp-min")) { wireThousands(inp); }
       inp.addEventListener("input", update);
       inp.addEventListener("change", update);
     });
@@ -50,9 +77,9 @@
     document.querySelectorAll("#dp-debts .dp-row").forEach(function (row) {
       out.push({
         name: row.querySelector(".dp-name").value.trim() || "Debt",
-        balance: parseFloat(row.querySelector(".dp-balance").value) || 0,
+        balance: parseAmount(row.querySelector(".dp-balance")),
         apr: parseFloat(row.querySelector(".dp-apr").value) || 0,
-        min: parseFloat(row.querySelector(".dp-min").value) || 0
+        min: parseAmount(row.querySelector(".dp-min"))
       });
     });
     return out;
@@ -98,7 +125,7 @@
 
   function update() {
     var debts = readDebts();
-    var extra = parseFloat($("dp-extra").value) || 0;
+    var extra = parseAmount($("dp-extra"));
     var cur = $("dp-currency").value;
     if (!debts.length) {
       $("dp-snow-time").textContent = "-";
@@ -117,19 +144,20 @@
     $("dp-ava-interest").textContent = fmt(ava.interest, cur) + " interest";
     var saved = ava.interest - snow.interest;
     if (ava.months === 1200 || snow.months === 1200) {
-      $("dp-saved").textContent = "Total debt: " + fmt(totalBal, cur) + ". The simulation did not finish within 100 years — increase the extra payment or check the minimums.";
+      $("dp-saved").textContent = "Total debt: " + fmt(totalBal, cur) + ". The simulation did not finish within 100 years â€” increase the extra payment or check the minimums.";
     } else if (saved > 0) {
-      $("dp-saved").textContent = "Avalanche saves about " + fmt(saved, cur) + " in interest compared with snowball, but snowball clears the first debt faster. Both are valid — the best strategy is the one you can actually stick to.";
+      $("dp-saved").textContent = "Avalanche saves about " + fmt(saved, cur) + " in interest compared with snowball, but snowball clears the first debt faster. Both are valid â€” the best strategy is the one you can actually stick to.";
     } else {
       $("dp-saved").textContent = "Both strategies finish in the same time and pay the same interest here (same APR on all debts). Strategy choice matters most when APRs differ.";
     }
   }
 
   $("dp-add").addEventListener("click", function () { addRow(null); update(); });
+  wireThousands($("dp-extra"));
   $("dp-extra").addEventListener("input", update);
   $("dp-currency").addEventListener("change", update);
 
-  addRow({ name: "Credit card", balance: "10000000", apr: "24", min: "400000" });
-  addRow({ name: "Motorcycle loan", balance: "20000000", apr: "12", min: "800000" });
+  addRow({ name: "Credit card", balance: "10.000.000", apr: "24", min: "400.000" });
+  addRow({ name: "Motorcycle loan", balance: "20.000.000", apr: "12", min: "800.000" });
   update();
 })();

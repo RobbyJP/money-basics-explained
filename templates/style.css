@@ -65,12 +65,15 @@ footer {
 .calc-row label { font-size: 0.85rem; color: #555; margin-bottom: 4px; }
 .calc-row input,
 .calc-row select {
+  box-sizing: border-box;
+  width: 100%;
   padding: 8px 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   background: #fff;
 }
+.calc-row input[type="text"] { text-align: right; }
 .calc-results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
