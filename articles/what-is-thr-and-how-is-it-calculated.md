@@ -46,7 +46,7 @@ Non-fixed allowances (such as daily meal allowances or variable travel reimburse
 ### 2. Employees with Less Than 12 Months of Service
 For employees who have worked for at least one month but less than a full year, the payment is pro-rated based on their exact tenure. The formula for this calculation is:
 
-$$\text{THR Amount} = \left( \frac{\text{Months of Service}}{12} \right) \times \text{One Month's Wages}$$
+**THR Amount** = (Months of Service ÷ 12) × One Month's Wages
 
 ---
 
@@ -71,8 +71,8 @@ Now, imagine an employee named Jordan who has worked at the same company for exa
 
 Because Jordan has worked for less than a year, the pro-rated formula applies:
 
-$$\text{THR Amount} = \left( \frac{7 \text{ months}}{12} \right) \times \$1,200$$
-$$\text{THR Amount} = 0.5833 \times \$1,200 = \$700$$
+**THR Amount** = (7 months ÷ 12) × $1,200
+**THR Amount** = 0.5833 × $1,200 = $700
 
 * **Jordan’s THR Payout:** $700
 

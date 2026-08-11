@@ -18,7 +18,7 @@ Understanding how this ratio is calculated and how it affects credit health can 
 
 Calculating this ratio involves a simple mathematical formula. To find the percentage, divide the total outstanding balance on all revolving accounts by the total credit limit across those same accounts, then multiply by 100.
 
-$$\text{Credit Utilization Ratio} = \left( \frac{\text{Total Outstanding Balances}}{\text{Total Credit Limits}} \right) \times 100$$
+**Credit Utilization Ratio** = (Total Outstanding Balances ÷ Total Credit Limits) × 100
 
 Credit scoring models typically look at two different types of utilization:
 1. **Per-card utilization:** The ratio on each individual credit card.

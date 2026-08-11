@@ -69,7 +69,7 @@ These are program selections made by the employee, such as:
 ### 4. Net Pay (The Take-Home Number)
 Net pay is the actual amount of money that is deposited into a bank account. It is calculated by subtracting all deductions from the gross pay.
 
-$$\text{Gross Pay} - \text{Total Deductions} = \text{Net Pay}$$
+**Gross Pay** − **Total Deductions** = **Net Pay**
 
 * **Example:** If gross monthly pay is $4,500, tax deductions total $900, and retirement contributions total $300, the net take-home pay is $3,300.
 
