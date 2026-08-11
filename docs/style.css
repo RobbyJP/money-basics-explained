@@ -426,6 +426,7 @@ textarea:focus {
   color: var(--ink-soft);
 }
 .consent-banner.consent-visible { display: block; }
+.consent-banner[hidden] { display: none !important; }
 .consent-banner p { margin: 0; }
 .consent-actions {
   display: flex;
@@ -440,14 +441,13 @@ textarea:focus {
 }
 @media (min-width: 700px) {
   .consent-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
     left: auto;
     right: 20px;
     bottom: 20px;
     max-width: 460px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
   }

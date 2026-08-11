@@ -124,6 +124,7 @@
   function choose(value) {
     try { localStorage.setItem(KEY, value); } catch (e) {}
     window.mcConsent = value;
+    banner.hidden = true;
     banner.classList.remove("consent-visible");
     document.dispatchEvent(new Event("mcConsent"));
   }
