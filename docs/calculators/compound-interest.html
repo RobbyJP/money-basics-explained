@@ -3,14 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
 <title>Compound Interest Calculator — How Compound Interest Works | Money Basics Explained</title>
 <meta name="description" content="Free compound interest calculator with monthly contributions, growth chart, and a clear explanation of how compound interest works.">
 <link rel="stylesheet" href="../style.css">
 <!-- AdSense: paste your approved AdSense snippet here once approved -->
 </head>
 <body>
-<header>
+<header class="site-header">
   <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
 </header>
 <main>
 <section class="calc-card" aria-label="Compound Interest Calculator">
@@ -61,7 +68,7 @@
 <h1>How Compound Interest Works</h1>
 <p>Compound interest is interest earned on top of interest. When you invest, your returns are reinvested, and those returns then earn their own returns. Over long periods, this effect turns steady contributions into significantly larger sums.</p>
 <h2>Simple vs compound interest</h2>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr>
 <th></th>
@@ -86,7 +93,7 @@
 <td>Investments, savings, most long-term products</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>With simple interest, a Rp 10,000,000 deposit at 7% earns Rp 700,000 every year — forever. With compounding, the second year's interest is calculated on Rp 10,700,000, the third on Rp 11,449,000, and so on. The difference grows with every period.</p>
 <h2>How the calculator works</h2>
 <p>The tool above projects the future value of an initial investment plus regular monthly contributions. It converts the nominal annual rate into an effective monthly rate based on the compounding frequency you choose, then compounds monthly — which matches how most investment products and index funds actually accrue.</p>
@@ -120,14 +127,14 @@
 <hr />
 <p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
 </main>
-<footer>
-  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
-  <p>
-    <a href="../about.html">About</a> &middot;
-    <a href="../contact.html">Contact</a> &middot;
-    <a href="../disclaimer.html">Disclaimer</a> &middot;
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
     <a href="../privacy-policy.html">Privacy Policy</a>
-  </p>
+  </div>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="compound-interest.js" defer></script>

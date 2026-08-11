@@ -3,27 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
 <title>{{ page_title }}</title>
 <meta name="description" content="{{ meta_description }}">
 <link rel="stylesheet" href="{{ base_prefix }}style.css">
 <!-- AdSense: paste your approved AdSense snippet here once approved -->
 </head>
 <body>
-<header>
+<header class="site-header">
   <a href="{{ base_prefix }}index.html" class="site-title">{{ site_name }}</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="{{ base_prefix }}about.html">About</a>
+    <a href="{{ base_prefix }}contact.html">Contact</a>
+  </nav>
 </header>
 <main>
 {{ calculator_html }}
 {{ content }}
 </main>
-<footer>
-  <p>&copy; {{ year }} {{ site_name }}. Educational content only, not financial advice.</p>
-  <p>
-    <a href="{{ base_prefix }}about.html">About</a> &middot;
-    <a href="{{ base_prefix }}contact.html">Contact</a> &middot;
-    <a href="{{ base_prefix }}disclaimer.html">Disclaimer</a> &middot;
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="{{ base_prefix }}about.html">About</a>
+    <a href="{{ base_prefix }}contact.html">Contact</a>
+    <a href="{{ base_prefix }}disclaimer.html">Disclaimer</a>
     <a href="{{ base_prefix }}privacy-policy.html">Privacy Policy</a>
-  </p>
+  </div>
+  <p class="footer-note">&copy; {{ year }} {{ site_name }}. Educational content only, not financial advice.</p>
 </footer>
 {{ calculator_script }}
 </body>

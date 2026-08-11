@@ -3,14 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
 <title>APR vs APY — What's the Difference? | Money Basics Explained</title>
 <meta name="description" content="APR vs APY explained, with a converter calculator showing how compounding frequency turns a nominal rate into an effective annual yield.">
 <link rel="stylesheet" href="../style.css">
 <!-- AdSense: paste your approved AdSense snippet here once approved -->
 </head>
 <body>
-<header>
+<header class="site-header">
   <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
 </header>
 <main>
 <section class="calc-card" aria-label="APR vs APY Calculator">
@@ -86,14 +93,14 @@
 <hr />
 <p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
 </main>
-<footer>
-  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
-  <p>
-    <a href="../about.html">About</a> &middot;
-    <a href="../contact.html">Contact</a> &middot;
-    <a href="../disclaimer.html">Disclaimer</a> &middot;
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
     <a href="../privacy-policy.html">Privacy Policy</a>
-  </p>
+  </div>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="apr-apy.js" defer></script>

@@ -87,15 +87,23 @@ def load_calculator(name: str) -> tuple[str, str]:
     return html, scripts
 
 
-def link_block(title: str, items: list[dict], link_base: str = "") -> str:
+def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "Guide") -> str:
     if not items:
         return ""
+    chip = kind.lower()
     entries = "\n".join(
-        f'<li><a href="{link_base}{a["filename"]}">{a.get("title", a["filename"])}</a>'
-        f'<p class="desc">{a.get("description", "")}</p></li>'
+        f'<li class="card">'
+        f'<a class="card-link" href="{link_base}{a["filename"]}">'
+        f'<span class="chip chip-{chip}">{kind}</span>'
+        f'<span class="card-title">{a.get("title", a["filename"])}</span>'
+        f'<span class="card-desc">{a.get("description", "")}</span>'
+        f"</a></li>"
         for a in items
     )
-    return f'<h2>{title}</h2><ul class="article-list">{entries}</ul>'
+    return (
+        f'<h2 class="section-title">{title} <span class="count">{len(items)}</span></h2>'
+        f'<ul class="card-list">{entries}</ul>'
+    )
 
 
 def build():
@@ -118,6 +126,8 @@ def build():
         fm, body = parse_frontmatter(raw)
         p = page_path(fm, md_path.stem)
         html_body = markdown.markdown(body, extensions=["tables", "fenced_code"])
+        html_body = re.sub(r"<table>", '<div class="table-wrap"><table>', html_body)
+        html_body = re.sub(r"</table>", "</table></div>", html_body)
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
         page_html = render_page(
             html_body,
@@ -150,10 +160,17 @@ def build():
     )
     calcs = sorted(calculators, key=lambda a: a.get("title", ""))
 
+    hero = (
+        '<section class="hero">'
+        '<p class="kicker">Independent &middot; Free &middot; Plain language</p>'
+        f"<h1>{SITE_NAME}</h1>"
+        f'<p class="hero-desc">{SITE_DESCRIPTION}</p>'
+        "</section>"
+    )
     index_content = (
-        f'<h1>{SITE_NAME}</h1><p>{SITE_DESCRIPTION}</p>'
-        + link_block("Calculators", calcs)
-        + link_block("Guides", guides)
+        hero
+        + link_block("Calculators", calcs, kind="Calculator")
+        + link_block("Guides", guides, kind="Guide")
     )
     (PUBLIC_DIR / "index.html").write_text(
         render_page(index_content, page_title=SITE_NAME, meta_description=SITE_DESCRIPTION, prefix=""),
@@ -165,7 +182,7 @@ def build():
         calc_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in calcs]
         calc_page = render_page(
             f"<h1>Calculators</h1><p>Free interactive tools to help you explore your money.</p>"
-            + link_block("Tools", calc_items),
+            + link_block("Tools", calc_items, kind="Calculator"),
             page_title=f"Calculators | {SITE_NAME}",
             meta_description="Free interactive personal finance calculators.",
             prefix="../",

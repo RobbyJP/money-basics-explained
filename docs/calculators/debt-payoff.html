@@ -3,14 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
 <title>Debt Payoff Calculator — Snowball vs Avalanche Compared | Money Basics Explained</title>
 <meta name="description" content="Interactive debt payoff calculator that compares the snowball and avalanche methods: payoff time, total interest, and which strategy fits your situation.">
 <link rel="stylesheet" href="../style.css">
 <!-- AdSense: paste your approved AdSense snippet here once approved -->
 </head>
 <body>
-<header>
+<header class="site-header">
   <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
 </header>
 <main>
 <section class="calc-card" aria-label="Debt Payoff Calculator">
@@ -49,7 +56,7 @@
 <h1>Debt Snowball vs Debt Avalanche</h1>
 <p>When you owe money on several debts at once, there are two well-known strategies for paying them off. Both work; they differ in <em>which debt you attack first with extra payments</em> — and that difference shapes how the journey feels.</p>
 <h2>The two strategies</h2>
-<table>
+<div class="table-wrap"><table>
 <thead>
 <tr>
 <th></th>
@@ -84,7 +91,7 @@
 <td>math and total cost</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>The snowball's idea is psychological: clearing a small debt quickly feels like a win, which keeps people motivated to continue. The avalanche's idea is mathematical: paying the highest-APR debt first minimizes the interest that accumulates while you pay.</p>
 <h2>How the calculator works</h2>
 <p>Enter each debt's balance, APR, and minimum payment, plus an extra monthly payment you can afford. The simulation runs both strategies month by month: interest accrues on each remaining balance, minimums are always paid, and every extra rupiah (plus each freed-up minimum once a debt is cleared) goes to the target debt.</p>
@@ -108,14 +115,14 @@
 <hr />
 <p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p>
 </main>
-<footer>
-  <p>&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
-  <p>
-    <a href="../about.html">About</a> &middot;
-    <a href="../contact.html">Contact</a> &middot;
-    <a href="../disclaimer.html">Disclaimer</a> &middot;
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
     <a href="../privacy-policy.html">Privacy Policy</a>
-  </p>
+  </div>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="debt-payoff.js" defer></script>
