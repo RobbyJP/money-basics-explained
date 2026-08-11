@@ -11,7 +11,9 @@
 <meta name="description" content="Clear explanations of personal finance concepts and honest comparisons of common tools and strategies.">
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Money Basics Explained", "url": "https://moneyclarity.blog", "description": "Clear explanations of personal finance concepts and honest comparisons of common tools and strategies."}</script>
-<!-- AdSense: paste your approved AdSense snippet here once approved -->
+<!-- AdSense: paste your approved AdSense snippet here once approved.
+     Gate ad loading on consent: only run the AdSense loader when
+     window.mcConsent === "accepted" (set by the consent banner). -->
 </head>
 <body>
 <header class="site-header">
@@ -51,6 +53,32 @@
   </div>
   <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
 </footer>
+<div id="consent-banner" class="consent-banner" role="region" aria-label="Cookie consent" hidden>
+  <p>We may use cookies, including advertising cookies from Google once ads are live, to keep this site free. You can accept or decline personalized advertising. See our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+  <div class="consent-actions">
+    <button type="button" id="consent-accept" class="calc-btn">Accept</button>
+    <button type="button" id="consent-decline" class="calc-btn calc-btn-ghost">Decline</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "mc_consent";
+  var banner = document.getElementById("consent-banner");
+  if (!banner) return;
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved) { window.mcConsent = saved; return; }
+  function choose(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
+    window.mcConsent = value;
+    banner.classList.remove("consent-visible");
+    document.dispatchEvent(new Event("mcConsent"));
+  }
+  document.getElementById("consent-accept").addEventListener("click", function () { choose("accepted"); });
+  document.getElementById("consent-decline").addEventListener("click", function () { choose("declined"); });
+  banner.classList.add("consent-visible");
+})();
+</script>
 
 </body>
 </html>
