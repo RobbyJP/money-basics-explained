@@ -163,6 +163,9 @@ def build():
     ads_src = Path("ads") / "ads.txt"
     if ads_src.exists():
         shutil.copy(ads_src, PUBLIC_DIR / "ads.txt")
+    for verify_file in PUBLIC_DIR.parent.glob("google*.html"):
+        shutil.copy(verify_file, PUBLIC_DIR / verify_file.name)
+        print(f"[site_builder] copied {verify_file.name}")
     if SITE_URL:
         sitemap_url = f"{SITE_URL.rstrip('/')}/sitemap.xml"
         (PUBLIC_DIR / "robots.txt").write_text(
