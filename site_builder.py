@@ -144,7 +144,7 @@ def build():
             print(f"[site_builder] built {out_path}")
 
     guides = sorted(
-        [a for a in articles if a.get("slug") != "privacy-policy"],
+        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact")],
         key=lambda a: a.get("date", ""),
         reverse=True,
     )
