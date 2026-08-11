@@ -72,7 +72,7 @@ def build():
 
     # Build index page
     list_items = "\n".join(
-        f'<a href="/{a["filename"]}">{a.get("title", a["filename"])}</a>'
+        f'<a href="{a["filename"]}">{a.get("title", a["filename"])}</a>'
         f'<p>{a.get("description", "")}</p>'
         for a in sorted(articles, key=lambda a: a.get("date", ""), reverse=True)
     )
