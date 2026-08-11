@@ -28,7 +28,7 @@ All calculators run entirely in your browser — nothing you type is sent to any
 
 ## Who we are
 
-Money Clarity is an independent project, built and maintained by an individual with no financial-industry affiliations. We are not a financial advisor, a broker, or an investment firm, and we do not sell financial products.
+Money Clarity is an independent, self-funded project. It is written and edited by one person with no financial-industry affiliations, publishing under the site's editorial byline — "Money Clarity Editorial Team" — so articles carry a consistent, accountable voice tied to the site rather than to an individual's personal name. That byline refers to this editorial operation; it is not a company or a large staff. We are not a financial advisor, a broker, or an investment firm, and we do not sell financial products.
 
 ## Contact
 

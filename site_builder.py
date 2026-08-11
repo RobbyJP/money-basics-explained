@@ -201,9 +201,15 @@ def build():
         date = fm.get("date", today)
         is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact")
         if not is_meta:
+            try:
+                from datetime import datetime as _dt
+
+                display_date = _dt.strptime(date, "%Y-%m-%d").strftime("%B %d, %Y")
+            except ValueError:
+                display_date = date
             byline = (
                 f'<p class="byline">By the Money Clarity Editorial Team '
-                f"&middot; Updated {date}</p>"
+                f"&middot; Updated {display_date}</p>"
             )
             html_body = byline + html_body
         page_html = render_page(
