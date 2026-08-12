@@ -241,10 +241,13 @@ def build():
     add_sitemap("", today)
 
     translations = {}
+    link_map = {}
     for _md in sorted(ARTICLES_DIR.glob("*.md")):
         _fm, _ = parse_frontmatter(_md.read_text(encoding="utf-8"))
         if _fm.get("lang") == "id" and _fm.get("translation_of"):
             translations[_fm["translation_of"]] = page_path(_fm, _md.stem)
+        _p = page_path(_fm, _md.stem)
+        link_map[os.path.basename(_p) + ".html"] = "/" + _p + ".html"
 
     articles = []
     calculators = []
@@ -258,8 +261,11 @@ def build():
         html_body = re.sub(
             r'href="\.\./calculators/([^"]+\.html)"', r'href="/calculators/\1"', html_body
         )
-        html_body = re.sub(r'href="\.\./([^"]+\.html)"', r'href="/articles/\1"', html_body)
-        html_body = re.sub(r'href="([a-z0-9-]+\.html)"', r'href="/articles/\1"', html_body)
+        html_body = re.sub(
+            r'href="(\.\./)?([a-z0-9-]+\.html)"',
+            lambda m: f'href="{link_map[m.group(2)]}"' if m.group(2) in link_map else m.group(0),
+            html_body,
+        )
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
         date = fm.get("date", today)
         is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")
@@ -410,10 +416,9 @@ def build():
     print(f"[site_builder] built index: {len(calcs)} calculators, {len(guides)} guides")
 
     if calcs:
-        calc_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in calcs]
         calc_page = render_page(
             f"<h1>Calculators</h1><p>Free interactive tools to help you explore your money.</p>"
-            + link_block("Tools", calc_items, kind="Calculator"),
+            + link_block("Tools", calcs, link_base="../", kind="Calculator"),
             page_title=f"Calculators | {SITE_NAME}",
             meta_description="Free interactive personal finance calculators.",
             prefix="../",
