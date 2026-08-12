@@ -205,6 +205,9 @@ def build():
     for verify_file in PUBLIC_DIR.parent.glob("google*.html"):
         shutil.copy(verify_file, PUBLIC_DIR / verify_file.name)
         print(f"[site_builder] copied {verify_file.name}")
+    for indexnow_key in PUBLIC_DIR.parent.glob("[0-9a-f]*[0-9a-f].txt"):
+        shutil.copy(indexnow_key, PUBLIC_DIR / indexnow_key.name)
+        print(f"[site_builder] copied IndexNow key {indexnow_key.name}")
     og_image_src = Path("og-image.png")
     if og_image_src.exists():
         shutil.copy(og_image_src, PUBLIC_DIR / "og-image.png")
