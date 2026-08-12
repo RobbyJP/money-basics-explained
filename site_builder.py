@@ -196,7 +196,7 @@ def build():
     import datetime
 
     today = datetime.date.today().isoformat()
-    css_version = today.replace("-", "")
+    css_version = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     if PUBLIC_DIR.exists():
         shutil.rmtree(PUBLIC_DIR)
     PUBLIC_DIR.mkdir(parents=True)
