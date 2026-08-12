@@ -62,6 +62,9 @@ def render_page(
     css_version: str = "",
     og_url: str = "",
     og_type: str = "article",
+    html_lang: str = "en",
+    og_locale: str = "en_US",
+    hreflang_links: str = "",
 ) -> str:
     base = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
     import datetime
@@ -80,6 +83,9 @@ def render_page(
         .replace("{{ og_url }}", og_url)
         .replace("{{ og_type }}", og_type)
         .replace("{{ og_image }}", og_image)
+        .replace("{{ html_lang }}", html_lang)
+        .replace("{{ og_locale }}", og_locale)
+        .replace("{{ hreflang_links }}", hreflang_links)
         .replace("{{ year }}", str(datetime.date.today().year))
     )
 
@@ -230,6 +236,12 @@ def build():
 
     add_sitemap("", today)
 
+    translations = {}
+    for _md in sorted(ARTICLES_DIR.glob("*.md")):
+        _fm, _ = parse_frontmatter(_md.read_text(encoding="utf-8"))
+        if _fm.get("lang") == "id" and _fm.get("translation_of"):
+            translations[_fm["translation_of"]] = _md.stem
+
     articles = []
     calculators = []
     for md_path in sorted(ARTICLES_DIR.glob("*.md")):
@@ -242,21 +254,59 @@ def build():
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
         date = fm.get("date", today)
         is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact")
+        is_id = fm.get("lang") == "id"
+        stem = md_path.stem
+        en_slug = fm.get("translation_of", "") if is_id else fm.get("slug", stem)
+        id_slug = stem if is_id else translations.get(fm.get("slug", stem), "")
         if not is_meta:
             try:
                 from datetime import datetime as _dt
 
-                display_date = _dt.strptime(date, "%Y-%m-%d").strftime("%B %d, %Y")
+                if is_id:
+                    _months_id = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+                    _d = _dt.strptime(date, "%Y-%m-%d")
+                    display_date = f"{_d.day} {_months_id[_d.month - 1]} {_d.year}"
+                    byline = (
+                        f'<p class="byline">Oleh Tim Redaksi Money Clarity '
+                        f"&middot; Diperbarui {display_date}</p>"
+                    )
+                else:
+                    display_date = _dt.strptime(date, "%Y-%m-%d").strftime("%B %d, %Y")
+                    byline = (
+                        f'<p class="byline">By the Money Clarity Editorial Team '
+                        f"&middot; Updated {display_date}</p>"
+                    )
             except ValueError:
                 display_date = date
-            byline = (
-                f'<p class="byline">By the Money Clarity Editorial Team '
-                f"&middot; Updated {display_date}</p>"
-            )
+                byline = (
+                    f'<p class="byline">By the Money Clarity Editorial Team '
+                    f"&middot; Updated {display_date}</p>"
+                )
+            if id_slug:
+                if is_id:
+                    lang_box = (
+                        f'<p class="lang-switch">English version: '
+                        f'<a href="../{en_slug}.html">This article in English</a></p>'
+                    )
+                else:
+                    lang_box = (
+                        f'<p class="lang-switch">Versi Bahasa Indonesia: '
+                        f'<a href="id/{id_slug}.html">Baca artikel ini dalam Bahasa Indonesia</a></p>'
+                    )
+                html_body = lang_box + html_body
             html_body = byline + html_body
         page_url_full = page_url(fm, md_path.stem)
         if calc_html:
             calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
+        hreflang_links = ""
+        if id_slug:
+            en_url = site_url(en_slug)
+            id_url = site_url(f"id/{id_slug}")
+            hreflang_links = (
+                f'<link rel="alternate" hreflang="en" href="{en_url}">'
+                f'<link rel="alternate" hreflang="id" href="{id_url}">'
+                f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
+            )
         page_html = render_page(
             html_body,
             page_title=f"{fm.get('title', md_path.stem)} | {SITE_NAME}",
@@ -273,6 +323,9 @@ def build():
             ),
             og_url=page_url_full,
             og_type="article",
+            html_lang="id" if is_id else "en",
+            og_locale="id_ID" if is_id else "en_US",
+            hreflang_links=hreflang_links,
         )
         out_path = PUBLIC_DIR / f"{p}.html"
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -303,6 +356,7 @@ def build():
         '<p class="kicker">Independent &middot; Free &middot; Plain language</p>'
         f"<h1>{SITE_NAME}</h1>"
         f'<p class="hero-desc">{SITE_DESCRIPTION}</p>'
+        '<p class="hero-lang"><a href="id/index.html">Bahasa Indonesia &rarr;</a></p>'
         "</section>"
     )
     newsletter = (
@@ -336,6 +390,11 @@ def build():
             json_ld=json_ld_website(),
             og_url=site_url(""),
             og_type="website",
+            hreflang_links=(
+                f'<link rel="alternate" hreflang="en" href="{site_url("")}">'
+                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">'
+                f'<link rel="alternate" hreflang="x-default" href="{site_url("")}">'
+            ),
         ),
         encoding="utf-8",
     )
@@ -364,6 +423,43 @@ def build():
         (calc_dir / "index.html").write_text(calc_page, encoding="utf-8")
         add_sitemap("calculators/index", today)
         print(f"[site_builder] built calculators index with {len(calcs)} calculators")
+
+    id_guides = sorted(
+        [a for a in articles if a.get("lang") == "id"],
+        key=lambda a: a.get("date", ""),
+        reverse=True,
+    )
+    if id_guides:
+        id_hub = render_page(
+            "<h1>Money Clarity — Bahasa Indonesia</h1>"
+            "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
+            + link_block("Panduan Bahasa Indonesia", id_guides, kind="Guide")
+            + '<p><a href="../index.html">English version &rarr;</a></p>',
+            page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
+            meta_description="Panduan keuangan pribadi dalam Bahasa Indonesia: THR, slip gaji, PPh 21, dan KPR dijelaskan dengan bahasa yang sederhana.",
+            prefix="../",
+            css_version=css_version,
+            json_ld=json_ld_article(
+                "Money Clarity — Bahasa Indonesia",
+                "Panduan keuangan pribadi dalam Bahasa Indonesia.",
+                site_url("id"),
+                today,
+            ),
+            og_url=site_url("id"),
+            og_type="website",
+            html_lang="id",
+            og_locale="id_ID",
+            hreflang_links=(
+                f'<link rel="alternate" hreflang="en" href="{site_url("")}">'
+                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">'
+                f'<link rel="alternate" hreflang="x-default" href="{site_url("")}">'
+            ),
+        )
+        id_dir = PUBLIC_DIR / "id"
+        id_dir.mkdir(parents=True, exist_ok=True)
+        (id_dir / "index.html").write_text(id_hub, encoding="utf-8")
+        add_sitemap("id/index", today)
+        print(f"[site_builder] built id hub with {len(id_guides)} guides")
 
     sitemap_xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'

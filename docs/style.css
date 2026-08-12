@@ -113,6 +113,18 @@ p { margin: 0.9em 0; }
   border-bottom: 1px solid var(--line);
   padding-bottom: 0.9em;
 }
+.lang-switch {
+  font-size: 0.85rem;
+  margin: 0 0 1.1em;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--ink-soft);
+}
+.hero-lang { margin: 14px 0 0; }
+.hero-lang a { font-weight: 600; }
 strong { color: var(--ink); }
 a { color: var(--accent); }
 hr {

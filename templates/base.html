@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ html_lang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,8 @@
 <meta property="og:description" content="{{ meta_description }}">
 <meta property="og:url" content="{{ og_url }}">
 <meta property="og:image" content="{{ og_image }}">
+<meta property="og:locale" content="{{ og_locale }}">
+{{ hreflang_links }}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }}">
 <meta name="twitter:description" content="{{ meta_description }}">
@@ -43,6 +45,7 @@
     <a href="{{ base_prefix }}contact.html">Contact</a>
     <a href="{{ base_prefix }}disclaimer.html">Disclaimer</a>
     <a href="{{ base_prefix }}privacy-policy.html">Privacy Policy</a>
+    <a href="{{ base_prefix }}id/index.html">Bahasa Indonesia</a>
   </div>
   <p class="footer-note">&copy; {{ year }} {{ site_name }}. Educational content only, not financial advice.</p>
 </footer>
