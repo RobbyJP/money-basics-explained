@@ -297,6 +297,28 @@ def build():
                     f'<p class="byline">By the Money Clarity Editorial Team '
                     f"&middot; Updated {display_date}</p>"
                 )
+            if is_id:
+                author_box = (
+                    '<div class="author-box">'
+                    '<p class="author-name">Oleh Tim Redaksi Money Clarity</p>'
+                    "<p>Setiap panduan diteliti, ditulis, dan diperiksa ulang oleh tim "
+                    "redaksi Money Clarity: konsep dan rumus diverifikasi terhadap "
+                    "sumber utama, kalkulator diuji dengan contoh perhitungan, dan "
+                    "setiap halaman mencantumkan tanggal pembaruan. Lihat "
+                    f'<a href="{base_prefix(p)}about.html">standar editorial kami</a>.</p>'
+                    "</div>"
+                )
+            else:
+                author_box = (
+                    '<div class="author-box">'
+                    '<p class="author-name">By the Money Clarity Editorial Team</p>'
+                    "<p>Every guide is researched, written, and fact-checked by the "
+                    "Money Clarity editorial team: concepts and formulas are verified "
+                    "against primary sources, calculators are tested with worked "
+                    "examples, and each page shows its last-updated date. See our "
+                    f'<a href="{base_prefix(p)}about.html">editorial standards</a>.</p>'
+                    "</div>"
+                )
             if id_slug:
                 if is_id:
                     lang_box = (
@@ -309,7 +331,7 @@ def build():
                         f'<a href="../{id_slug}.html">Baca artikel ini dalam Bahasa Indonesia</a></p>'
                     )
                 html_body = lang_box + html_body
-            html_body = byline + html_body
+            html_body = byline + html_body + author_box
         page_url_full = page_url(fm, md_path.stem)
         if calc_html:
             calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
@@ -360,7 +382,7 @@ def build():
             print(f"[site_builder] built {out_path}")
 
     guides = sorted(
-        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact")],
+        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")],
         key=lambda a: a.get("date", ""),
         reverse=True,
     )

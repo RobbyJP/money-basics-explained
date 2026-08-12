@@ -26,6 +26,14 @@ We publish two kinds of pages:
 
 All calculators run entirely in your browser — nothing you type is sent to any server. The formulas are standard financial mathematics (compound growth, amortization-style debt simulation, effective-rate conversion). Each tool page includes a section explaining its method and its limitations.
 
+## How we research and review
+
+- **Research first.** Before writing, we review how the topic is covered by primary and reputable sources (tax rules, regulatory definitions, published methodology). Where a rule or rate is specific — like PPh 21 brackets or THR rules — the guide names the governing regulation or institution, and example figures are labeled as examples.
+- **Math is checked.** Calculator formulas are verified with worked examples before publishing, and each tool page explains its method and limitations. A bad number in a finance tool is worse than no tool.
+- **Human review.** Every article is read in full before it goes live — checked for errors, misleading phrasing, and claims we cannot support. Corrections are made promptly and the page's "Last updated" date is bumped.
+- **Bilingual, not machine-translated.** Indonesian guides are written for the Indonesian context (Indonesian tax, KPR, THR, payslip conventions) rather than translated from English, then cross-checked against the English version for consistency.
+- **Editorial independence.** We have no affiliate relationships, sell no financial products, and accept no sponsored content. The site is self-funded and independent.
+
 ## Who we are
 
 Money Clarity is an independent, self-funded project. It is written and edited by one person with no financial-industry affiliations, publishing under the site's editorial byline — "Money Clarity Editorial Team" — so articles carry a consistent, accountable voice tied to the site rather than to an individual's personal name. That byline refers to this editorial operation; it is not a company or a large staff. We are not a financial advisor, a broker, or an investment firm, and we do not sell financial products.
