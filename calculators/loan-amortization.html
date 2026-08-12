@@ -1,0 +1,36 @@
+<section class="calc-card" aria-label="Loan Amortization Calculator">
+  <h2>Loan Amortization Calculator</h2>
+  <p class="calc-intro">See your true monthly payment, the total interest a loan will cost, and how much an extra payment every month can save you.</p>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="la-amount">Loan amount</label>
+      <input id="la-amount" type="text" inputmode="decimal" value="300.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="la-rate">Annual interest rate (%)</label>
+      <input id="la-rate" type="number" min="0" step="any" value="9.5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="la-years">Loan term (years)</label>
+      <input id="la-years" type="number" min="1" max="40" step="1" value="15">
+    </div>
+    <div class="calc-row">
+      <label for="la-extra">Extra monthly payment (optional)</label>
+      <input id="la-extra" type="text" inputmode="decimal" value="500.000">
+    </div>
+    <div class="calc-row">
+      <label for="la-currency">Currency</label>
+      <select id="la-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main"><span class="calc-label">Monthly payment</span><span id="la-payment" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Total interest paid</span><span id="la-interest" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Paid off in</span><span id="la-payoff" class="calc-value">-</span></div>
+  </div>
+  <canvas id="la-chart" height="260" aria-label="Loan balance over time chart"></canvas>
+  <p class="calc-note">Fixed-rate estimate: monthly interest, no fees, insurance, or rate changes. Many Indonesian mortgages (KPR) use floating rates — re-run whenever the rate changes.</p>
+</section>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="4KnXhXG-VSV4APVsfZLdrqVFhpQBAt7IskEaMk0b5L8">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
+<title>Loan Amortization Calculator: How Mortgages and Car Loans Really Work | Money Basics Explained</title>
+<meta name="description" content="Understand loan amortization, how monthly payments split into principal and interest, and how extra payments shorten your loan and cut total interest — with a free calculator.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Money Basics Explained">
+<meta property="og:title" content="Loan Amortization Calculator: How Mortgages and Car Loans Really Work | Money Basics Explained">
+<meta property="og:description" content="Understand loan amortization, how monthly payments split into principal and interest, and how extra payments shorten your loan and cut total interest — with a free calculator.">
+<meta property="og:url" content="https://moneyclarity.blog/articles/loan-amortization-explained.html">
+<meta property="og:image" content="https://moneyclarity.blog/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loan Amortization Calculator: How Mortgages and Car Loans Really Work | Money Basics Explained">
+<meta name="twitter:description" content="Understand loan amortization, how monthly payments split into principal and interest, and how extra payments shorten your loan and cut total interest — with a free calculator.">
+<link rel="stylesheet" href="../style.css?v=20260812">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Loan Amortization Calculator: How Mortgages and Car Loans Really Work", "description": "Understand loan amortization, how monthly payments split into principal and interest, and how extra payments shorten your loan and cut total interest \u2014 with a free calculator.", "datePublished": "2026-08-12", "dateModified": "2026-08-12", "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"}, "publisher": {"@type": "Organization", "name": "Money Basics Explained"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://moneyclarity.blog/articles/loan-amortization-explained.html"}}</script>
+<!-- AdSense: paste your approved AdSense snippet here once approved.
+     Gate ad loading on consent: only run the AdSense loader when
+     window.mcConsent === "accepted" (set by the consent banner). -->
+</head>
+<body>
+<header class="site-header">
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+<section class="calc-card" aria-label="Loan Amortization Calculator">
+  <h2>Loan Amortization Calculator</h2>
+  <p class="calc-intro">See your true monthly payment, the total interest a loan will cost, and how much an extra payment every month can save you.</p>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="la-amount">Loan amount</label>
+      <input id="la-amount" type="text" inputmode="decimal" value="300.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="la-rate">Annual interest rate (%)</label>
+      <input id="la-rate" type="number" min="0" step="any" value="9.5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="la-years">Loan term (years)</label>
+      <input id="la-years" type="number" min="1" max="40" step="1" value="15">
+    </div>
+    <div class="calc-row">
+      <label for="la-extra">Extra monthly payment (optional)</label>
+      <input id="la-extra" type="text" inputmode="decimal" value="500.000">
+    </div>
+    <div class="calc-row">
+      <label for="la-currency">Currency</label>
+      <select id="la-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main"><span class="calc-label">Monthly payment</span><span id="la-payment" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Total interest paid</span><span id="la-interest" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Paid off in</span><span id="la-payoff" class="calc-value">-</span></div>
+  </div>
+  <canvas id="la-chart" height="260" aria-label="Loan balance over time chart"></canvas>
+  <p class="calc-note">Fixed-rate estimate: monthly interest, no fees, insurance, or rate changes. Many Indonesian mortgages (KPR) use floating rates — re-run whenever the rate changes.</p>
+</section><div class="share-bar"><span class="share-label">Share this tool:</span><a class="calc-btn calc-btn-small" rel="noopener" target="_blank" href="https://wa.me/?text=Loan%20Amortization%20Calculator%3A%20How%20Mortgages%20and%20Car%20Loans%20Really%20Work%20-%20a%20free%20tool%20from%20Money%20Clarity%20https%3A%2F%2Fmoneyclarity.blog%2Farticles%2Floan-amortization-explained.html">WhatsApp</a><button type="button" class="calc-btn calc-btn-small share-copy" data-url="https://moneyclarity.blog/articles/loan-amortization-explained.html">Copy link</button></div><script>(function(){var b=document.querySelector(".share-copy");if(b){b.addEventListener("click",function(){var u=b.getAttribute("data-url");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);});}else{var t=document.createElement("textarea");t.value=u;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);}});}})();</script>
+<p class="byline">By the Money Clarity Editorial Team &middot; Updated August 12, 2026</p><hr />
+<p>A loan's monthly payment looks simple, but behind it sits a schedule called amortization — the gradual repayment of a loan through fixed payments where interest is front-loaded. Understanding it explains two things most borrowers miss: why the balance barely moves in the early years, and why small extra payments are disproportionately powerful. This guide covers the mechanics, the Indonesia-specific (KPR) reality, and how to use the calculator above.</p>
+<h2>How a fixed monthly payment is built</h2>
+<p>For a fixed-rate loan the bank derives one payment that, over the full term, exactly repays the principal plus interest. The standard formula:</p>
+<blockquote>
+<p>Payment = P × i ÷ (1 − (1 + i)^−n)</p>
+</blockquote>
+<p>Where <code>P</code> is the loan amount, <code>i</code> the monthly interest rate, and <code>n</code> the number of monthly payments.</p>
+<p>Each month your payment is split in two:</p>
+<ul>
+<li><strong>Interest portion</strong> = current balance × monthly rate</li>
+<li><strong>Principal portion</strong> = payment − interest</li>
+</ul>
+<p>Because the interest portion shrinks as the balance falls, the principal portion grows with every month. Early payments are mostly interest; late payments are mostly principal. That is the amortization curve — and it is why paying off "early" in a loan's life saves so much.</p>
+<h3>Worked example</h3>
+<p>A Rp 300,000,000 loan at 9.5% per year for 15 years:</p>
+<ul>
+<li>Monthly payment: about Rp 3,136,000</li>
+<li>Total paid over 15 years: about Rp 564,500,000</li>
+<li>Total interest: about <strong>Rp 264,500,000</strong> — 88% of the loan amount</li>
+</ul>
+<p>The calculator above reproduces these numbers and shows the balance curve month by month.</p>
+<h2>Why the balance seems stuck</h2>
+<p>In year one of that same loan, roughly Rp 2,375,000 of each payment is interest and only about Rp 761,000 reaches the principal. After five years you will have made about Rp 188,000,000 in payments — yet the balance will still be above Rp 220,000,000. This is not the bank being unfair; it is simply how fixed payments with front-loaded interest work. The turning point comes after roughly two-thirds of the term, when principal payments start to dominate.</p>
+<h2>The superpower of extra payments</h2>
+<p>Add Rp 500,000 to the monthly payment in the example above and two things happen:</p>
+<ul>
+<li><strong>The loan is paid off in about 11 years instead of 15</strong> — four years earlier.</li>
+<li><strong>Total interest drops from about Rp 264 million to about Rp 196 million</strong> — roughly Rp 68 million saved.</li>
+</ul>
+<p>Extra payments attack the most expensive part of the loan (the interest that would have been charged on the early principal) and shorten the term directly. On high-rate consumer loans the "guaranteed return" of an extra payment often beats what the same money would earn invested.</p>
+<h2>KPR specifics in Indonesia</h2>
+<p>Most Indonesian mortgages use a <strong>floating rate</strong> that the bank can adjust (often every quarter), so the payment is not truly fixed. Practical consequences:</p>
+<ul>
+<li><strong>Re-run the calculator whenever the rate changes</strong> — a 1 percentage point rise on a 15-year KPR adds tens of millions in interest.</li>
+<li><strong>Do not confuse the intro rate</strong> — low first-year promotional rates (often 2–3%) revert to market rates afterwards; the "discount" period is marketing, not a discount.</li>
+<li><strong>The 100% financing trap</strong> — loans that cover the full property price carry higher rates and fees, increasing both payment and total interest.</li>
+<li><strong>Extra payments during early years are most valuable</strong> — this is exactly when floating-rate KPR borrowers have the least spare cash, so even occasional lump sums (THR, bonus) moved to the loan beat most alternatives.</li>
+</ul>
+<h2>A decision framework for extra payments</h2>
+<p>Use the calculator above and compare:</p>
+<ol>
+<li><strong>Cash-flow impact:</strong> can the extra payment survive a rate hike without breaking your budget?</li>
+<li><strong>Comparison against alternatives:</strong> extra payment beats low-yield savings, usually loses to high-yield investments over long horizons — but is a <em>guaranteed</em> return.</li>
+<li><strong>Emergency fund first:</strong> do not over-pay a loan until you have a separate emergency cushion; a loan cannot be reborrowed on demand without cost.</li>
+</ol>
+<h2>Final word</h2>
+<p>Amortization is not intuitive, but it is simple arithmetic once you see the curve. Every borrower should know their true total interest before signing — the calculator above shows it in seconds, and the extra-payment line shows exactly what a little discipline is worth in rupiah and months.</p>
+<p><em><strong>Disclaimer:</strong> This content is for general educational purposes only and is not financial advice. Loan terms, fees, and tax treatment vary by lender and jurisdiction. Consult a qualified professional before making borrowing decisions.</em></p>
+</main>
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+  </div>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+</footer>
+<div id="consent-banner" class="consent-banner" role="region" aria-label="Cookie consent" hidden>
+  <p>We may use cookies, including advertising cookies from Google once ads are live, to keep this site free. You can accept or decline personalized advertising. See our <a href="../privacy-policy.html">Privacy Policy</a>.</p>
+  <div class="consent-actions">
+    <button type="button" id="consent-accept" class="calc-btn">Accept</button>
+    <button type="button" id="consent-decline" class="calc-btn calc-btn-ghost">Decline</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "mc_consent";
+  var banner = document.getElementById("consent-banner");
+  if (!banner) return;
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved) { window.mcConsent = saved; return; }
+  function choose(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
+    window.mcConsent = value;
+    banner.hidden = true;
+    banner.classList.remove("consent-visible");
+    document.dispatchEvent(new Event("mcConsent"));
+  }
+  document.getElementById("consent-accept").addEventListener("click", function () { choose("accepted"); });
+  document.getElementById("consent-decline").addEventListener("click", function () { choose("declined"); });
+  banner.hidden = false;
+  banner.classList.add("consent-visible");
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="loan-amortization.js" defer></script>
+</body>
+</html>

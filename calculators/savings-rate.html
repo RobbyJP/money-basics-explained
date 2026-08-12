@@ -1,0 +1,28 @@
+<section class="calc-card" aria-label="Savings Rate Calculator">
+  <h2>Savings Rate Calculator</h2>
+  <p class="calc-intro">Your savings rate is the share of take-home income you keep each month. It is the single most useful number for judging whether you are saving meaningfully.</p>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="sr-income">Monthly take-home income</label>
+      <input id="sr-income" type="text" inputmode="decimal" value="8.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="sr-saved">Monthly amount saved</label>
+      <input id="sr-saved" type="text" inputmode="decimal" value="1.600.000">
+    </div>
+    <div class="calc-row">
+      <label for="sr-currency">Currency</label>
+      <select id="sr-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main"><span class="calc-label">Your savings rate</span><span id="sr-rate" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Amount spent</span><span id="sr-spent" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Band</span><span id="sr-band" class="calc-value">-</span></div>
+  </div>
+  <canvas id="sr-chart" height="120" aria-label="Savings rate vs benchmark bar"></canvas>
+  <p class="calc-note">Count only money you actually keep — transfers to savings or investment accounts. Paying off high-interest debt is often counted as saving too.</p>
+</section>

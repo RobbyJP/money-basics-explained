@@ -1,0 +1,31 @@
+<section class="calc-card" aria-label="Salary to Hourly Rate Calculator">
+  <h2>Salary to Hourly Rate Calculator</h2>
+  <p class="calc-intro">Convert a salary into an hourly rate so you can compare job offers, side hustles, and freelance work on equal terms.</p>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="st-annual">Annual salary (gross, before tax)</label>
+      <input id="st-annual" type="text" inputmode="decimal" value="120.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="st-hours">Hours worked per week</label>
+      <input id="st-hours" type="number" min="1" max="80" step="0.5" value="40" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="st-weeks">Weeks worked per year</label>
+      <input id="st-weeks" type="number" min="1" max="52" step="1" value="48" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="st-currency">Currency</label>
+      <select id="st-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result calc-result-main"><span class="calc-label">Hourly rate</span><span id="st-hourly" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Per week</span><span id="st-weekly" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Per month</span><span id="st-monthly" class="calc-value">-</span></div>
+  </div>
+  <p class="calc-note">Based on gross salary and total hours including unpaid overtime. For a true rate, divide by hours actually worked — commute and after-hours duties count in practice.</p>
+</section>
