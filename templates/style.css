@@ -459,11 +459,11 @@ textarea:focus {
 .footer-links a:hover { color: var(--accent); }
 .footer-badge { margin: 14px 0 0; }
 .footer-badge a { display: inline-block; }
-.footer-badge img { display: block; opacity: 0.85; }
+.footer-badge img { opacity: 0.85; }
 .badge-dark { display: none; }
 @media (prefers-color-scheme: dark) {
   .badge-light { display: none; }
-  .badge-dark { display: block; }
+  .badge-dark { display: inline; }
 }
 .footer-note { margin: 6px 0 0; }
 
