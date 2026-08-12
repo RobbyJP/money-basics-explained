@@ -60,10 +60,13 @@ def render_page(
     calculator_script: str = "",
     json_ld: str = "",
     css_version: str = "",
+    og_url: str = "",
+    og_type: str = "article",
 ) -> str:
     base = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
     import datetime
 
+    og_image = f"{SITE_URL.rstrip('/')}/og-image.png" if SITE_URL else ""
     return (
         base.replace("{{ page_title }}", page_title)
         .replace("{{ meta_description }}", meta_description)
@@ -74,7 +77,37 @@ def render_page(
         .replace("{{ calculator_script }}", calculator_script)
         .replace("{{ json_ld }}", json_ld)
         .replace("{{ css_version }}", css_version)
+        .replace("{{ og_url }}", og_url)
+        .replace("{{ og_type }}", og_type)
+        .replace("{{ og_image }}", og_image)
         .replace("{{ year }}", str(datetime.date.today().year))
+    )
+
+
+def share_bar(url: str, title: str) -> str:
+    import urllib.parse
+
+    text = urllib.parse.quote(f"{title} - a free tool from Money Clarity")
+    return (
+        f'<div class="share-bar">'
+        f'<span class="share-label">Share this tool:</span>'
+        f'<a class="calc-btn calc-btn-small" rel="noopener" target="_blank" '
+        f'href="https://wa.me/?text={text}%20{urllib.parse.quote(url, safe="")}">WhatsApp</a>'
+        f'<button type="button" class="calc-btn calc-btn-small share-copy" '
+        f'data-url="{url}">Copy link</button>'
+        f"</div>"
+        f'<script>'
+        f'(function(){{var b=document.querySelector(".share-copy");'
+        f"if(b){{b.addEventListener(\"click\",function(){{"
+        f"var u=b.getAttribute(\"data-url\");"
+        f"if(navigator.clipboard&&navigator.clipboard.writeText)"
+        f"{{navigator.clipboard.writeText(u).then(function(){{"
+        f"b.textContent=\"Copied!\";setTimeout(function(){{b.textContent=\"Copy link\";}},2000);}});}}"
+        f"else{{var t=document.createElement(\"textarea\");t.value=u;"
+        f"document.body.appendChild(t);t.select();document.execCommand(\"copy\");"
+        f"document.body.removeChild(t);b.textContent=\"Copied!\";"
+        f"setTimeout(function(){{b.textContent=\"Copy link\";}},2000);}}"
+        f"}});}}" + "})();" + "</script>"
     )
 
 
@@ -172,6 +205,9 @@ def build():
     for verify_file in PUBLIC_DIR.parent.glob("google*.html"):
         shutil.copy(verify_file, PUBLIC_DIR / verify_file.name)
         print(f"[site_builder] copied {verify_file.name}")
+    og_image_src = Path("og-image.png")
+    if og_image_src.exists():
+        shutil.copy(og_image_src, PUBLIC_DIR / "og-image.png")
     if SITE_URL:
         sitemap_url = f"{SITE_URL.rstrip('/')}/sitemap.xml"
         (PUBLIC_DIR / "robots.txt").write_text(
@@ -215,6 +251,9 @@ def build():
                 f"&middot; Updated {display_date}</p>"
             )
             html_body = byline + html_body
+        page_url_full = page_url(fm, md_path.stem)
+        if calc_html:
+            calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
         page_html = render_page(
             html_body,
             page_title=f"{fm.get('title', md_path.stem)} | {SITE_NAME}",
@@ -226,9 +265,11 @@ def build():
             json_ld=json_ld_article(
                 fm.get("title", md_path.stem),
                 fm.get("description", SITE_DESCRIPTION),
-                page_url(fm, md_path.stem),
+                page_url_full,
                 date,
             ),
+            og_url=page_url_full,
+            og_type="article",
         )
         out_path = PUBLIC_DIR / f"{p}.html"
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -274,6 +315,8 @@ def build():
             prefix="",
             css_version=css_version,
             json_ld=json_ld_website(),
+            og_url=site_url(""),
+            og_type="website",
         ),
         encoding="utf-8",
     )
@@ -294,6 +337,8 @@ def build():
                 site_url("calculators"),
                 today,
             ),
+            og_url=site_url("calculators"),
+            og_type="website",
         )
         calc_dir = PUBLIC_DIR / "calculators"
         calc_dir.mkdir(parents=True, exist_ok=True)

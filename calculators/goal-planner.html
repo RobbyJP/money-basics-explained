@@ -1,0 +1,36 @@
+<section class="calc-card" aria-label="Savings Goal Planner">
+  <h2>Savings Goal Planner</h2>
+  <p class="calc-intro">See whether your monthly savings will hit a target by a deadline, and exactly how much you would need to save each month if not.</p>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="gp-target">Target amount</label>
+      <input id="gp-target" type="text" inputmode="decimal" value="50.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="gp-monthly">Monthly contribution</label>
+      <input id="gp-monthly" type="text" inputmode="decimal" value="2.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="gp-rate">Expected annual return (%)</label>
+      <input id="gp-rate" type="number" min="0" step="any" value="5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="gp-years">Years until goal</label>
+      <input id="gp-years" type="number" min="1" max="60" step="1" value="5">
+    </div>
+    <div class="calc-row">
+      <label for="gp-currency">Currency</label>
+      <select id="gp-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result"><span class="calc-label">Projected balance at goal date</span><span id="gp-projected" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Monthly contribution needed</span><span id="gp-need" class="calc-value">-</span></div>
+    <div class="calc-result calc-result-main"><span class="calc-label">Verdict</span><span id="gp-verdict" class="calc-value">-</span></div>
+  </div>
+  <canvas id="gp-chart" height="260" aria-label="Projected balance vs target chart"></canvas>
+  <p class="calc-note">Estimates assume monthly contributions, a constant annual return, and no taxes or inflation. Your actual results will differ. See the guide below for limitations.</p>
+</section>
