@@ -10,8 +10,8 @@ Phase A list. All items are manual, free, and take 5–15 minutes each. Verify e
 ## Tool directory listings (verified free submission channels, 2026-08-12)
 - [x] **directree.io** — DONE 2026-08-12: listing saved, verified badge embedded in site footer (do-follow active, `5d647d2`).
 - [ ] **digital.finance/get-listed** (https://digital.finance/get-listed) — fintech directory pitched at exactly this site type (mortgage/retirement/compound interest calc users). Free submit, ~2 min form, reviewed in 3–5 business days.
+- [x] **topdividendtools.com/submit-tool.html** — DONE 2026-08-12 (submitted: Dividend Calculator + Other, Free; review pending).
 - [ ] **surelists.com** — free directory submission form, quick approval.
-- [ ] **topdividendtools.com/submit-tool.html** — free form; submit as a dividend/portfolio tool category.
 - [ ] **addfreewebdirectory.com** — has a dedicated "Financial Calculators" category with free listings.
 - [x] AllCalculators.net — **NO public submission form (verified 2026-08-12)** — they publish their own WP-hosted calculators; only a footer contact email exists. SKIP or optionally email their contact (low probability).
 
