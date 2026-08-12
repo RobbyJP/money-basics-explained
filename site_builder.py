@@ -302,8 +302,24 @@ def build():
         f'<p class="hero-desc">{SITE_DESCRIPTION}</p>'
         "</section>"
     )
+    newsletter = (
+        '<section class="card newsletter-box" aria-label="Newsletter signup">'
+        "<h2>Money lessons, once a month</h2>"
+        '<p class="newsletter-desc">One short email a month: a money lesson, the newest calculator, and an honest reminder or two. No spam, unsubscribe any time.</p>'
+        '<form class="contact-form newsletter-form" action="https://formsubmit.co/robbyjulian57@gmail.com" method="POST">'
+        '<input type="hidden" name="_subject" value="Newsletter signup - Money Clarity">'
+        '<input type="hidden" name="_next" value="' + site_url("") + '">'
+        '<input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">'
+        '<div class="newsletter-row">'
+        '<input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">'
+        '<button type="submit" class="calc-btn">Subscribe</button>'
+        "</div>"
+        '<p class="newsletter-note">We never sell or share your address. Unsubscribe with one click.</p>'
+        "</form></section>"
+    )
     index_content = (
         hero
+        + newsletter
         + link_block("Calculators", calcs, kind="Calculator")
         + link_block("Guides", guides, kind="Guide")
     )
