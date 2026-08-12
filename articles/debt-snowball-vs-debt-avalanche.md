@@ -26,7 +26,7 @@ The snowball's idea is psychological: clearing a small debt quickly feels like a
 
 ## How the calculator works
 
-Enter each debt's balance, APR, and minimum payment, plus an extra monthly payment you can afford. The simulation runs both strategies month by month: interest accrues on each remaining balance, minimums are always paid, and every extra rupiah (plus each freed-up minimum once a debt is cleared) goes to the target debt.
+Enter each debt's balance, APR, and minimum payment, plus an extra monthly payment you can afford. The simulation runs both strategies month by month: interest accrues on each remaining balance, minimums are always paid, and every extra dollar (plus each freed-up minimum once a debt is cleared) goes to the target debt.
 
 **Key assumptions:** interest compounds monthly on the remaining balance, minimum payments stay constant, and no new debt is added. Real life often involves the last assumption failing — which matters more than the strategy you pick.
 

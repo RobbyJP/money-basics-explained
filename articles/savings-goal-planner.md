@@ -57,7 +57,7 @@ Use the calculator at the top of this page, then run these five checks before co
 
 - **Ignoring the deadline.** A target without a date has no required monthly amount, which means it has no plan.
 - **Using an overly optimistic return.** Planning around 12% annual returns makes the monthly amount look easy — and the plan fragile.
-- **Not adjusting for inflation.** A target set in today's money will need more nominal rupiah or dollars by the time you reach it. If your goal is five years away, consider adding a small annual inflation factor.
+- **Not adjusting for inflation.** A target set in today's money will need more nominal dollars by the time you reach it. If your goal is five years away, consider adding a small annual inflation factor.
 - **Quitting after a market dip.** Investment plans are built on averages over the full period; month-to-month noise is normal and expected.
 
 ## Final word

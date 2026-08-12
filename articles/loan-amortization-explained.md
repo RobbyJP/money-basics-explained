@@ -69,6 +69,6 @@ Use the calculator above and compare:
 
 ## Final word
 
-Amortization is not intuitive, but it is simple arithmetic once you see the curve. Every borrower should know their true total interest before signing — the calculator above shows it in seconds, and the extra-payment line shows exactly what a little discipline is worth in rupiah and months.
+Amortization is not intuitive, but it is simple arithmetic once you see the curve. Every borrower should know their true total interest before signing — the calculator above shows it in seconds, and the extra-payment line shows exactly what a little discipline is worth in dollars and months.
 
 ***Disclaimer:** This content is for general educational purposes only and is not financial advice. Loan terms, fees, and tax treatment vary by lender and jurisdiction. Consult a qualified professional before making borrowing decisions.*

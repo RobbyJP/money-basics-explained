@@ -24,7 +24,7 @@ What matters is *essential* expenses — housing, food, utilities, minimum debt 
 
 ## What the calculator considers
 
-The tool above combines four factors into a recommended range of months (and the rupiah amount that represents):
+The tool above combines four factors into a recommended range of months (and the dollar amount that represents):
 
 1. **Monthly essential expenses** — the base of the calculation.
 2. **Income stability** — how easily you could replace your income.
