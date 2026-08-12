@@ -16,7 +16,7 @@ The good news: you do not need to guess. With a goal amount, a deadline, and a r
 
 ## How much do you actually need to save each month?
 
-The starting point is a specific target and a specific deadline. "Save for a house" is not a goal; "Rp 200,000,000 by August 2029" is.
+The starting point is a specific target and a specific deadline. "Save for a house" is not a goal; "$50,000 by August 2029" is.
 
 Once you have both numbers, the monthly requirement depends on whether you plan to keep the money in a savings account (low or zero return) or invest it in something with a higher expected return (higher risk, larger upside). The formula behind the calculator is the standard annuity formula:
 
@@ -26,10 +26,10 @@ Where `i` is the expected monthly return and `n` is the number of months until y
 
 ### A worked example
 
-Suppose your target is Rp 50,000,000 in 5 years (60 months):
+Suppose your target is $12,500 in 5 years (60 months):
 
-- At 0% return: Rp 50,000,000 ÷ 60 = about Rp 833,000 per month.
-- At 5% per year (a reasonable long-term assumption for balanced investments): about Rp 735,000 per month.
+- At 0% return: $12,500 ÷ 60 = about $208 per month.
+- At 5% per year (a reasonable long-term assumption for balanced investments): about $184 per month.
 
 The difference looks small per month but matters over time — the compounding does roughly 12% of the work for you.
 

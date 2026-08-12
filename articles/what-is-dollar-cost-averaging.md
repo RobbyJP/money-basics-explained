@@ -5,12 +5,12 @@ slug: "what-is-dollar-cost-averaging"
 keyword: "what is dollar-cost averaging"
 path: "calculators/dollar-cost-averaging"
 calculator: "dca"
-date: "2026-08-11"
+date: "2026-08-12"
 ---
 
 # What Is Dollar-Cost Averaging (DCA)?
 
-Dollar-cost averaging is the practice of investing a **fixed amount on a regular schedule** — for example, Rp 1,000,000 every month — regardless of what the market is doing. It is one of the most common ways people build long-term investments, and its logic is deliberately humble: you don't need to predict when prices are low or high.
+Dollar-cost averaging is the practice of investing a **fixed amount on a regular schedule** — for example, $1,000 every month — regardless of what the market is doing. It is one of the most common ways people build long-term investments, and its logic is deliberately humble: you don't need to predict when prices are low or high.
 
 ## Why people use DCA
 

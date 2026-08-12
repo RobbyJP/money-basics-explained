@@ -29,24 +29,24 @@ Because the interest portion shrinks as the balance falls, the principal portion
 
 ### Worked example
 
-A Rp 300,000,000 loan at 9.5% per year for 15 years:
+A $300,000 loan at 9.5% per year for 15 years:
 
-- Monthly payment: about Rp 3,136,000
-- Total paid over 15 years: about Rp 564,500,000
-- Total interest: about **Rp 264,500,000** — 88% of the loan amount
+- Monthly payment: about $3,132
+- Total paid over 15 years: about $563,800
+- Total interest: about **$263,800** — 88% of the loan amount
 
 The calculator above reproduces these numbers and shows the balance curve month by month.
 
 ## Why the balance seems stuck
 
-In year one of that same loan, roughly Rp 2,375,000 of each payment is interest and only about Rp 761,000 reaches the principal. After five years you will have made about Rp 188,000,000 in payments — yet the balance will still be above Rp 220,000,000. This is not the bank being unfair; it is simply how fixed payments with front-loaded interest work. The turning point comes after roughly two-thirds of the term, when principal payments start to dominate.
+In year one of that same loan, roughly $2,375 of each payment is interest and only about $757 reaches the principal. After five years you will have made about $188,000 in payments — yet the balance will still be above $240,000. This is not the bank being unfair; it is simply how fixed payments with front-loaded interest work. The turning point comes after roughly two-thirds of the term, when principal payments start to dominate.
 
 ## The superpower of extra payments
 
-Add Rp 500,000 to the monthly payment in the example above and two things happen:
+Add $500 to the monthly payment in the example above and two things happen:
 
 - **The loan is paid off in about 11 years instead of 15** — four years earlier.
-- **Total interest drops from about Rp 264 million to about Rp 196 million** — roughly Rp 68 million saved.
+- **Total interest drops from about $263,800 to about $188,700** — roughly $75,000 saved.
 
 Extra payments attack the most expensive part of the loan (the interest that would have been charged on the early principal) and shorten the term directly. On high-rate consumer loans the "guaranteed return" of an extra payment often beats what the same money would earn invested.
 

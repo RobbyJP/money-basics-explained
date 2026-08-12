@@ -5,7 +5,7 @@ slug: "debt-snowball-vs-debt-avalanche"
 keyword: "debt snowball vs debt avalanche"
 path: "calculators/debt-payoff"
 calculator: "debt-payoff"
-date: "2026-08-11"
+date: "2026-08-12"
 ---
 
 # Debt Snowball vs Debt Avalanche
@@ -38,7 +38,7 @@ The honest answer: **the best strategy is the one you will actually stick to.** 
 
 ## A worked example
 
-Suppose two debts: a credit card with a Rp 10,000,000 balance at 24% APR (Rp 400,000 minimum) and a vehicle loan with Rp 20,000,000 at 12% (Rp 800,000 minimum), with Rp 500,000 extra per month.
+Suppose two debts: a credit card with a $10,000 balance at 24% APR ($400 minimum) and a vehicle loan with $20,000 at 12% ($800 minimum), with $500 extra per month.
 
 - **Snowball** targets the credit card first: it is cleared quickly, then its minimum rolls into the vehicle loan.
 - **Avalanche** targets the card too here (it has the higher rate) — but if the rates were reversed, the two strategies would diverge.

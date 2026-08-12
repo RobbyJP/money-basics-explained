@@ -20,11 +20,11 @@ Use **take-home income** (after tax and official deductions) and count as saving
 
 ### Worked example
 
-Monthly take-home income of Rp 8,000,000, and Rp 1,600,000 transferred to savings and investments each month:
+Monthly take-home income of $4,000, and $800 transferred to savings and investments each month:
 
-> Rp 1,600,000 ÷ Rp 8,000,000 = 0.20 = **20%**
+> $800 ÷ $4,000 = 0.20 = **20%**
 
-An Rp 8,000,000 income with only Rp 400,000 saved gives 5% — a comfortable lifestyle, but a weak building rate. The calculator above does this instantly and places your number on a benchmark scale.
+A $4,000 income with only $200 saved gives 5% — a comfortable lifestyle, but a weak building rate. The calculator above does this instantly and places your number on a benchmark scale.
 
 ## Benchmarks: where should you aim?
 
@@ -35,11 +35,11 @@ There is no universal target, but the ranges below are widely used by financial 
 - **20–30% — strong.** Meaningful progress toward early retirement or a large purchase.
 - **Above 30% — fast-track.** Possible only with a low-cost lifestyle or high income; it dramatically shortens the time to financial independence.
 
-The reason advisors emphasise the rate rather than the amount: a percentage travels with your income. Saving Rp 1,000,000 a month sounds big until income doubles; a 20% habit scales automatically.
+The reason advisors emphasise the rate rather than the amount: a percentage travels with your income. Saving $500 a month sounds big until income doubles; a 20% habit scales automatically.
 
 ## Why the rate matters more than your salary
 
-A raise of Rp 2,000,000 with pre-existing spending habits rarely compounds wealth — lifestyle inflation tends to absorb it. Raising the savings rate from 5% to 15% is a doubling of your building speed that does not require anyone's permission. And one extra percentage point of saving rate has more impact on retirement readiness than most salary bumps once taxes and lifestyle creep are factored in.
+A raise of $1,000 with pre-existing spending habits rarely compounds wealth — lifestyle inflation tends to absorb it. Raising the savings rate from 5% to 15% is a doubling of your building speed that does not require anyone's permission. And one extra percentage point of saving rate has more impact on retirement readiness than most salary bumps once taxes and lifestyle creep are factored in.
 
 ## How to improve the number in practice
 

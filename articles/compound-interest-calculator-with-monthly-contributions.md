@@ -1,6 +1,6 @@
 ---
 title: "Compound Interest Calculator with Monthly Contributions: How to Use It"
-description: "How monthly contributions change compound growth — examples from Rp 100.000 to Rp 1.000.000 a month, and how to read the results."
+description: "How monthly contributions change compound growth — examples from $100 to $1,000 a month, and how to read the results."
 slug: "compound-interest-calculator-with-monthly-contributions"
 keyword: "compound interest calculator with monthly contributions"
 path: "articles/compound-interest-calculator-with-monthly-contributions"
@@ -28,9 +28,9 @@ All figures below assume 7% compounded monthly, contributions made at the end of
 
 | Monthly contribution | After 10 years | After 20 years | After 30 years |
 |---|---|---|---|
-| Rp 100.000 | Rp 17,3 juta | Rp 52,1 juta | Rp 122,0 juta |
-| Rp 500.000 | Rp 86,5 juta | Rp 260,5 juta | Rp 610,0 juta |
-| Rp 1.000.000 | Rp 173,1 juta | Rp 520,9 juta | Rp 1,22 miliar |
+| $100 | $17,300 | $52,100 | $122,000 |
+| $500 | $86,500 | $260,500 | $610,000 |
+| $1,000 | $173,100 | $520,900 | $1,220,000 |
 
 Note how the 30-year column is roughly seven times the 10-year column for the same monthly amount — you are not tripling the time to triple the result; you are multiplying it by seven. That is compounding.
 
@@ -48,7 +48,7 @@ Then read the results: total contributions (what you actually put in), final val
 
 - **Using today's high rate for a long forecast.** A 15% return assumed for 20 years produces fantasy numbers. Use a conservative rate; a modest correct estimate beats an exciting wrong one.
 - **Ignoring fees and taxes.** A 1% annual fee on a 7% return costs you roughly a third of the final balance over 20 years — see the [expense ratio calculator](../calculators/expense-ratio.html).
-- **Starting "later when I earn more."** Every year of delay skips a doubling cycle. Rp 500.000 a month for 20 years starting now beats Rp 1.000.000 a month for 10 years starting later, in most realistic scenarios.
+- **Starting "later when I earn more."** Every year of delay skips a doubling cycle. $500 a month for 20 years starting now beats $1,000 a month for 10 years starting later, in most realistic scenarios.
 - **Treating the result as a prediction.** This is a planning tool with constant returns, not a market forecast.
 
 ## Related searches

@@ -20,7 +20,7 @@ Compound interest is interest earned on top of interest. When you invest, your r
 | Growth pattern | Linear | Exponential |
 | Real-world use | Some loans, short-term products | Investments, savings, most long-term products |
 
-With simple interest, a Rp 10,000,000 deposit at 7% earns Rp 700,000 every year — forever. With compounding, the second year's interest is calculated on Rp 10,700,000, the third on Rp 11,449,000, and so on. The difference grows with every period.
+With simple interest, a $10,000 deposit at 7% earns $700 every year — forever. With compounding, the second year's interest is calculated on $10,700, the third on $11,449, and so on. The difference grows with every period.
 
 ## How the calculator works
 
@@ -39,13 +39,13 @@ Banks and products often advertise a *nominal* (stated) annual rate, but what ma
 
 ## A worked example
 
-A 25-year-old invests Rp 1,000,000 once and adds Rp 500,000 every month, with an average annual return of 7% compounded monthly. After 20 years:
+A 25-year-old invests $1,000 once and adds $500 every month, with an average annual return of 7% compounded monthly. After 20 years:
 
-- Total contributions: Rp 121,000,000
-- Final value: roughly Rp 264,500,000
-- Gains: roughly Rp 143,500,000 — more than the money put in
+- Total contributions: $121,000
+- Final value: roughly $264,300
+- Gains: roughly $143,300 — more than the money put in
 
-The same contributions with **no** compounding (a plain savings pile) would be worth exactly what was put in: Rp 121,000,000. That difference is the entire point of investing early and staying invested.
+The same contributions with **no** compounding (a plain savings pile) would be worth exactly what was put in: $121,000. That difference is the entire point of investing early and staying invested.
 
 ## Frequently asked questions
 

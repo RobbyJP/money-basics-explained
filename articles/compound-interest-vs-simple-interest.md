@@ -23,14 +23,14 @@ The difference between simple and compound interest is the difference between sa
 
 With simple interest, every year's interest is identical. With compounding, each year's interest is larger than the last because the base keeps growing.
 
-## The same Rp 10,000,000, 20 years, 7%
+## The same $10,000, 20 years, 7%
 
 | | Simple interest | Compound interest |
 |---|---|---|
-| Total interest | Rp 14,000,000 | Rp 30,387,388 |
-| Final amount | Rp 24,000,000 | Rp 40,387,388 |
+| Total interest | $14,000 | $30,387 |
+| Final amount | $24,000 | $40,387 |
 
-Compounding more than **doubled** the interest earned. And the gap only widens with time: over 30 years at 7%, the same deposit compounds to roughly Rp 80,000,000 versus Rp 31,000,000 with simple interest.
+Compounding more than **doubled** the interest earned. And the gap only widens with time: over 30 years at 7%, the same deposit compounds to roughly $76,000 versus $31,000 with simple interest.
 
 ## When each one applies to you
 
@@ -40,7 +40,7 @@ Compounding more than **doubled** the interest earned. And the gap only widens w
 
 ## Why time matters more than the rate
 
-At 7%, money doubles roughly every 10 years (Rule of 72). The first 10 years grow Rp 10,000,000 to Rp 20,000,000; the second 10 years grow it to Rp 40,000,000; the third, to Rp 80,000,000. Each decade adds more than the entire decade before it. That is why starting early beats starting bigger later — every year you delay, you give up a doubling cycle.
+At 7%, money doubles roughly every 10 years (Rule of 72). The first 10 years grow $10,000 to $20,000; the second 10 years grow it to $40,000; the third, to $80,000. Each decade adds more than the entire decade before it. That is why starting early beats starting bigger later — every year you delay, you give up a doubling cycle.
 
 ## See it with your own numbers
 
