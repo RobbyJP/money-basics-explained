@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="4KnXhXG-VSV4APVsfZLdrqVFhpQBAt7IskEaMk0b5L8">
+<meta name="msvalidate.01" content="1A11E8FAA62F817290C8CD180B09FACF" />
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
+<title>Compound Interest Calculator with Monthly Contributions: How to Use It | Money Basics Explained</title>
+<meta name="description" content="How monthly contributions change compound growth — examples from Rp 100.000 to Rp 1.000.000 a month, and how to read the results.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Money Basics Explained">
+<meta property="og:title" content="Compound Interest Calculator with Monthly Contributions: How to Use It | Money Basics Explained">
+<meta property="og:description" content="How monthly contributions change compound growth — examples from Rp 100.000 to Rp 1.000.000 a month, and how to read the results.">
+<meta property="og:url" content="https://moneyclarity.blog/articles/compound-interest-calculator-with-monthly-contributions.html">
+<meta property="og:image" content="https://moneyclarity.blog/og-image.png">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compound Interest Calculator with Monthly Contributions: How to Use It | Money Basics Explained">
+<meta name="twitter:description" content="How monthly contributions change compound growth — examples from Rp 100.000 to Rp 1.000.000 a month, and how to read the results.">
+<link rel="stylesheet" href="../style.css?v=20260812140100">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Compound Interest Calculator with Monthly Contributions: How to Use It", "description": "How monthly contributions change compound growth \u2014 examples from Rp 100.000 to Rp 1.000.000 a month, and how to read the results.", "datePublished": "2026-08-12", "dateModified": "2026-08-12", "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"}, "publisher": {"@type": "Organization", "name": "Money Basics Explained"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://moneyclarity.blog/articles/compound-interest-calculator-with-monthly-contributions.html"}}</script>
+<!-- AdSense: paste your approved AdSense snippet here once approved.
+     Gate ad loading on consent: only run the AdSense loader when
+     window.mcConsent === "accepted" (set by the consent banner). -->
+</head>
+<body>
+<header class="site-header">
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../index.html">Home</a>
+    <a href="../calculators/index.html">Calculators</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+<section class="calc-card" aria-label="Compound Interest Calculator">
+  <h2>Compound Interest Calculator</h2>
+  <div class="calc-form">
+    <div class="calc-row">
+      <label for="ci-initial">Initial investment</label>
+      <input id="ci-initial" type="text" inputmode="decimal" value="1.000.000">
+    </div>
+    <div class="calc-row">
+      <label for="ci-monthly">Monthly contribution</label>
+      <input id="ci-monthly" type="text" inputmode="decimal" value="500.000">
+    </div>
+    <div class="calc-row">
+      <label for="ci-rate">Annual return (%)</label>
+      <input id="ci-rate" type="number" min="0" step="any" value="7" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="ci-years">Investment period (years)</label>
+      <input id="ci-years" type="number" min="1" max="60" step="1" value="20">
+    </div>
+    <div class="calc-row">
+      <label for="ci-frequency">Compounding frequency</label>
+      <select id="ci-frequency">
+        <option value="1">Annually</option>
+        <option value="2">Semi-annually</option>
+        <option value="4">Quarterly</option>
+        <option value="12" selected>Monthly</option>
+      </select>
+    </div>
+    <div class="calc-row">
+      <label for="ci-currency">Currency</label>
+      <select id="ci-currency">
+        <option value="IDR" selected>Indonesian Rupiah (IDR)</option>
+        <option value="USD">US Dollar (USD)</option>
+      </select>
+    </div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result"><span class="calc-label">Total contributions</span><span id="ci-contributed" class="calc-value">-</span></div>
+    <div class="calc-result"><span class="calc-label">Investment gains</span><span id="ci-gains" class="calc-value">-</span></div>
+    <div class="calc-result calc-result-main"><span class="calc-label">Final value</span><span id="ci-final" class="calc-value">-</span></div>
+  </div>
+  <canvas id="ci-chart" height="260" aria-label="Growth chart"></canvas>
+  <p class="calc-note">Estimates assume contributions at the end of each month, a constant annual return, and no taxes or inflation. See the guide below for limitations.</p>
+</section>
+<div class="share-bar"><span class="share-label">Share this tool:</span><a class="calc-btn calc-btn-small" rel="noopener" target="_blank" href="https://wa.me/?text=Compound%20Interest%20Calculator%20with%20Monthly%20Contributions%3A%20How%20to%20Use%20It%20-%20a%20free%20tool%20from%20Money%20Clarity%20https%3A%2F%2Fmoneyclarity.blog%2Farticles%2Fcompound-interest-calculator-with-monthly-contributions.html">WhatsApp</a><button type="button" class="calc-btn calc-btn-small share-copy" data-url="https://moneyclarity.blog/articles/compound-interest-calculator-with-monthly-contributions.html">Copy link</button></div><script>(function(){var b=document.querySelector(".share-copy");if(b){b.addEventListener("click",function(){var u=b.getAttribute("data-url");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);});}else{var t=document.createElement("textarea");t.value=u;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);}});}})();</script>
+<p class="byline">By the Money Clarity Editorial Team &middot; Updated August 12, 2026</p><h1>Compound Interest Calculator with Monthly Contributions: How to Use It</h1>
+<p>Most people don't invest one lump sum — they save a fixed amount every month. The compound interest calculator above handles exactly that: it combines an initial amount with regular monthly contributions and compounds the whole balance at the rate you choose.</p>
+<h2>What the monthly contribution setting does</h2>
+<p>Each contribution is added to the balance, and from that point it compounds like everything else. So the final result has three parts:</p>
+<ol>
+<li><strong>The initial amount</strong> compounding for the full period.</li>
+<li><strong>Each monthly contribution</strong> compounding for the months remaining after it is added.</li>
+<li><strong>The compounding itself</strong> — interest on interest, which is where most of the growth comes from at longer periods.</li>
+</ol>
+<p>The calculator separates these visually: the gray contribution line shows parts 1 and 2 only; the blue balance line shows all three. The gap between them is the compounding effect.</p>
+<h2>What your monthly contribution can become</h2>
+<p>All figures below assume 7% compounded monthly, contributions made at the end of each month, and no taxes or fees:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Monthly contribution</th>
+<th>After 10 years</th>
+<th>After 20 years</th>
+<th>After 30 years</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rp 100.000</td>
+<td>Rp 17,3 juta</td>
+<td>Rp 52,1 juta</td>
+<td>Rp 122,0 juta</td>
+</tr>
+<tr>
+<td>Rp 500.000</td>
+<td>Rp 86,5 juta</td>
+<td>Rp 260,5 juta</td>
+<td>Rp 610,0 juta</td>
+</tr>
+<tr>
+<td>Rp 1.000.000</td>
+<td>Rp 173,1 juta</td>
+<td>Rp 520,9 juta</td>
+<td>Rp 1,22 miliar</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note how the 30-year column is roughly seven times the 10-year column for the same monthly amount — you are not tripling the time to triple the result; you are multiplying it by seven. That is compounding.</p>
+<h2>How to use the calculator</h2>
+<ol>
+<li><strong>Initial investment</strong> — what you already have invested (leave at 0 if you are starting from nothing).</li>
+<li><strong>Monthly contribution</strong> — the regular amount you plan to add.</li>
+<li><strong>Annual return (%)</strong> — a conservative long-run estimate. Try 5–7% for broad index funds and compare the difference.</li>
+<li><strong>Years</strong> — your horizon. The tool accepts partial years.</li>
+<li><strong>Compounding frequency</strong> — monthly matches how most products accrue; switching to annual shows how much frequency matters.</li>
+</ol>
+<p>Then read the results: total contributions (what you actually put in), final value, and gains (final value minus contributions). The chart shows the balance over time against the contributions line.</p>
+<h2>Common mistakes to avoid</h2>
+<ul>
+<li><strong>Using today's high rate for a long forecast.</strong> A 15% return assumed for 20 years produces fantasy numbers. Use a conservative rate; a modest correct estimate beats an exciting wrong one.</li>
+<li><strong>Ignoring fees and taxes.</strong> A 1% annual fee on a 7% return costs you roughly a third of the final balance over 20 years — see the <a href="/calculators/expense-ratio.html">expense ratio calculator</a>.</li>
+<li><strong>Starting "later when I earn more."</strong> Every year of delay skips a doubling cycle. Rp 500.000 a month for 20 years starting now beats Rp 1.000.000 a month for 10 years starting later, in most realistic scenarios.</li>
+<li><strong>Treating the result as a prediction.</strong> This is a planning tool with constant returns, not a market forecast.</li>
+</ul>
+<h2>Related searches</h2>
+<ul>
+<li><a href="/articles/compound-interest-vs-simple-interest.html">Compound interest vs simple interest</a> — why compounding is the whole game</li>
+<li><a href="/calculators/compound-interest.html">The worked example behind the calculator</a> — how compounding built on itself in one real scenario</li>
+<li><a href="/articles/savings-goal-planner.html">Savings goal planner</a> — reverse-engineer the monthly amount you need for a target</li>
+<li><a href="/calculators/dollar-cost-averaging.html">DCA calculator</a> — how regular contributions behave during market swings</li>
+</ul>
+<hr />
+<p><em>This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.</em></p><div class="author-box"><p class="author-name">By the Money Clarity Editorial Team</p><p>Every guide is researched, written, and fact-checked by the Money Clarity editorial team: concepts and formulas are verified against primary sources, calculators are tested with worked examples, and each page shows its last-updated date. See our <a href="../about.html">editorial standards</a>.</p></div>
+</main>
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms-of-service.html">Terms of Service</a>
+    <a href="../id/index.html">Bahasa Indonesia</a>
+  </div>
+  <p class="footer-badge"><a href="https://www.directree.io" target="_blank" rel="noopener" aria-label="Verified on directree"><img class="badge-light" src="https://www.directree.io/badge/directree-badge-lightmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"><img class="badge-dark" src="https://www.directree.io/badge/directree-badge-darkmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"></a></p>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+</footer>
+<div id="consent-banner" class="consent-banner" role="region" aria-label="Cookie consent" hidden>
+  <p>We may use cookies, including advertising cookies from Google once ads are live, to keep this site free. You can accept or decline personalized advertising. See our <a href="../privacy-policy.html">Privacy Policy</a>.</p>
+  <div class="consent-actions">
+    <button type="button" id="consent-accept" class="calc-btn">Accept</button>
+    <button type="button" id="consent-decline" class="calc-btn calc-btn-ghost">Decline</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "mc_consent";
+  var banner = document.getElementById("consent-banner");
+  if (!banner) return;
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved) { window.mcConsent = saved; return; }
+  function choose(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
+    window.mcConsent = value;
+    banner.hidden = true;
+    banner.classList.remove("consent-visible");
+    document.dispatchEvent(new Event("mcConsent"));
+  }
+  document.getElementById("consent-accept").addEventListener("click", function () { choose("accepted"); });
+  document.getElementById("consent-decline").addEventListener("click", function () { choose("declined"); });
+  banner.hidden = false;
+  banner.classList.add("consent-visible");
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="compound-interest.js" defer></script>
+</body>
+</html>

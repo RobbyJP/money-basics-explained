@@ -42,10 +42,38 @@ Banks and products often advertise a *nominal* (stated) annual rate, but what ma
 A 25-year-old invests Rp 1,000,000 once and adds Rp 500,000 every month, with an average annual return of 7% compounded monthly. After 20 years:
 
 - Total contributions: Rp 121,000,000
-- Final value: roughly Rp 270,000,000
-- Gains: roughly Rp 149,000,000 — more than the money put in
+- Final value: roughly Rp 264,500,000
+- Gains: roughly Rp 143,500,000 — more than the money put in
 
 The same contributions with **no** compounding (a plain savings pile) would be worth exactly what was put in: Rp 121,000,000. That difference is the entire point of investing early and staying invested.
+
+## Frequently asked questions
+
+**How long does it take to double your money?**
+The Rule of 72 gives a quick estimate: divide 72 by the annual rate. At 7%, doubling takes about 10 years; at 10%, about 7. For the exact answer, use the calculator with a contribution of zero and see where the balance reaches twice your starting amount.
+
+**Does compounding frequency matter?**
+Yes, but less than the rate and the time. Monthly compounding beats annual compounding at the same nominal rate, and the difference grows with higher rates and longer periods. The calculator lets you switch frequency and see the effect directly.
+
+**What is the difference between compound and simple interest?**
+Simple interest is paid on the original amount only and grows in a straight line. Compound interest is paid on the original amount *plus* reinvested interest, so the balance grows exponentially — see the table above.
+
+**What return rate should I use?**
+A conservative long-run average, not today's hot product. Long-term broad index funds have historically returned mid-single to low-double digits in nominal terms depending on market and currency, but past performance does not predict future results. Try 5–7% and compare outcomes.
+
+**Do I pay tax on compound interest?**
+Interest and investment gains are taxed in most countries — how and when depends on your jurisdiction and the product (Indonesian bank interest and some investment income are subject to final tax; many countries tax capital gains separately). Tax reduces the effective rate, so your actual after-tax result will be lower than the calculator's figure.
+
+**Is it better to invest monthly or as a lump sum?**
+That is the dollar-cost averaging question — see the [DCA calculator](../calculators/dollar-cost-averaging.html) for the trade-offs between spreading contributions over time and investing a lump sum.
+
+## Related searches
+
+- [Compound interest calculator with monthly contributions](compound-interest-calculator-with-monthly-contributions.html) — the setting most long-term savers actually use
+- [Compound interest vs simple interest](compound-interest-vs-simple-interest.html) — when each applies to you
+- [How much will my monthly contributions grow?](../calculators/dollar-cost-averaging.html) — steady investing, compounded
+- [Emergency fund calculator](../calculators/emergency-fund.html) — the buffer you build before investing
+- [Savings goal planner](../calculators/savings-goal-planner.html) — reverse-engineer the monthly amount for a target
 
 ## Limitations to keep in mind
 

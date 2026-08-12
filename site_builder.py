@@ -259,11 +259,8 @@ def build():
         html_body = re.sub(r"<table>", '<div class="table-wrap"><table>', html_body)
         html_body = re.sub(r"</table>", "</table></div>", html_body)
         html_body = re.sub(
-            r'href="\.\./calculators/([^"]+\.html)"', r'href="/calculators/\1"', html_body
-        )
-        html_body = re.sub(
-            r'href="(\.\./)?([a-z0-9-]+\.html)"',
-            lambda m: f'href="{link_map[m.group(2)]}"' if m.group(2) in link_map else m.group(0),
+            r'href="(?:\.\./|\./)*(?:[a-z0-9-]+/)*([a-z0-9-]+\.html)"',
+            lambda m: f'href="{link_map[m.group(1)]}"' if m.group(1) in link_map else m.group(0),
             html_body,
         )
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
