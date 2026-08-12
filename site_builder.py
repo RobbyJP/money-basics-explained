@@ -306,7 +306,7 @@ def build():
         '<section class="card newsletter-box" aria-label="Newsletter signup">'
         "<h2>Money lessons, once a month</h2>"
         '<p class="newsletter-desc">One short email a month: a money lesson, the newest calculator, and an honest reminder or two. No spam, unsubscribe any time.</p>'
-        '<form class="contact-form newsletter-form" action="https://formsubmit.co/robbyjulian57@gmail.com" method="POST">'
+        '<form class="contact-form newsletter-form" action="https://formsubmit.co/contact@moneyclarity.blog" method="POST">'
         '<input type="hidden" name="_subject" value="Newsletter signup - Money Clarity">'
         '<input type="hidden" name="_next" value="' + site_url("") + '">'
         '<input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">'

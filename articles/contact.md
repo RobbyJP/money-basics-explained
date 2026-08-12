@@ -10,8 +10,10 @@ date: "2026-08-11"
 
 We welcome corrections, feedback, and questions about the site or its tools.
 
+Prefer email? Write to **contact@moneyclarity.blog**.
+
 <section class="calc-card" aria-label="Contact form">
-  <form class="contact-form" action="https://formsubmit.co/robbyjulian57@gmail.com" method="POST">
+  <form class="contact-form" action="https://formsubmit.co/contact@moneyclarity.blog" method="POST">
     <input type="hidden" name="_subject" value="Money Clarity contact message">
     <input type="hidden" name="_next" value="https://moneyclarity.blog/contact.html">
     <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
