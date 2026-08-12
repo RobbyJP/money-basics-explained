@@ -457,6 +457,9 @@ textarea:focus {
 }
 .footer-links a { color: var(--ink-soft); text-decoration: none; }
 .footer-links a:hover { color: var(--accent); }
+.footer-badge { margin: 14px 0 0; }
+.footer-badge a { display: inline-block; }
+.footer-badge img { display: block; opacity: 0.85; }
 .footer-note { margin: 6px 0 0; }
 
 :focus-visible {

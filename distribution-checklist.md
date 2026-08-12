@@ -7,12 +7,18 @@ Phase A list. All items are manual, free, and take 5–15 minutes each. Verify e
 - [ ] **Google Search Console** — DONE (verified, sitemap submitted, indexing requested).
 - [ ] Check GSC → Crawl stats (filter `Mediapartners-Google`) once or twice a week during AdSense review.
 
-## Tool directory listings (verify URL, then submit)
+## Tool directory listings (verified free submission channels, 2026-08-12)
+- [ ] **directree.io** (https://www.directree.io) — paste https://moneyclarity.blog, auto-crawls a listing in ~30s, free claim + do-follow backlink. Best effort-to-value item.
+- [ ] **digital.finance/get-listed** (https://digital.finance/get-listed) — fintech directory pitched at exactly this site type (mortgage/retirement/compound interest calc users). Free submit, ~2 min form, reviewed in 3–5 business days.
+- [ ] **surelists.com** — free directory submission form, quick approval.
+- [ ] **topdividendtools.com/submit-tool.html** — free form; submit as a dividend/portfolio tool category.
+- [ ] **addfreewebdirectory.com** — has a dedicated "Financial Calculators" category with free listings.
+- [x] AllCalculators.net — **NO public submission form (verified 2026-08-12)** — they publish their own WP-hosted calculators; only a footer contact email exists. SKIP or optionally email their contact (low probability).
+
+## Community/launch listings
 - [ ] Product Hunt — https://www.producthunt.com — best done as a "Maker" launch post; title the site's free calculators angle. Pick a weekday (Tue–Thu) to launch.
 - [ ] Indie Hackers — https://www.indiehackers.com — post the build story in a thread + add to your profile projects.
 - [ ] Bootstrapped.fun — https://www.bootstrapped.fun — free "showcase/launch" listing.
-- [ ] AllCalculators.net — has a free "submit a calculator" page; list the calculators page URL.
-- [ ] Calculator.io — check for a submit form; list individual calculators.
 - [ ] AlternativeTo — https://alternativeto.net/submit — submit as alternative to paid finance tools (Mint/You Need a Budget style), "Free" license.
 
 ## Shareable assets (auto-served, already live)
