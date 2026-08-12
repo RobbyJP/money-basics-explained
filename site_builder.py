@@ -43,7 +43,11 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
 
 
 def page_path(fm: dict, stem: str) -> str:
-    return (fm.get("path") or fm.get("slug") or stem).strip("/")
+    if fm.get("path"):
+        return fm["path"].strip("/")
+    if fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service"):
+        return fm.get("slug") or stem
+    return f"articles/{stem}"
 
 
 def base_prefix(path: str) -> str:
@@ -240,7 +244,7 @@ def build():
     for _md in sorted(ARTICLES_DIR.glob("*.md")):
         _fm, _ = parse_frontmatter(_md.read_text(encoding="utf-8"))
         if _fm.get("lang") == "id" and _fm.get("translation_of"):
-            translations[_fm["translation_of"]] = _md.stem
+            translations[_fm["translation_of"]] = page_path(_fm, _md.stem)
 
     articles = []
     calculators = []
@@ -251,9 +255,14 @@ def build():
         html_body = markdown.markdown(body, extensions=["tables", "fenced_code"])
         html_body = re.sub(r"<table>", '<div class="table-wrap"><table>', html_body)
         html_body = re.sub(r"</table>", "</table></div>", html_body)
+        html_body = re.sub(
+            r'href="\.\./calculators/([^"]+\.html)"', r'href="/calculators/\1"', html_body
+        )
+        html_body = re.sub(r'href="\.\./([^"]+\.html)"', r'href="/articles/\1"', html_body)
+        html_body = re.sub(r'href="([a-z0-9-]+\.html)"', r'href="/articles/\1"', html_body)
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
         date = fm.get("date", today)
-        is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact")
+        is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")
         is_id = fm.get("lang") == "id"
         stem = md_path.stem
         en_slug = fm.get("translation_of", "") if is_id else fm.get("slug", stem)
@@ -286,12 +295,12 @@ def build():
                 if is_id:
                     lang_box = (
                         f'<p class="lang-switch">English version: '
-                        f'<a href="../{en_slug}.html">This article in English</a></p>'
+                        f'<a href="../articles/{en_slug}.html">This article in English</a></p>'
                     )
                 else:
                     lang_box = (
                         f'<p class="lang-switch">Versi Bahasa Indonesia: '
-                        f'<a href="id/{id_slug}.html">Baca artikel ini dalam Bahasa Indonesia</a></p>'
+                        f'<a href="../{id_slug}.html">Baca artikel ini dalam Bahasa Indonesia</a></p>'
                     )
                 html_body = lang_box + html_body
             html_body = byline + html_body
@@ -430,10 +439,11 @@ def build():
         reverse=True,
     )
     if id_guides:
+        id_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in id_guides]
         id_hub = render_page(
             "<h1>Money Clarity — Bahasa Indonesia</h1>"
             "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
-            + link_block("Panduan Bahasa Indonesia", id_guides, kind="Guide")
+            + link_block("Panduan Bahasa Indonesia", id_items, kind="Guide")
             + '<p><a href="../index.html">English version &rarr;</a></p>',
             page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
             meta_description="Panduan keuangan pribadi dalam Bahasa Indonesia: THR, slip gaji, PPh 21, dan KPR dijelaskan dengan bahasa yang sederhana.",

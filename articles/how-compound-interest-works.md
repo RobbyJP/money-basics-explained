@@ -55,7 +55,7 @@ The same contributions with **no** compounding (a plain savings pile) would be w
 
 ## Related reading
 
-- [Index funds vs mutual funds](../index-funds-vs-mutual-funds.html) — where most people put money they plan to compound
+- [Index funds vs mutual funds](index-funds-vs-mutual-funds.html) — where most people put money they plan to compound
 - [Expense ratio calculator](../calculators/expense-ratio.html) — the fee that silently reduces compounding
 - [Dollar-cost averaging calculator](../calculators/dollar-cost-averaging.html) — steady monthly contributions, explained
 

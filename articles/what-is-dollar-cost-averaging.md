@@ -36,7 +36,7 @@ Enter your initial amount, monthly contribution, expected annual return, investm
 
 - [Compound interest calculator](../calculators/compound-interest.html) — the engine behind any long-term plan
 - [What is an expense ratio](../calculators/expense-ratio.html) — the fee that quietly reduces what compounding keeps
-- [Index funds vs mutual funds](../index-funds-vs-mutual-funds.html) — what most DCA contributions end up buying
+- [Index funds vs mutual funds](index-funds-vs-mutual-funds.html) — what most DCA contributions end up buying
 
 ---
 

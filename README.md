@@ -1,5 +1,9 @@
 # Personal Finance Content Site — Automated SEO Site Builder
 
+Live site: **https://moneyclarity.blog** — bilingual (EN + Indonesian `/id/`)
+finance education hub: interactive calculators, explainer guides, built with
+GitHub Pages + custom domain.
+
 Automated pipeline: seed keywords → AI-generated educational/comparison
 articles → static HTML site → git-based free hosting → AdSense monetization.
 

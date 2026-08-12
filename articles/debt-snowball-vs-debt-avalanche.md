@@ -48,7 +48,7 @@ Try both with your own numbers above — seeing your own debts and dates makes t
 ## Related reading
 
 - [Emergency fund calculator](../calculators/emergency-fund.html) — build a buffer so unexpected costs don't create new debt
-- [Sinking fund vs emergency fund](../sinking-fund-vs-emergency-fund.html) — the difference between saving for shocks and saving for planned expenses
+- [Sinking fund vs emergency fund](sinking-fund-vs-emergency-fund.html) — the difference between saving for shocks and saving for planned expenses
 - [Compound interest calculator](../calculators/compound-interest.html) — what the same monthly amount could do on the investment side
 
 ---

@@ -35,7 +35,7 @@ The output is a **range**, not a single magic number, because a single number wo
 
 ## Emergency fund vs sinking fund
 
-A common mistake is using one pot for everything. An emergency fund handles *unknown* shocks; a sinking fund handles *predictable* expenses you can see coming — a new laptop next year, annual insurance premiums, a wedding. Keeping them separate makes both easier to reason about: see the [sinking fund vs emergency fund](../sinking-fund-vs-emergency-fund.html) comparison.
+A common mistake is using one pot for everything. An emergency fund handles *unknown* shocks; a sinking fund handles *predictable* expenses you can see coming — a new laptop next year, annual insurance premiums, a wedding. Keeping them separate makes both easier to reason about: see the [sinking fund vs emergency fund](sinking-fund-vs-emergency-fund.html) comparison.
 
 ## Practical notes
 
@@ -45,9 +45,9 @@ A common mistake is using one pot for everything. An emergency fund handles *unk
 
 ## Related reading
 
-- [Sinking fund vs emergency fund](../sinking-fund-vs-emergency-fund.html) — separating shocks from planned spending
+- [Sinking fund vs emergency fund](sinking-fund-vs-emergency-fund.html) — separating shocks from planned spending
 - [Debt payoff calculator](../calculators/debt-payoff.html) — an emergency fund protects you from creating debt when things go wrong
-- [The 50/30/20 budget rule](../503020-budget-rule-explained.html) — where the savings for this fund fits in a budget
+- [The 50/30/20 budget rule](503020-budget-rule-explained.html) — where the savings for this fund fits in a budget
 
 ---
 

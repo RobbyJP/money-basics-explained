@@ -27,7 +27,7 @@ The fee debate usually sits between two approaches:
 - **Index (passive) funds** track a market index, cost little to run, and typically charge low fees (commonly under 0.5%).
 - **Actively managed funds** pay managers to pick investments and typically charge noticeably more.
 
-High fees are only worth paying if the fund reliably delivers higher *net* returns — and reliably beating the market after fees is rare and hard to predict. See [index funds vs mutual funds](../index-funds-vs-mutual-funds.html) for how these categories actually relate.
+High fees are only worth paying if the fund reliably delivers higher *net* returns — and reliably beating the market after fees is rare and hard to predict. See [index funds vs mutual funds](index-funds-vs-mutual-funds.html) for how these categories actually relate.
 
 ## Practical takeaways
 
