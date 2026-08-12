@@ -45,7 +45,7 @@
   }
 
   function update() {
-    var nominal = parseFloat($("aa-nominal").value) || 0;
+    var nominal = parseFloat(String($("aa-nominal").value).replace(",", ".")) || 0;
     var periods = parseInt($("aa-frequency").value, 10) || 12;
     var principal = parseAmount($("aa-principal"));
     var cur = $("aa-currency").value;

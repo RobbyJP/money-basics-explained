@@ -39,7 +39,7 @@
 
   function update() {
     var annual = parseAmount($("st-annual"));
-    var hours = Math.max(1, parseFloat($("st-hours").value) || 0);
+    var hours = Math.max(1, parseFloat(String($("st-hours").value).replace(",", ".")) || 0);
     var weeks = Math.max(1, parseInt($("st-weeks").value, 10) || 0);
     var cur = $("st-currency").value;
     var totalHours = hours * weeks;

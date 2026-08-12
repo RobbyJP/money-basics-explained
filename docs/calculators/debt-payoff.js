@@ -78,7 +78,7 @@
       out.push({
         name: row.querySelector(".dp-name").value.trim() || "Debt",
         balance: parseAmount(row.querySelector(".dp-balance")),
-        apr: parseFloat(row.querySelector(".dp-apr").value) || 0,
+        apr: parseFloat(String(row.querySelector(".dp-apr").value).replace(",", ".")) || 0,
         min: parseAmount(row.querySelector(".dp-min"))
       });
     });
@@ -125,7 +125,7 @@
 
   function update() {
     var debts = readDebts();
-    var extra = parseAmount($("dp-extra"));
+    var extra = Math.max(0, parseAmount($("dp-extra")));
     var cur = $("dp-currency").value;
     if (!debts.length) {
       $("dp-snow-time").textContent = "-";
@@ -157,7 +157,7 @@
   $("dp-extra").addEventListener("input", update);
   $("dp-currency").addEventListener("change", update);
 
-  addRow({ name: "Credit card", balance: "10.000.000", apr: "24", min: "400.000" });
-  addRow({ name: "Motorcycle loan", balance: "20.000.000", apr: "12", min: "800.000" });
+  addRow({ name: "Credit card", balance: "10.000", apr: "24", min: "400" });
+  addRow({ name: "Motorcycle loan", balance: "20.000", apr: "12", min: "800" });
   update();
 })();

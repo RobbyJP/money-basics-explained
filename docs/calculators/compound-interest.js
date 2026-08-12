@@ -81,7 +81,7 @@
   function update() {
     var P = parseAmount($("ci-initial"));
     var m = parseAmount($("ci-monthly"));
-    var rate = parseFloat($("ci-rate").value) || 0;
+    var rate = parseFloat(String($("ci-rate").value).replace(",", ".")) || 0;
     var years = Math.max(0, Math.min(60, parseInt($("ci-years").value, 10) || 0));
     var periods = parseInt($("ci-frequency").value, 10) || 12;
     var cur = $("ci-currency").value;

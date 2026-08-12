@@ -58,9 +58,9 @@
   function update() {
     var P = parseAmount($("dca-initial"));
     var m = parseAmount($("dca-monthly"));
-    var rate = parseFloat($("dca-rate").value) || 0;
+    var rate = parseFloat(String($("dca-rate").value).replace(",", ".")) || 0;
     var years = Math.max(0, Math.min(60, parseInt($("dca-years").value, 10) || 0));
-    var growth = parseFloat($("dca-growth").value) || 0;
+    var growth = parseFloat(String($("dca-growth").value).replace(",", ".")) || 0;
     var cur = $("dca-currency").value;
 
     var fv = dcaFinal(P, m, rate, years, growth);

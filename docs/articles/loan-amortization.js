@@ -65,6 +65,7 @@
       var principal = pay - interest;
       if (principal <= 0) { principal = 0.01; }
       balance = Math.max(0, balance - principal);
+      if (balance > 0 && balance < 0.005) { balance = 0; }
       totalInterest += interest;
       monthsPaid++;
       curve.push(Math.round(balance));
@@ -80,14 +81,17 @@
     var labels = [];
     var maxLen = Math.max(simNoExtra.curve.length, simWithExtra.curve.length);
     for (var m = 0; m < maxLen; m++) { labels.push(m); }
+    var datasets = [
+      { label: "Without extra payment", data: simNoExtra.curve, borderColor: "#c5221f", backgroundColor: "rgba(197,34,31,0.08)", borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true }
+    ];
+    if (simWithExtra.curve.length !== simNoExtra.curve.length) {
+      datasets.push({ label: "With extra payment", data: simWithExtra.curve, borderColor: "#1a73e8", backgroundColor: "rgba(26,115,232,0.10)", borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true });
+    }
     chart = new Chart(canvas, {
       type: "line",
       data: {
         labels: labels,
-        datasets: [
-          { label: "Without extra payment", data: simNoExtra.curve, borderColor: "#c5221f", backgroundColor: "rgba(197,34,31,0.08)", borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true },
-          { label: "With extra payment", data: simWithExtra.curve, borderColor: "#1a73e8", backgroundColor: "rgba(26,115,232,0.10)", borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true }
-        ]
+        datasets: datasets
       },
       options: {
         responsive: true,
@@ -105,9 +109,9 @@
 
   function update() {
     var P = parseAmount($("la-amount"));
-    var rate = parseFloat($("la-rate").value) || 0;
+    var rate = parseFloat(String($("la-rate").value).replace(",", ".")) || 0;
     var years = Math.max(1, Math.min(40, parseInt($("la-years").value, 10) || 1));
-    var extra = parseAmount($("la-extra"));
+    var extra = Math.max(0, parseAmount($("la-extra")));
     var cur = $("la-currency").value;
     var months = years * 12;
 
@@ -128,7 +132,11 @@
     }
     var payoffLabel = $("la-payoff");
     if (extra > 0) {
-      payoffLabel.textContent = fmtMonths(withExtra.monthsPaid, cur) + " vs " + fmtMonths(noExtra.monthsPaid, cur);
+      if (withExtra.monthsPaid === noExtra.monthsPaid) {
+        payoffLabel.textContent = fmtMonths(noExtra.monthsPaid, cur) + " (extra payment too small to shorten the term)";
+      } else {
+        payoffLabel.textContent = fmtMonths(withExtra.monthsPaid, cur) + " vs " + fmtMonths(noExtra.monthsPaid, cur);
+      }
       payoffLabel.className = "calc-value calc-ok";
     } else {
       payoffLabel.textContent = fmtMonths(noExtra.monthsPaid, cur);

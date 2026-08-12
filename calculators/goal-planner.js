@@ -95,7 +95,7 @@
   function update() {
     var target = parseAmount($("gp-target"));
     var monthly = parseAmount($("gp-monthly"));
-    var rate = parseFloat($("gp-rate").value) || 0;
+    var rate = parseFloat(String($("gp-rate").value).replace(",", ".")) || 0;
     var years = Math.max(0, Math.min(60, parseInt($("gp-years").value, 10) || 0));
     var cur = $("gp-currency").value;
     var months = Math.max(1, years * 12);

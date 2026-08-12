@@ -49,9 +49,9 @@
   function update() {
     var P = parseAmount($("er-initial"));
     var m = parseAmount($("er-monthly"));
-    var rate = parseFloat($("er-rate").value) || 0;
-    var feeA = parseFloat($("er-feea").value) || 0;
-    var feeB = parseFloat($("er-feeb").value) || 0;
+    var rate = parseFloat(String($("er-rate").value).replace(",", ".")) || 0;
+    var feeA = parseFloat(String($("er-feea").value).replace(",", ".")) || 0;
+    var feeB = parseFloat(String($("er-feeb").value).replace(",", ".")) || 0;
     var years = Math.max(0, Math.min(60, parseInt($("er-years").value, 10) || 0));
     var cur = $("er-currency").value;
 
