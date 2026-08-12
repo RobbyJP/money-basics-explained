@@ -8,7 +8,7 @@ Phase A list. All items are manual, free, and take 5–15 minutes each. Verify e
 - [ ] Check GSC → Crawl stats (filter `Mediapartners-Google`) once or twice a week during AdSense review.
 
 ## Tool directory listings (verified free submission channels, 2026-08-12)
-- [ ] **directree.io** (https://www.directree.io) — paste https://moneyclarity.blog, auto-crawls a listing in ~30s, free claim + do-follow backlink. Best effort-to-value item.
+- [x] **directree.io** — DONE 2026-08-12: listing saved, verified badge embedded in site footer (do-follow active, `5d647d2`).
 - [ ] **digital.finance/get-listed** (https://digital.finance/get-listed) — fintech directory pitched at exactly this site type (mortgage/retirement/compound interest calc users). Free submit, ~2 min form, reviewed in 3–5 business days.
 - [ ] **surelists.com** — free directory submission form, quick approval.
 - [ ] **topdividendtools.com/submit-tool.html** — free form; submit as a dividend/portfolio tool category.
