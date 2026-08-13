@@ -6,6 +6,7 @@ separate branch like gh-pages instead of committing public/ to main).
 """
 import os
 import subprocess
+import sys
 
 from dotenv import load_dotenv
 
@@ -26,12 +27,18 @@ def run(cmd: list[str]):
 
 def publish():
     run(["git", "add", "articles", PUBLIC_DIR, "keywords.csv"])
-    committed = run(["git", "commit", "-m", "Auto-publish: new content"])
-    if not committed:
+    result = subprocess.run(["git", "commit", "-m", "Auto-publish: new content"], capture_output=True, text=True)
+    if result.returncode == 0:
+        return run(["git", "push", "origin", BRANCH])
+    output = result.stdout + result.stderr
+    if "nothing to commit" in output or "nothing added to commit" in output:
         print("[publish] nothing to commit")
-        return
-    run(["git", "push", "origin", BRANCH])
+        return True
+    print(result.stdout)
+    print(result.stderr)
+    print(f"[publish] git commit failed (exit {result.returncode})")
+    return False
 
 
 if __name__ == "__main__":
-    publish()
+    sys.exit(0 if publish() else 1)
