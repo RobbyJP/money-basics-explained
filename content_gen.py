@@ -144,14 +144,16 @@ def _retry_delay(exc) -> float:
     if m:
         return max(float(m.group(1)), 5.0)
     for detail in getattr(exc, "details", None) or []:
-        delay = detail.get("retryDelay", "")
-        m = _re.search(r"([0-9.]+)s", delay)
+        if not isinstance(detail, dict):
+            continue
+        delay = detail.get("retryDelay", "") or ""
+        m = _re.search(r"([0-9.]+)s", str(delay))
         if m:
             return max(float(m.group(1)), 5.0)
     return 0.0
 
 
-def _generate_with_retry(client, user_prompt: str, max_retries: int = 5):
+def _generate_with_retry(client, user_prompt: str, max_retries: int = 8):
     model = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
     config = types.GenerateContentConfig(
         system_instruction=SYSTEM_PROMPT,
@@ -170,6 +172,7 @@ def _generate_with_retry(client, user_prompt: str, max_retries: int = 5):
             wait = _retry_delay(exc)
             if not wait:
                 wait = 45.0
+            wait = min(wait, 300.0)
             print(
                 f"[content_gen] API error (attempt {attempt}/{max_retries}): "
                 f"{type(exc).__name__} code={getattr(exc, 'code', '?')}; retrying in {wait:.0f}s"
