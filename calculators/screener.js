@@ -194,11 +194,11 @@
     });
     el("reset").addEventListener("click", function () {
       el("mcap").value = "10";
-      el("roe").value = "15";
-      el("pbv").value = "2";
-      el("growth").value = "5";
-      el("yield").value = "3";
-      el("de").value = "1";
+      el("roe").value = "10";
+      el("pbv").value = "3";
+      el("growth").value = "0";
+      el("yield").value = "1";
+      el("de").value = "2";
       el("sector").value = "";
       el("sort").value = "score";
       fetchScreener();
