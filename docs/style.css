@@ -546,3 +546,64 @@ textarea:focus {
   .site-header { padding: 10px 0; }
   .card-list { grid-template-columns: 1fr; }
 }
+
+/* IDX screener */
+.mc-market-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+.mc-stat {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.mc-stat-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.mc-stat-value {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 2px;
+  color: var(--ink);
+}
+.mc-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.mc-badge-bull { background: rgba(30, 142, 62, 0.14); color: var(--ok); }
+.mc-badge-bear { background: rgba(176, 0, 0, 0.12); color: var(--warn); }
+.screener-table { min-width: 780px; }
+.screener-table td.num, .screener-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.screener-table th { white-space: nowrap; }
+.screener-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0 4px;
+  flex-wrap: wrap;
+}
+.screener-actions .calc-btn { margin: 0; }
+.screener-actions .calc-note { margin: 0; flex: 1; }
+.score-pill {
+  display: inline-block;
+  min-width: 48px;
+  text-align: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.score-hi { background: rgba(30, 142, 62, 0.14); color: var(--ok); }
+.score-mid { background: rgba(31, 95, 191, 0.12); color: var(--accent); }
+.score-lo { background: var(--surface-2); color: var(--muted); }

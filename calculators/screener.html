@@ -1,0 +1,71 @@
+<section class="calc-card" aria-label="IDX Stock Screener">
+  <h2>IDX Stock Screener</h2>
+  <p class="calc-note">Screen Jakarta Stock Exchange (IDX) stocks by valuation, profitability, growth and dividend metrics. Fundamentals come from audited annual reports (2022–2025); prices are the latest close. Data loads from our live API — nothing you change leaves the page.</p>
+  <div class="mc-market-strip" id="mc-market" aria-live="polite"></div>
+  <div class="calc-form screener-form">
+    <div class="calc-row">
+      <label for="scr-mcap">Min market cap (Rp T)</label>
+      <input id="scr-mcap" type="number" min="0" step="any" value="10" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-roe">Min ROE (%)</label>
+      <input id="scr-roe" type="number" min="0" step="any" value="15" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-pbv">Max P/BV</label>
+      <input id="scr-pbv" type="number" min="0" step="any" value="2" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-growth">Min growth (%)</label>
+      <input id="scr-growth" type="number" min="0" step="any" value="5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-yield">Min dividend yield (%)</label>
+      <input id="scr-yield" type="number" min="0" step="any" value="3" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-de">Max debt/equity</label>
+      <input id="scr-de" type="number" min="0" step="any" value="1" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-sector">Sector</label>
+      <select id="scr-sector"><option value="">All sectors</option></select>
+    </div>
+    <div class="calc-row">
+      <label for="scr-sort">Sort by</label>
+      <select id="scr-sort">
+        <option value="score" selected>Score (high to low)</option>
+        <option value="roe">ROE</option>
+        <option value="yield">Dividend yield</option>
+        <option value="growth">Growth</option>
+        <option value="pbv">P/BV (low to high)</option>
+        <option value="mcap">Market cap</option>
+      </select>
+    </div>
+  </div>
+  <div class="screener-actions">
+    <button type="button" id="scr-reset" class="calc-btn calc-btn-ghost">Reset filters</button>
+    <span class="calc-note" id="mc-status"></span>
+  </div>
+  <div class="table-wrap">
+    <table class="screener-table" aria-label="Screened stocks">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th class="num">Price</th>
+          <th class="num">Mkt cap (Rp T)</th>
+          <th class="num">P/E</th>
+          <th class="num">ROE</th>
+          <th class="num">P/BV</th>
+          <th class="num">D/E</th>
+          <th class="num">Growth</th>
+          <th class="num">Yield</th>
+          <th>Sector</th>
+          <th class="num">Score</th>
+        </tr>
+      </thead>
+      <tbody id="mc-rows"></tbody>
+    </table>
+  </div>
+  <p class="calc-note">The score combines profitability (ROE, 20%), growth (15%), dividend yield (15%), valuation (P/BV, 20%), leverage (D/E, 15%) and size (15%). A <span class="score-pill score-mid">score</span> is a relative ranking, not a recommendation — read the guide below for what each metric means and its limits.</p>
+</section>

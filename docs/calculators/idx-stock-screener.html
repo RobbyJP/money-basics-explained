@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="4KnXhXG-VSV4APVsfZLdrqVFhpQBAt7IskEaMk0b5L8">
+<meta name="msvalidate.01" content="1A11E8FAA62F817290C8CD180B09FACF" />
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f6fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0d1422">
+<title>IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers | Money Basics Explained</title>
+<meta name="description" content="A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends — with the methodology and limits of each metric explained.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Money Basics Explained">
+<meta property="og:title" content="IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers | Money Basics Explained">
+<meta property="og:description" content="A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends — with the methodology and limits of each metric explained.">
+<meta property="og:url" content="https://moneyclarity.blog/calculators/idx-stock-screener.html">
+<meta property="og:image" content="https://moneyclarity.blog/og-image.png">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers | Money Basics Explained">
+<meta name="twitter:description" content="A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends — with the methodology and limits of each metric explained.">
+<link rel="stylesheet" href="../style.css?v=20260814152446">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers", "description": "A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends \u2014 with the methodology and limits of each metric explained.", "datePublished": "2026-08-14", "dateModified": "2026-08-14", "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"}, "publisher": {"@type": "Organization", "name": "Money Basics Explained"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://moneyclarity.blog/calculators/idx-stock-screener.html"}}</script>
+<!-- AdSense: paste your approved AdSense snippet here once approved.
+     Gate ad loading on consent: only run the AdSense loader when
+     window.mcConsent === "accepted" (set by the consent banner). -->
+</head>
+<body>
+<header class="site-header">
+  <a href="../index.html" class="site-title">Money Basics Explained</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="../index.html">Home</a>
+    <a href="../calculators/index.html">Calculators</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+<main>
+<section class="calc-card" aria-label="IDX Stock Screener">
+  <h2>IDX Stock Screener</h2>
+  <p class="calc-note">Screen Jakarta Stock Exchange (IDX) stocks by valuation, profitability, growth and dividend metrics. Fundamentals come from audited annual reports (2022–2025); prices are the latest close. Data loads from our live API — nothing you change leaves the page.</p>
+  <div class="mc-market-strip" id="mc-market" aria-live="polite"></div>
+  <div class="calc-form screener-form">
+    <div class="calc-row">
+      <label for="scr-mcap">Min market cap (Rp T)</label>
+      <input id="scr-mcap" type="number" min="0" step="any" value="10" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-roe">Min ROE (%)</label>
+      <input id="scr-roe" type="number" min="0" step="any" value="15" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-pbv">Max P/BV</label>
+      <input id="scr-pbv" type="number" min="0" step="any" value="2" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-growth">Min growth (%)</label>
+      <input id="scr-growth" type="number" min="0" step="any" value="5" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-yield">Min dividend yield (%)</label>
+      <input id="scr-yield" type="number" min="0" step="any" value="3" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-de">Max debt/equity</label>
+      <input id="scr-de" type="number" min="0" step="any" value="1" inputmode="decimal">
+    </div>
+    <div class="calc-row">
+      <label for="scr-sector">Sector</label>
+      <select id="scr-sector"><option value="">All sectors</option></select>
+    </div>
+    <div class="calc-row">
+      <label for="scr-sort">Sort by</label>
+      <select id="scr-sort">
+        <option value="score" selected>Score (high to low)</option>
+        <option value="roe">ROE</option>
+        <option value="yield">Dividend yield</option>
+        <option value="growth">Growth</option>
+        <option value="pbv">P/BV (low to high)</option>
+        <option value="mcap">Market cap</option>
+      </select>
+    </div>
+  </div>
+  <div class="screener-actions">
+    <button type="button" id="scr-reset" class="calc-btn calc-btn-ghost">Reset filters</button>
+    <span class="calc-note" id="mc-status"></span>
+  </div>
+  <div class="table-wrap">
+    <table class="screener-table" aria-label="Screened stocks">
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th class="num">Price</th>
+          <th class="num">Mkt cap (Rp T)</th>
+          <th class="num">P/E</th>
+          <th class="num">ROE</th>
+          <th class="num">P/BV</th>
+          <th class="num">D/E</th>
+          <th class="num">Growth</th>
+          <th class="num">Yield</th>
+          <th>Sector</th>
+          <th class="num">Score</th>
+        </tr>
+      </thead>
+      <tbody id="mc-rows"></tbody>
+    </table>
+  </div>
+  <p class="calc-note">The score combines profitability (ROE, 20%), growth (15%), dividend yield (15%), valuation (P/BV, 20%), leverage (D/E, 15%) and size (15%). A <span class="score-pill score-mid">score</span> is a relative ranking, not a recommendation — read the guide below for what each metric means and its limits.</p>
+</section>
+<div class="share-bar"><span class="share-label">Share this tool:</span><a class="calc-btn calc-btn-small" rel="noopener" target="_blank" href="https://wa.me/?text=IDX%20Stock%20Screener%3A%20How%20to%20Screen%20Indonesian%20Stocks%20by%20the%20Numbers%20-%20a%20free%20tool%20from%20Money%20Clarity%20https%3A%2F%2Fmoneyclarity.blog%2Fcalculators%2Fidx-stock-screener.html">WhatsApp</a><button type="button" class="calc-btn calc-btn-small share-copy" data-url="https://moneyclarity.blog/calculators/idx-stock-screener.html">Copy link</button></div><script>(function(){var b=document.querySelector(".share-copy");if(b){b.addEventListener("click",function(){var u=b.getAttribute("data-url");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);});}else{var t=document.createElement("textarea");t.value=u;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);}});}})();</script>
+<p class="byline">By the Money Clarity Editorial Team &middot; Updated August 14, 2026</p><h1>IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers</h1>
+<p>The screener above scans the Indonesian market (IDX) and ranks roughly 55 liquid large- and mid-cap stocks on the fundamentals that matter most to long-term investors: profitability, valuation, growth, leverage and dividends. It turns annual-report numbers and the latest market close into one comparable list, so you spend your time reading annual reports instead of building spreadsheets.</p>
+<p>This guide explains what each metric means, how the score is built, and — just as important — what the screener cannot tell you.</p>
+<h2>What the screener measures</h2>
+<p>Every stock gets a score from 0 to 100 built from six components:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Weight</th>
+<th>What it captures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Return on equity (ROE)</td>
+<td>20%</td>
+<td>How profitably management uses shareholder money</td>
+</tr>
+<tr>
+<td>Valuation (P/BV)</td>
+<td>20%</td>
+<td>How much you pay per rupiah of book value</td>
+</tr>
+<tr>
+<td>Leverage (D/E)</td>
+<td>15%</td>
+<td>How much debt the company carries relative to equity</td>
+</tr>
+<tr>
+<td>Earnings growth</td>
+<td>15%</td>
+<td>Whether profit is growing or shrinking</td>
+</tr>
+<tr>
+<td>Dividend yield</td>
+<td>15%</td>
+<td>What the company pays back to shareholders</td>
+</tr>
+<tr>
+<td>Market cap</td>
+<td>15%</td>
+<td>Company size and liquidity</td>
+</tr>
+</tbody>
+</table></div>
+<p>The weights are our editorial choice, not an objective truth. They favor profitable, reasonably valued, low-debt businesses that pay dividends — a sensible starting point for long-term investing in Indonesian blue chips, but you may weigh things differently.</p>
+<h3>Return on equity (ROE)</h3>
+<p>ROE is net profit divided by shareholders' equity: how many rupiah of profit each rupiah of owner capital produces per year. A consistent ROE above 15% is a reasonable bar for a quality business. Banks naturally report high ROE on thin equity — which is why the screener's leverage filter tends to exclude them (see limits below).</p>
+<h3>Price-to-book value (P/BV)</h3>
+<p>P/BV compares the market price to the company's net assets per share. A P/BV below 1 means you can buy the business for less than its book value; above 2-3, the market is pricing in growth expectations. It is most meaningful for asset-heavy businesses (banks, property, mining) and less useful for asset-light ones.</p>
+<h3>Debt-to-equity (D/E)</h3>
+<p>D/E compares total liabilities to shareholder equity — how much of the business is funded by debt versus owners' money. Lower is generally safer, but some sectors (banks, utilities, property developers) are structurally leveraged. A D/E below 1 is a conservative screen that deliberately keeps most financials out.</p>
+<h3>Earnings growth</h3>
+<p>Growth compares the latest annual net profit against the prior year. It is reported as a percentage and can be negative. Single-year growth is noisy — a good year or a one-off gain can flatter the number, so treat it as one input, not a verdict.</p>
+<h3>Dividend yield</h3>
+<p>Yield is the annual dividend per share divided by the price. Indonesian banks and conglomerates often pay high, reliable dividends, which is why they dominate the screener's dividend column. A high yield can also signal a falling share price, so it is read together with ROE and D/E.</p>
+<h2>How the filters work</h2>
+<p>The six filter boxes map to the same numbers above. Start with the defaults, then tighten:</p>
+<ul>
+<li><strong>Min market cap</strong> — keep this above Rp 10 trillion for liquidity; smaller caps are riskier and harder to exit.</li>
+<li><strong>Min ROE</strong> — raise to 20 to isolate the most profitable names.</li>
+<li><strong>Max P/BV</strong> — lower to 1.5 to hunt value; most quality stocks will fall out.</li>
+<li><strong>Min growth</strong> — 5–10% keeps the list to growers; set to 0 or below to include turnaround names.</li>
+<li><strong>Min yield</strong> — 3%+ selects dividend payers; 0 keeps everyone.</li>
+<li><strong>Max D/E</strong> — 1 keeps the conservative list; banks only appear at higher values.</li>
+</ul>
+<p>The strictest combination (market cap ≥ Rp 10T, ROE ≥ 15%, P/BV ≤ 2, growth ≥ 5%, yield ≥ 3%, D/E ≤ 1) is intentionally demanding — typically only a handful of Indonesian names pass all six at once. That is the point: a screen that returns 50 stocks is a catalog, not a filter.</p>
+<h2>What the screener cannot tell you</h2>
+<p>Screening by numbers has hard limits:</p>
+<ul>
+<li><strong>It is a snapshot, not a story.</strong> The score ranks the <em>latest</em> annual reports against the <em>latest</em> price. It cannot see a company's competitive moat, management quality, or the regulatory changes coming next year.</li>
+<li><strong>Banks are largely invisible.</strong> Because of the leverage filter, financials rarely appear — yet banks are Indonesia's most profitable sector. If you want to screen banks, raise the D/E maximum; the other metrics still rank them.</li>
+<li><strong>Data has an as-of date.</strong> Fundamentals come from audited annual reports (2022–2025) and prices from the latest market close — the "data as of" line in the screener shows exactly when. Between reporting seasons, numbers age.</li>
+<li><strong>No forward-looking information.</strong> Nothing here is an earnings forecast, a price target, or a recommendation. It is a ranking of the past and the present.</li>
+</ul>
+<h2>How to use it responsibly</h2>
+<ol>
+<li><strong>Run the screener, then open the annual report</strong> of the top few names. The numbers behind this screen come from those reports — verify, and read the management discussion.</li>
+<li><strong>Compare sectors, not just scores.</strong> A top score in property is not the same risk as a top score in mining. The sector column keeps you honest.</li>
+<li><strong>Check the regime line.</strong> The market strip shows whether the IHSG trades above or below its 60-day average and how many stocks advanced versus declined over 5 days. Screens change meaning in a falling market — over-leveraged names that look cheap can stay cheap.</li>
+<li><strong>Never buy on a screen alone.</strong> Use it as the first filter, then apply valuation, quality and risk analysis specific to the business.</li>
+</ol>
+<h2>Related searches</h2>
+<ul>
+<li><a href="how-compound-interest-works.html">How compound interest works</a> — why long-term holding matters more than any single pick</li>
+<li><a href="/articles/index-funds-vs-mutual-funds.html">Index funds vs mutual funds</a> — the low-effort alternative to picking individual stocks</li>
+<li><a href="/calculators/emergency-fund.html">Emergency fund calculator</a> — build the buffer that lets you hold through drawdowns</li>
+<li><a href="/disclaimer.html">Disclaimer</a> — what this site's tools do and do not guarantee</li>
+</ul>
+<hr />
+<p><em>This screener is for general educational purposes only and is not personalized investment advice. The score is a transparent ranking of published fundamentals, not a recommendation to buy, sell or hold any security. Verify data against official company filings before acting.</em></p><div class="author-box"><p class="author-name">By the Money Clarity Editorial Team</p><p>Every guide is researched, written, and fact-checked by the Money Clarity editorial team: concepts and formulas are verified against primary sources, calculators are tested with worked examples, and each page shows its last-updated date. See our <a href="../about.html">editorial standards</a>.</p></div>
+</main>
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../disclaimer.html">Disclaimer</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms-of-service.html">Terms of Service</a>
+    <a href="../id/index.html">Bahasa Indonesia</a>
+  </div>
+  <p class="footer-badge"><a href="https://www.directree.io" target="_blank" rel="noopener" aria-label="Verified on directree"><img class="badge-light" src="https://www.directree.io/badge/directree-badge-lightmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"><img class="badge-dark" src="https://www.directree.io/badge/directree-badge-darkmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"></a></p>
+  <p class="footer-note">&copy; 2026 Money Basics Explained. Educational content only, not financial advice.</p>
+</footer>
+<div id="consent-banner" class="consent-banner" role="region" aria-label="Cookie consent" hidden>
+  <p>We may use cookies, including advertising cookies from Google once ads are live, to keep this site free. You can accept or decline personalized advertising. See our <a href="../privacy-policy.html">Privacy Policy</a>.</p>
+  <div class="consent-actions">
+    <button type="button" id="consent-accept" class="calc-btn">Accept</button>
+    <button type="button" id="consent-decline" class="calc-btn calc-btn-ghost">Decline</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "mc_consent";
+  var banner = document.getElementById("consent-banner");
+  if (!banner) return;
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (saved) { window.mcConsent = saved; return; }
+  function choose(value) {
+    try { localStorage.setItem(KEY, value); } catch (e) {}
+    window.mcConsent = value;
+    banner.hidden = true;
+    banner.classList.remove("consent-visible");
+    document.dispatchEvent(new Event("mcConsent"));
+  }
+  document.getElementById("consent-accept").addEventListener("click", function () { choose("accepted"); });
+  document.getElementById("consent-decline").addEventListener("click", function () { choose("declined"); });
+  banner.hidden = false;
+  banner.classList.add("consent-visible");
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="screener.js" defer></script>
+</body>
+</html>
