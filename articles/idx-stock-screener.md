@@ -80,7 +80,7 @@ Screening by numbers has hard limits:
 
 ## Related searches
 
-- [How compound interest works](how-compound-interest-works.html) — why long-term holding matters more than any single pick
+- [How compound interest works](../calculators/compound-interest.html) — why long-term holding matters more than any single pick
 - [Index funds vs mutual funds](index-funds-vs-mutual-funds.html) — the low-effort alternative to picking individual stocks
 - [Emergency fund calculator](../calculators/emergency-fund.html) — build the buffer that lets you hold through drawdowns
 - [Disclaimer](disclaimer.html) — what this site's tools do and do not guarantee

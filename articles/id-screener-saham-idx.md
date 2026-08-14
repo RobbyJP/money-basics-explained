@@ -84,7 +84,7 @@ Menyaring dengan angka punya batas yang tegas:
 
 - [Apa Itu THR dan Bagaimana Cara Menghitungnya](id/apa-itu-thr-dan-cara-menghitungnya.html) — uang masuk yang teratur
 - [Kalkulator dana darurat](../calculators/emergency-fund.html) — bangun cadangan yang membuat Anda mampu bertahan saat pasar turun
-- [Cara kerja bunga majemuk](how-compound-interest-works.html) — mengapa berpegang jangka panjang lebih penting daripada satu pilihan apa pun
+- [Cara kerja bunga majemuk](../calculators/compound-interest.html) — mengapa berpegang jangka panjang lebih penting daripada satu pilihan apa pun
 - [Disclaimer](disclaimer.html) — apa yang dijamin dan tidak dijamin oleh alat situs ini
 
 ---
