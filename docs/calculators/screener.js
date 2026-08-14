@@ -5,6 +5,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var state = { rows: [], market: null, error: "" };
   var timer = null;
+  var lang = (document.documentElement.lang || "en").toLowerCase() === "id" ? "id" : "en";
 
   var ids = {
     market: "mc-market",
@@ -21,7 +22,48 @@
     reset: "scr-reset"
   };
 
+  var T = lang === "id" ? {
+    bull: "Pasar bullish",
+    bear: "Pasar bearish",
+    regime: "Rezim pasar",
+    ihsg_close: "Penutupan IHSG",
+    ihsg_sma60: "IHSG vs SMA60",
+    breadth: "Breadth 5 hari",
+    data_asof: "Data per",
+    no_match: "Tidak ada saham yang cocok dengan filter ini.",
+    match_count: " saham cocok dengan filter Anda",
+    not_loaded: "Data screener belum dimuat.",
+    error: "Data screener sedang tidak tersedia. Silakan coba lagi sebentar lagi.",
+    all_sectors: "Semua sektor"
+  } : {
+    bull: "Bull market",
+    bear: "Bear market",
+    regime: "Market regime",
+    ihsg_close: "IHSG close",
+    ihsg_sma60: "IHSG vs SMA60",
+    breadth: "5-day breadth",
+    data_asof: "Data as of",
+    no_match: "No stocks match these filters.",
+    match_count: " stocks match your filters",
+    not_loaded: "Screener data not loaded yet.",
+    error: "Screener data is temporarily unavailable. Please try again in a moment.",
+    all_sectors: "All sectors"
+  };
+
   function el(id) { return $(ids[id]); }
+
+  function applyLang() {
+    document.querySelectorAll("[data-lang]").forEach(function (node) {
+      node.hidden = node.getAttribute("data-lang") !== lang;
+    });
+    document.querySelectorAll("select").forEach(function (sel) {
+      var cur = sel.value;
+      var opts = sel.querySelectorAll("option[data-lang='" + lang + "']");
+      for (var i = 0; i < opts.length; i++) {
+        if (opts[i].value === cur) { sel.value = cur; break; }
+      }
+    });
+  }
 
   function fmt(n, digits) {
     if (n === null || n === undefined || isNaN(n)) return "-";
@@ -38,8 +80,8 @@
   }
 
   function regimeBadge(regime) {
-    if (regime === "bull") return '<span class="mc-badge mc-badge-bull">Bull market</span>';
-    if (regime === "bear") return '<span class="mc-badge mc-badge-bear">Bear market</span>';
+    if (regime === "bull") return '<span class="mc-badge mc-badge-bull">' + T.bull + "</span>";
+    if (regime === "bear") return '<span class="mc-badge mc-badge-bear">' + T.bear + "</span>";
     return '<span class="mc-badge">' + (regime || "-") + "</span>";
   }
 
@@ -51,17 +93,20 @@
   function renderMarket(m) {
     if (!m) return;
     var strip = el("market");
+    var adv = lang === "id"
+      ? m.advancers_5d + " naik / " + m.decliners_5d + " turun"
+      : m.advancers_5d + " adv / " + m.decliners_5d + " dec";
     strip.innerHTML =
-      '<div class="mc-stat"><span class="mc-stat-label">Market regime</span>' +
+      '<div class="mc-stat"><span class="mc-stat-label">' + T.regime + "</span>" +
       '<span class="mc-stat-value">' + regimeBadge(m.regime) + "</span></div>" +
-      '<div class="mc-stat"><span class="mc-stat-label">IHSG close</span>' +
+      '<div class="mc-stat"><span class="mc-stat-label">' + T.ihsg_close + "</span>" +
       '<span class="mc-stat-value">' + fmt(m.ihsg_close, 2) + "</span></div>" +
-      '<div class="mc-stat"><span class="mc-stat-label">IHSG vs SMA60</span>' +
+      '<div class="mc-stat"><span class="mc-stat-label">' + T.ihsg_sma60 + "</span>" +
       '<span class="mc-stat-value">' + fmt(m.ihsg_sma60, 2) + "</span></div>" +
-      '<div class="mc-stat"><span class="mc-stat-label">5-day breadth</span>' +
+      '<div class="mc-stat"><span class="mc-stat-label">' + T.breadth + "</span>" +
       '<span class="mc-stat-value">' + fmt(m.breadth_pct, 1) + "%</span>" +
-      '<span class="mc-stat-label">' + m.advancers_5d + " adv / " + m.decliners_5d + " dec" + "</span></div>" +
-      '<div class="mc-stat"><span class="mc-stat-label">Data as of</span>' +
+      '<span class="mc-stat-label">' + adv + "</span></div>" +
+      '<div class="mc-stat"><span class="mc-stat-label">' + T.data_asof + "</span>" +
       '<span class="mc-stat-value">' + (m.asof || "-") + "</span></div>";
   }
 
@@ -80,7 +125,7 @@
 
     var tbody = el("rows");
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="11">No stocks match these filters.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="11">' + T.no_match + "</td></tr>";
       return;
     }
     var html = "";
@@ -111,8 +156,8 @@
       return;
     }
     s.textContent = state.rows.length
-      ? state.rows.length + " stocks match your filters"
-      : "Screener data not loaded yet.";
+      ? state.rows.length + T.match_count
+      : T.not_loaded;
   }
 
   function fetchSectors() {
@@ -129,9 +174,11 @@
         sectors.sort();
         var sel = el("sector");
         var cur = sel.value;
-        sel.innerHTML = '<option value="">All sectors</option>' +
+        sel.innerHTML = '<option value="" data-lang="en">All sectors</option>' +
+          '<option value="" data-lang="id" hidden>Semua sektor</option>' +
           sectors.map(function (s) { return '<option value="' + s + '">' + s + "</option>"; }).join("");
         if (sectors.indexOf(cur) !== -1) sel.value = cur;
+        applyLang();
       })
       .catch(function () {});
   }
@@ -163,7 +210,7 @@
         renderRows();
       })
       .catch(function () {
-        state.error = "Screener data is temporarily unavailable. Please try again in a moment.";
+        state.error = T.error;
         renderStatus();
       });
   }
@@ -188,6 +235,7 @@
 
   function wire() {
     if (!el("rows")) return;
+    applyLang();
     ["mcap", "roe", "pbv", "growth", "yield", "de", "sector", "sort"].forEach(function (k) {
       el(k).addEventListener("input", scheduleFetch);
       el(k).addEventListener("change", scheduleFetch);

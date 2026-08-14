@@ -17,11 +17,11 @@
 <meta property="og:url" content="https://moneyclarity.blog/calculators/idx-stock-screener.html">
 <meta property="og:image" content="https://moneyclarity.blog/og-image.png">
 <meta property="og:locale" content="en_US">
-
+<link rel="alternate" hreflang="en" href="https://moneyclarity.blog/calculators/idx-stock-screener.html"><link rel="alternate" hreflang="id" href="/id/screener-saham-idx.html"><link rel="alternate" hreflang="x-default" href="https://moneyclarity.blog/calculators/idx-stock-screener.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers | Money Basics Explained">
 <meta name="twitter:description" content="A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends — with the methodology and limits of each metric explained.">
-<link rel="stylesheet" href="../style.css?v=20260814152734">
+<link rel="stylesheet" href="../style.css?v=20260814153647">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers", "description": "A free IDX stock screener that ranks Jakarta Stock Exchange stocks by ROE, valuation, growth, leverage and dividends \u2014 with the methodology and limits of each metric explained.", "datePublished": "2026-08-14", "dateModified": "2026-08-14", "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"}, "publisher": {"@type": "Organization", "name": "Money Basics Explained"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://moneyclarity.blog/calculators/idx-stock-screener.html"}}</script>
 <!-- AdSense: paste your approved AdSense snippet here once approved.
      Gate ad loading on consent: only run the AdSense loader when
@@ -40,51 +40,57 @@
 <main>
 <section class="calc-card" aria-label="IDX Stock Screener">
   <h2>IDX Stock Screener</h2>
-  <p class="calc-note">Screen Jakarta Stock Exchange (IDX) stocks by valuation, profitability, growth and dividend metrics. Fundamentals come from audited annual reports (2022–2025); prices are the latest close. Data loads from our live API — nothing you change leaves the page.</p>
+  <p class="calc-note"><span data-lang="en">Screen Jakarta Stock Exchange (IDX) stocks by valuation, profitability, growth and dividend metrics. Fundamentals come from audited annual reports (2022–2025); prices are the latest close. Data loads from our live API — nothing you change leaves the page.</span><span data-lang="id" hidden>Menyaring saham Bursa Efek Indonesia (IDX) berdasarkan valuasi, profitabilitas, pertumbuhan, dan dividen. Fundamental berasal dari laporan tahunan teraudit (2022–2025); harga adalah penutupan terbaru. Data dimuat dari API langsung — tidak ada yang Anda ubah meninggalkan halaman ini.</span></p>
   <div class="mc-market-strip" id="mc-market" aria-live="polite"></div>
   <div class="calc-form screener-form">
     <div class="calc-row">
-      <label for="scr-mcap">Min market cap (Rp T)</label>
+      <label for="scr-mcap"><span data-lang="en">Min market cap (Rp T)</span><span data-lang="id" hidden>Kap. pasar min (Rp T)</span></label>
       <input id="scr-mcap" type="number" min="0" step="any" value="10" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-roe">Min ROE (%)</label>
+      <label for="scr-roe"><span data-lang="en">Min ROE (%)</span><span data-lang="id" hidden>ROE minimum (%)</span></label>
       <input id="scr-roe" type="number" min="0" step="any" value="10" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-pbv">Max P/BV</label>
+      <label for="scr-pbv"><span data-lang="en">Max P/BV</span><span data-lang="id" hidden>P/BV maksimum</span></label>
       <input id="scr-pbv" type="number" min="0" step="any" value="3" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-growth">Min growth (%)</label>
+      <label for="scr-growth"><span data-lang="en">Min growth (%)</span><span data-lang="id" hidden>Pertumbuhan min (%)</span></label>
       <input id="scr-growth" type="number" min="0" step="any" value="0" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-yield">Min dividend yield (%)</label>
+      <label for="scr-yield"><span data-lang="en">Min dividend yield (%)</span><span data-lang="id" hidden>Imbal hasil min (%)</span></label>
       <input id="scr-yield" type="number" min="0" step="any" value="1" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-de">Max debt/equity</label>
+      <label for="scr-de"><span data-lang="en">Max debt/equity</span><span data-lang="id" hidden>Utang/ekuitas maks</span></label>
       <input id="scr-de" type="number" min="0" step="any" value="2" inputmode="decimal">
     </div>
     <div class="calc-row">
-      <label for="scr-sector">Sector</label>
-      <select id="scr-sector"><option value="">All sectors</option></select>
+      <label for="scr-sector"><span data-lang="en">Sector</span><span data-lang="id" hidden>Sektor</span></label>
+      <select id="scr-sector"><option value="" data-lang="en">All sectors</option><option value="" data-lang="id" hidden>Semua sektor</option></select>
     </div>
     <div class="calc-row">
-      <label for="scr-sort">Sort by</label>
+      <label for="scr-sort"><span data-lang="en">Sort by</span><span data-lang="id" hidden>Urutkan</span></label>
       <select id="scr-sort">
-        <option value="score" selected>Score (high to low)</option>
-        <option value="roe">ROE</option>
-        <option value="yield">Dividend yield</option>
-        <option value="growth">Growth</option>
-        <option value="pbv">P/BV (low to high)</option>
-        <option value="mcap">Market cap</option>
+        <option value="score" selected data-lang="en">Score (high to low)</option>
+        <option value="score" data-lang="id" hidden>Skor (tinggi ke rendah)</option>
+        <option value="roe" data-lang="en">ROE</option>
+        <option value="roe" data-lang="id" hidden>ROE</option>
+        <option value="yield" data-lang="en">Dividend yield</option>
+        <option value="yield" data-lang="id" hidden>Imbal hasil dividen</option>
+        <option value="growth" data-lang="en">Growth</option>
+        <option value="growth" data-lang="id" hidden>Pertumbuhan</option>
+        <option value="pbv" data-lang="en">P/BV (low to high)</option>
+        <option value="pbv" data-lang="id" hidden>P/BV (rendah ke tinggi)</option>
+        <option value="mcap" data-lang="en">Market cap</option>
+        <option value="mcap" data-lang="id" hidden>Kapitalisasi pasar</option>
       </select>
     </div>
   </div>
   <div class="screener-actions">
-    <button type="button" id="scr-reset" class="calc-btn calc-btn-ghost">Reset filters</button>
+    <button type="button" id="scr-reset" class="calc-btn calc-btn-ghost"><span data-lang="en">Reset filters</span><span data-lang="id" hidden>Atur ulang filter</span></button>
     <span class="calc-note" id="mc-status"></span>
   </div>
   <div class="table-wrap">
@@ -92,25 +98,25 @@
       <thead>
         <tr>
           <th>Ticker</th>
-          <th class="num">Price</th>
-          <th class="num">Mkt cap (Rp T)</th>
+          <th class="num"><span data-lang="en">Price</span><span data-lang="id" hidden>Harga</span></th>
+          <th class="num"><span data-lang="en">Mkt cap (Rp T)</span><span data-lang="id" hidden>Kap. pasar (Rp T)</span></th>
           <th class="num">P/E</th>
           <th class="num">ROE</th>
           <th class="num">P/BV</th>
           <th class="num">D/E</th>
-          <th class="num">Growth</th>
-          <th class="num">Yield</th>
-          <th>Sector</th>
-          <th class="num">Score</th>
+          <th class="num"><span data-lang="en">Growth</span><span data-lang="id" hidden>Pertumbuhan</span></th>
+          <th class="num"><span data-lang="en">Yield</span><span data-lang="id" hidden>Imbal hasil</span></th>
+          <th><span data-lang="en">Sector</span><span data-lang="id" hidden>Sektor</span></th>
+          <th class="num"><span data-lang="en">Score</span><span data-lang="id" hidden>Skor</span></th>
         </tr>
       </thead>
       <tbody id="mc-rows"></tbody>
     </table>
   </div>
-  <p class="calc-note">The score combines profitability (ROE, 20%), growth (15%), dividend yield (15%), valuation (P/BV, 20%), leverage (D/E, 15%) and size (15%). A <span class="score-pill score-mid">score</span> is a relative ranking, not a recommendation — read the guide below for what each metric means and its limits.</p>
+  <p class="calc-note"><span data-lang="en">The score combines profitability (ROE, 20%), growth (15%), dividend yield (15%), valuation (P/BV, 20%), leverage (D/E, 15%) and size (15%). A <span class="score-pill score-mid">score</span> is a relative ranking, not a recommendation — read the guide below for what each metric means and its limits.</span><span data-lang="id" hidden>Skor menggabungkan profitabilitas (ROE, 20%), pertumbuhan (15%), imbal hasil dividen (15%), valuasi (P/BV, 20%), leverage (D/E, 15%), dan ukuran (15%). <span class="score-pill score-mid">Skor</span> adalah peringkat relatif, bukan rekomendasi — baca panduan di bawah untuk arti setiap metrik dan keterbatasannya.</span></p>
 </section>
 <div class="share-bar"><span class="share-label">Share this tool:</span><a class="calc-btn calc-btn-small" rel="noopener" target="_blank" href="https://wa.me/?text=IDX%20Stock%20Screener%3A%20How%20to%20Screen%20Indonesian%20Stocks%20by%20the%20Numbers%20-%20a%20free%20tool%20from%20Money%20Clarity%20https%3A%2F%2Fmoneyclarity.blog%2Fcalculators%2Fidx-stock-screener.html">WhatsApp</a><button type="button" class="calc-btn calc-btn-small share-copy" data-url="https://moneyclarity.blog/calculators/idx-stock-screener.html">Copy link</button></div><script>(function(){var b=document.querySelector(".share-copy");if(b){b.addEventListener("click",function(){var u=b.getAttribute("data-url");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);});}else{var t=document.createElement("textarea");t.value=u;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);b.textContent="Copied!";setTimeout(function(){b.textContent="Copy link";},2000);}});}})();</script>
-<p class="byline">By the Money Clarity Editorial Team &middot; Updated August 14, 2026</p><h1>IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers</h1>
+<p class="byline">By the Money Clarity Editorial Team &middot; Updated August 14, 2026</p><p class="lang-switch">Versi Bahasa Indonesia: <a href="/id/screener-saham-idx.html">Baca artikel ini dalam Bahasa Indonesia</a></p><h1>IDX Stock Screener: How to Screen Indonesian Stocks by the Numbers</h1>
 <p>The screener above scans the Indonesian market (IDX) and ranks roughly 55 liquid large- and mid-cap stocks on the fundamentals that matter most to long-term investors: profitability, valuation, growth, leverage and dividends. It turns annual-report numbers and the latest market close into one comparable list, so you spend your time reading annual reports instead of building spreadsheets.</p>
 <p>This guide explains what each metric means, how the score is built, and — just as important — what the screener cannot tell you.</p>
 <h2>What the screener measures</h2>

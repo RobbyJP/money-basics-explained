@@ -318,14 +318,16 @@ def build():
                 )
             if id_slug:
                 if is_id:
+                    en_href = link_map.get(en_slug + ".html", "../articles/" + en_slug + ".html")
                     lang_box = (
                         f'<p class="lang-switch">English version: '
-                        f'<a href="../articles/{en_slug}.html">This article in English</a></p>'
+                        f'<a href="{en_href}">This article in English</a></p>'
                     )
                 else:
+                    id_href = link_map.get(os.path.basename(id_slug) + ".html", "../" + id_slug + ".html")
                     lang_box = (
                         f'<p class="lang-switch">Versi Bahasa Indonesia: '
-                        f'<a href="../{id_slug}.html">Baca artikel ini dalam Bahasa Indonesia</a></p>'
+                        f'<a href="{id_href}">Baca artikel ini dalam Bahasa Indonesia</a></p>'
                     )
                 html_body = lang_box + html_body
             html_body = byline + html_body + author_box
@@ -334,8 +336,12 @@ def build():
             calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
         hreflang_links = ""
         if id_slug:
-            en_url = site_url(en_slug)
-            id_url = site_url(f"id/{id_slug}")
+            if is_id:
+                en_url = link_map.get(en_slug + ".html", site_url(en_slug))
+                id_url = site_url(p)
+            else:
+                en_url = site_url(p)
+                id_url = link_map.get(os.path.basename(id_slug) + ".html", site_url(id_slug))
             hreflang_links = (
                 f'<link rel="alternate" hreflang="en" href="{en_url}">'
                 f'<link rel="alternate" hreflang="id" href="{id_url}">'
@@ -383,7 +389,10 @@ def build():
         key=lambda a: a.get("date", ""),
         reverse=True,
     )
-    calcs = sorted(calculators, key=lambda a: a.get("title", ""))
+    calcs = sorted(
+        [c for c in calculators if c.get("lang") != "id"],
+        key=lambda a: a.get("title", ""),
+    )
 
     hero = (
         '<section class="hero">'
@@ -462,15 +471,20 @@ def build():
         key=lambda a: a.get("date", ""),
         reverse=True,
     )
-    if id_guides:
+    id_calcs = sorted(
+        [c for c in calculators if c.get("lang") == "id"],
+        key=lambda c: c.get("title", ""),
+    )
+    if id_guides or id_calcs:
         id_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in id_guides]
         id_hub = render_page(
             "<h1>Money Clarity — Bahasa Indonesia</h1>"
             "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
+            + (link_block("Alat Bahasa Indonesia", id_calcs, kind="Calculator") if id_calcs else "")
             + link_block("Panduan Bahasa Indonesia", id_items, kind="Guide")
             + '<p><a href="../index.html">English version &rarr;</a></p>',
             page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
-            meta_description="Panduan keuangan pribadi dalam Bahasa Indonesia: THR, slip gaji, PPh 21, dan KPR dijelaskan dengan bahasa yang sederhana.",
+            meta_description="Panduan keuangan pribadi dalam Bahasa Indonesia: THR, slip gaji, PPh 21, KPR, dan screener saham IDX, dijelaskan dengan bahasa yang sederhana.",
             prefix="../",
             css_version=css_version,
             json_ld=json_ld_article(
@@ -493,7 +507,7 @@ def build():
         id_dir.mkdir(parents=True, exist_ok=True)
         (id_dir / "index.html").write_text(id_hub, encoding="utf-8")
         add_sitemap("id/index", today)
-        print(f"[site_builder] built id hub with {len(id_guides)} guides")
+        print(f"[site_builder] built id hub with {len(id_guides)} guides, {len(id_calcs)} calculators")
 
     sitemap_xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
