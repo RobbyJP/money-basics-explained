@@ -477,10 +477,11 @@ def build():
     )
     if id_guides or id_calcs:
         id_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in id_guides]
+        id_calc_items = [dict(c, filename=c["filename"].split("/")[-1]) for c in id_calcs]
         id_hub = render_page(
             "<h1>Money Clarity — Bahasa Indonesia</h1>"
             "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
-            + (link_block("Alat Riset", id_calcs, kind="Calculator") if id_calcs else "")
+            + (link_block("Alat Riset", id_calc_items, kind="Calculator") if id_calc_items else "")
             + link_block("Panduan Bahasa Indonesia", id_items, kind="Guide")
             + '<p><a href="../index.html">English version &rarr;</a></p>',
             page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
