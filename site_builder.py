@@ -480,7 +480,7 @@ def build():
         id_hub = render_page(
             "<h1>Money Clarity — Bahasa Indonesia</h1>"
             "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
-            + (link_block("Alat Bahasa Indonesia", id_calcs, kind="Calculator") if id_calcs else "")
+            + (link_block("Alat Riset", id_calcs, kind="Calculator") if id_calcs else "")
             + link_block("Panduan Bahasa Indonesia", id_items, kind="Guide")
             + '<p><a href="../index.html">English version &rarr;</a></p>',
             page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
