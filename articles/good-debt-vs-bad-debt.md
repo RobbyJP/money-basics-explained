@@ -42,7 +42,7 @@ Not all debt fits neatly into one category. Context, terms, and individual circu
 
 For example, a car loan can be a grey area. If a reliable commuter car costing $15,000 is necessary to get to a job that pays $60,000 a year, the loan is a functional necessity that supports income. However, borrowing $50,000 for a luxury vehicle when a cheaper option would suffice turns the purchase into a financial drag.
 
-Similarly, student loans can become bad debt if a student borrows heavilyâ€â€—such as $120,000â€â€—for a degree in a field with low average entry-level wages. In this scenario, the cost of servicing the debt may outweigh the salary boost provided by the degree.
+Similarly, student loans can become bad debt if a student borrows heavily—such as $120,000—for a degree in a field with low average entry-level wages. In this scenario, the cost of servicing the debt may outweigh the salary boost provided by the degree.
 
 ---
 

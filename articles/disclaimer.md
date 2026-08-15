@@ -1,5 +1,5 @@
 ---
-title: "Disclaimer â€â€— Money Clarity"
+title: "Disclaimer — Money Clarity"
 description: "Legal and editorial disclaimers for Money Clarity, including the educational-only and non-advisory notice."
 slug: "disclaimer"
 keyword: "disclaimer"
@@ -10,7 +10,7 @@ date: "2026-08-11"
 
 ## Educational purposes only
 
-The content on Money Clarity â€â€— including all guides, articles, and calculator outputs â€â€— is provided **for general educational purposes only**. It is not personalized financial advice, investment advice, tax advice, or legal advice.
+The content on Money Clarity — including all guides, articles, and calculator outputs — is provided **for general educational purposes only**. It is not personalized financial advice, investment advice, tax advice, or legal advice.
 
 We do not know your income, your debts, your goals, or your risk tolerance. A calculator result is a mathematical projection under stated assumptions, not a recommendation to buy, sell, or hold anything.
 
@@ -18,11 +18,11 @@ We do not know your income, your debts, your goals, or your risk tolerance. A ca
 
 ## No professional relationship
 
-Using this site does not create an advisorâ€â€œclient relationship of any kind between you and the site's author. We are not a registered financial adviser, and nothing on this site constitutes an offer of financial services.
+Using this site does not create an advisor–client relationship of any kind between you and the site's author. We are not a registered financial adviser, and nothing on this site constitutes an offer of financial services.
 
 ## Accuracy of information
 
-While we aim for accuracy, financial rules, rates, and products change. Information on this site may be outdated by the time you read it â€â€— check the "Last updated" date on each page, and verify current details with official sources (for example, a bank's own terms or a regulator's publication) before acting on anything.
+While we aim for accuracy, financial rules, rates, and products change. Information on this site may be outdated by the time you read it — check the "Last updated" date on each page, and verify current details with official sources (for example, a bank's own terms or a regulator's publication) before acting on anything.
 
 ## Calculators and projections
 

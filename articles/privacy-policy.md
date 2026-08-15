@@ -44,7 +44,7 @@ If you are located in the European Economic Area (EEA), the United Kingdom, or C
 
 ## 5. Financial disclaimer
 
-All content published on Money Clarity â€â€— including articles, guides, and calculator results â€â€— is provided solely for educational and informational purposes. It does not constitute professional financial, tax, investment, or legal advice. See the [disclaimer](disclaimer.html) for details.
+All content published on Money Clarity — including articles, guides, and calculator results — is provided solely for educational and informational purposes. It does not constitute professional financial, tax, investment, or legal advice. See the [disclaimer](disclaimer.html) for details.
 
 ## 6. Changes to this policy
 
