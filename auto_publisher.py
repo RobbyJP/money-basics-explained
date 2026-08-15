@@ -1,17 +1,19 @@
 """
 Dynamic Weekly AI Content Publisher for Money Clarity.
 
-1. Discovers fresh search queries / trending personal finance topics for EN and ID.
-2. Checks candidate topics against all existing articles using Gemini semantic deduplication.
-3. Automatically writes a high-quality educational article in Markdown with frontmatter,
-   worked mathematical examples, tables, and compliance disclaimers.
-4. Invokes site_builder to compile the live static site and updates sitemaps.
+Robustness & Error-Handling Features:
+1. Multi-tiered Topic Discovery (Google Suggest + Gemini Niche Fallback).
+2. Semantic AI Deduplication (Strict overlap checks against existing articles).
+3. API Quota & Rate-Limit Shield (Exponential backoff & graceful degradation).
+4. Content Quality Validation (Word count, structural headers, frontmatter sanity).
+5. Safe Site Rebuild & Sitemap Updates.
 """
 import argparse
 import datetime
 import json
 import os
 import re
+import time
 import urllib.parse
 from pathlib import Path
 
@@ -19,6 +21,7 @@ import requests
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from google.genai.errors import APIError
 
 import site_builder
 
@@ -39,7 +42,6 @@ DISCLAIMER_ID = (
     "untuk berkonsultasi dengan penasihat keuangan berlisensi untuk situasi spesifik Anda.*\n"
 )
 
-# Seed query concepts for discovery
 SEED_EN_TOPICS = [
     "personal finance basics",
     "emergency fund high yield savings",
@@ -67,6 +69,29 @@ SEED_ID_TOPICS = [
     "pajak penghasilan atas dividen dan saham bei",
     "keuntungan dan risiko deposito bank digital",
 ]
+
+
+def call_gemini_with_retry(client: genai.Client, model: str, prompt: str, config: types.GenerateContentConfig, max_retries: int = 3):
+    """Execute Gemini API calls with exponential backoff for rate limits."""
+    for attempt in range(1, max_retries + 1):
+        try:
+            return client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=config,
+            )
+        except Exception as e:
+            err_msg = str(e).lower()
+            is_rate_limit = "429" in err_msg or "quota" in err_msg or "resource_exhausted" in err_msg
+            if is_rate_limit and attempt < max_retries:
+                wait_time = attempt * 8
+                print(f"[auto_publisher] Rate limit encountered. Retrying in {wait_time}s (Attempt {attempt}/{max_retries})...")
+                time.sleep(wait_time)
+            else:
+                print(f"[auto_publisher] API call failed on attempt {attempt}: {e}")
+                if attempt == max_retries:
+                    raise e
+    return None
 
 
 def fetch_google_suggestions(query: str, lang: str = "en") -> list[str]:
@@ -125,20 +150,73 @@ Respond with ONLY valid JSON with this exact schema:
 }}"""
 
     try:
-        response = client.models.generate_content(
+        response = call_gemini_with_retry(
+            client=client,
             model=model,
-            contents=prompt,
+            prompt=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
                 temperature=0.2,
             ),
         )
+        if not response or not response.text:
+            return False, {}
         data = json.loads(response.text.strip())
         is_dup = bool(data.get("is_duplicate", False))
         return not is_dup, data
     except Exception as e:
         print(f"[auto_publisher] Semantic dedup evaluation error: {e}")
         return False, {}
+
+
+def generate_niche_fallback_topics(client: genai.Client, model: str, lang: str, existing: list[dict]) -> list[str]:
+    """Fallback generator when search suggestions are exhausted or all duplicates."""
+    existing_titles = [f"- {item['title']}" for item in existing if item.get("lang") == lang]
+    titles_block = "\n".join(existing_titles)
+
+    prompt = f"""Here are our existing articles in {lang.upper()}:
+{titles_block}
+
+Propose 5 FRESH, specific, and unaddressed personal finance questions or niche educational topics that are NOT already covered above.
+Target demographic: {'Indonesian personal finance, tax, or property' if lang == 'id' else 'Global / US personal finance, investing, or budgeting'}.
+Return ONLY a JSON array of 5 strings (e.g. ["topic 1", "topic 2", ...])."""
+
+    try:
+        response = call_gemini_with_retry(
+            client=client,
+            model=model,
+            prompt=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.7,
+            ),
+        )
+        if response and response.text:
+            return json.loads(response.text.strip())
+    except Exception as e:
+        print(f"[auto_publisher] Niche fallback generation error: {e}")
+    return []
+
+
+def validate_article_quality(markdown_text: str) -> tuple[bool, str]:
+    """Validate that the generated article meets length, formatting, and structural standards."""
+    if not markdown_text or len(markdown_text.strip()) < 800:
+        return False, "Content too short (under 800 characters)."
+    
+    words = len(markdown_text.split())
+    if words < 500:
+        return False, f"Word count too low ({words} words; minimum required: 500)."
+    
+    # Must have at least 2 H2 sections
+    h2_count = len(re.findall(r"^##\s+", markdown_text, flags=re.MULTILINE))
+    if h2_count < 2:
+        return False, f"Missing structured subheadings (found {h2_count} '##' sections)."
+    
+    # Must have frontmatter
+    if not (markdown_text.startswith("---") and "\n---\n" in markdown_text):
+        return False, "Missing frontmatter delimiters."
+    
+    return True, "Quality checks passed."
 
 
 def generate_article_content(client: genai.Client, model: str, topic_info: dict, lang: str) -> str:
@@ -192,17 +270,21 @@ The guide must include:
 
 Length: 800-1200 words in clear, engaging English. Do not include a closing disclaimer (it is appended automatically)."""
 
-    response = client.models.generate_content(
+    response = call_gemini_with_retry(
+        client=client,
         model=model,
-        contents=user_prompt,
+        prompt=user_prompt,
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
             temperature=0.4,
         ),
     )
 
+    if not response or not response.text:
+        raise ValueError("Empty response received from Gemini API.")
+
     body = response.text.strip()
-    # Strip any duplicated frontmatter or leading H1 if already provided in body
+    # Strip any duplicated frontmatter
     body = re.sub(r"^---.*?---\n+", "", body, flags=re.DOTALL).strip()
     
     frontmatter = (
@@ -217,13 +299,19 @@ Length: 800-1200 words in clear, engaging English. Do not include a closing disc
     )
 
     disclaimer = DISCLAIMER_ID if lang == "id" else DISCLAIMER
-    return frontmatter + body + disclaimer
+    full_text = frontmatter + body + disclaimer
+
+    is_valid, reason = validate_article_quality(full_text)
+    if not is_valid:
+        raise ValueError(f"Generated article failed quality gate: {reason}")
+
+    return full_text
 
 
 def run_pipeline(dry_run: bool = False, force_lang: str = None) -> bool:
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        print("[auto_publisher] ERROR: GEMINI_API_KEY environment variable is not set.")
+        print("[auto_publisher] Notice: GEMINI_API_KEY environment variable is not set. Skipping.")
         return False
 
     model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
@@ -232,8 +320,7 @@ def run_pipeline(dry_run: bool = False, force_lang: str = None) -> bool:
     existing = get_existing_articles_summary()
     print(f"[auto_publisher] Found {len(existing)} existing articles in catalog.")
 
-    # Alternate or choose language
-    # Count existing ID vs EN articles to balance coverage
+    # Catalog balance
     id_count = sum(1 for item in existing if item.get("lang") == "id")
     en_count = sum(1 for item in existing if item.get("lang") != "id")
     print(f"[auto_publisher] Catalog balance: {en_count} English vs {id_count} Indonesian.")
@@ -243,44 +330,65 @@ def run_pipeline(dry_run: bool = False, force_lang: str = None) -> bool:
 
     seed_list = SEED_ID_TOPICS if target_lang == "id" else SEED_EN_TOPICS
 
-    # 1. Topic discovery via search suggestions
+    # 1. Harvest candidates
     candidates = []
     for seed in seed_list:
         suggestions = fetch_google_suggestions(seed, lang=target_lang)
         candidates.extend(suggestions)
     
-    # Add raw seeds as fallbacks
     candidates.extend(seed_list)
-    # Deduplicate candidate strings
     candidates = list(dict.fromkeys(candidates))
     print(f"[auto_publisher] Harvested {len(candidates)} candidate search queries.")
 
-    # 2. Evaluate candidates against existing catalog
+    # 2. Evaluate candidates against catalog
     approved_topic = None
-    for candidate in candidates:
-        is_approved, info = semantic_dedup_check(client, model_name, candidate, target_lang, existing)
-        if is_approved and info.get("suggested_title") and info.get("suggested_slug"):
-            slug = info["suggested_slug"]
-            target_file = ARTICLES_DIR / f"{slug}.md" if target_lang == "en" else ARTICLES_DIR / f"id-{slug}.md"
-            if not target_file.exists():
-                approved_topic = info
-                print(f"[auto_publisher] Approved Unique Topic: '{info['suggested_title']}' (Slug: {slug})")
-                print(f"  Reason: {info.get('reason', '')}")
-                break
-        else:
-            print(f"[auto_publisher] Skipped duplicate/overlapping topic: '{candidate}' -> {info.get('reason', 'Overlap')}")
+    try:
+        for candidate in candidates:
+            is_approved, info = semantic_dedup_check(client, model_name, candidate, target_lang, existing)
+            if is_approved and info.get("suggested_title") and info.get("suggested_slug"):
+                slug = info["suggested_slug"]
+                target_file = ARTICLES_DIR / f"{slug}.md" if target_lang == "en" else ARTICLES_DIR / f"id-{slug}.md"
+                if not target_file.exists():
+                    approved_topic = info
+                    print(f"[auto_publisher] Approved Unique Topic: '{info['suggested_title']}' (Slug: {slug})")
+                    print(f"  Reason: {info.get('reason', '')}")
+                    break
+            else:
+                print(f"[auto_publisher] Skipped duplicate/overlapping topic: '{candidate}' -> {info.get('reason', 'Overlap')}")
+
+        # If all search suggestions are duplicates, trigger niche brainstorming fallback
+        if not approved_topic:
+            print("[auto_publisher] All standard suggestions overlapped. Triggering niche brainstorming fallback...")
+            fallback_candidates = generate_niche_fallback_topics(client, model_name, target_lang, existing)
+            for candidate in fallback_candidates:
+                is_approved, info = semantic_dedup_check(client, model_name, candidate, target_lang, existing)
+                if is_approved and info.get("suggested_title") and info.get("suggested_slug"):
+                    slug = info["suggested_slug"]
+                    target_file = ARTICLES_DIR / f"{slug}.md" if target_lang == "en" else ARTICLES_DIR / f"id-{slug}.md"
+                    if not target_file.exists():
+                        approved_topic = info
+                        print(f"[auto_publisher] Approved Unique Fallback Topic: '{info['suggested_title']}' (Slug: {slug})")
+                        break
+    except Exception as e:
+        print(f"[auto_publisher] Quota limit or connection error during topic evaluation: {e}")
+        print("[auto_publisher] Gracefully exiting without modifying repository.")
+        return False
 
     if not approved_topic:
-        print("[auto_publisher] No new unique topic found this round. Catalog is comprehensive!")
+        print("[auto_publisher] Catalog is fully comprehensive! No new unique topics found. Exiting cleanly.")
         return False
 
     if dry_run:
         print(f"[auto_publisher] [DRY RUN] Would generate article: {approved_topic}")
         return True
 
-    # 3. Generate article
-    print(f"[auto_publisher] Generating full guide with {model_name}...")
-    full_markdown = generate_article_content(client, model_name, approved_topic, target_lang)
+    # 3. Generate article with quality validation
+    try:
+        print(f"[auto_publisher] Generating full guide with {model_name}...")
+        full_markdown = generate_article_content(client, model_name, approved_topic, target_lang)
+    except Exception as e:
+        print(f"[auto_publisher] Generation aborted due to quality or API error: {e}")
+        return False
 
     slug = approved_topic["suggested_slug"]
     filename = f"{slug}.md" if target_lang == "en" else f"id-{slug}.md"
