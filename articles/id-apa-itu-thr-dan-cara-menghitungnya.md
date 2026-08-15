@@ -17,11 +17,11 @@ path: "id/apa-itu-thr-dan-cara-menghitungnya"
 
 THR dirancang untuk membantu karyawan menutupi kenaikan pengeluaran saat merayakan hari raya keagamaan. Berbeda dengan bonus kinerja yang sifatnya kebijakan perusahaan, THR adalah **hak hukum** pekerja.
 
-Umumnya THR dibayarkan sekali setahun, disesuaikan dengan hari raya utama karyawan: Idul Fitri untuk karyawan Muslim, Natal untuk karyawan Kristen, Nyepi untuk karyawan Hindu, Waisak untuk karyawan Buddha, atau Tahun Baru Imlek untuk karyawan yang merayakannya. Namun banyak perusahaan menetapkan kebijakan membayarkan THR kepada seluruh karyawan di waktu yang sama — biasanya menjelang Idul Fitri — demi kemudahan administrasi penggajian.
+Umumnya THR dibayarkan sekali setahun, disesuaikan dengan hari raya utama karyawan: Idul Fitri untuk karyawan Muslim, Natal untuk karyawan Kristen, Nyepi untuk karyawan Hindu, Waisak untuk karyawan Buddha, atau Tahun Baru Imlek untuk karyawan yang merayakannya. Namun banyak perusahaan menetapkan kebijakan membayarkan THR kepada seluruh karyawan di waktu yang sama â€â€— biasanya menjelang Idul Fitri â€â€— demi kemudahan administrasi penggajian.
 
 ## Siapa yang Berhak Menerima THR?
 
-Berdasarkan peraturan pemerintah, cakupan penerima THR sangat luas — tidak hanya untuk karyawan tetap atau level manajemen:
+Berdasarkan peraturan pemerintah, cakupan penerima THR sangat luas â€â€— tidak hanya untuk karyawan tetap atau level manajemen:
 
 - **Karyawan tetap (PKWTT):** pekerja dengan perjanjian kerja waktu tidak tertentu berhak menerima THR.
 - **Karyawan kontrak (PKWT):** pekerja dengan perjanjian kerja waktu tertentu juga berhak.
@@ -36,7 +36,7 @@ Besaran THR bergantung pada lamanya masa kerja dan komponen gaji yang diterima. 
 Karyawan yang bekerja terus-menerus selama 12 bulan atau lebih menerima THR **satu kali upah sebulan penuh**, yang terdiri dari:
 
 - Gaji pokok.
-- Tunjangan tetap — tunjangan bulanan yang besarnya tidak berubah berdasarkan kehadiran, misalnya tunjangan perumahan atau transportasi yang dibayar tetap.
+- Tunjangan tetap â€â€— tunjangan bulanan yang besarnya tidak berubah berdasarkan kehadiran, misalnya tunjangan perumahan atau transportasi yang dibayar tetap.
 
 Tunjangan tidak tetap (seperti uang makan harian atau uang transport yang dihitung berdasarkan kehadiran) **tidak dimasukkan** ke dalam perhitungan.
 
@@ -44,7 +44,7 @@ Tunjangan tidak tetap (seperti uang makan harian atau uang transport yang dihitu
 
 Karyawan yang bekerja minimal satu bulan tetapi kurang dari setahun menerima THR secara proporsional:
 
-**THR = (Masa Kerja ÷ 12) × Upah Satu Bulan**
+**THR = (Masa Kerja Ã· 12) Ãâ€â€— Upah Satu Bulan**
 
 ## Contoh Perhitungan THR
 
@@ -64,8 +64,8 @@ Karena masa kerja Budi lebih dari 12 bulan, perhitungannya hanya memasukkan gaji
 
 Karyawan bernama Siti telah bekerja selama tujuh bulan di perusahaan yang sama, dengan komponen gaji yang sama (tanpa tunjangan tidak tetap):
 
-**THR = (7 bulan ÷ 12) × Rp 10.000.000**
-**THR = 0,5833 × Rp 10.000.000 = Rp 5.833.333**
+**THR = (7 bulan Ã· 12) Ãâ€â€— Rp 10.000.000**
+**THR = 0,5833 Ãâ€â€— Rp 10.000.000 = Rp 5.833.333**
 
 - **THR Siti:** Rp 5.833.333
 

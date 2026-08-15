@@ -10,7 +10,7 @@ date: "2026-08-12"
 
 # Compound Interest vs Simple Interest: The Difference, with Real Numbers
 
-The difference between simple and compound interest is the difference between saving and growing. Simple interest pays you the same amount every year on your original money. Compound interest pays you on your original money **plus everything the interest has already earned** — and that is where the real growth comes from.
+The difference between simple and compound interest is the difference between saving and growing. Simple interest pays you the same amount every year on your original money. Compound interest pays you on your original money **plus everything the interest has already earned** â€â€— and that is where the real growth comes from.
 
 ## The core difference
 
@@ -36,11 +36,11 @@ Compounding more than **doubled** the interest earned. And the gap only widens w
 
 - **Simple interest** appears in some short-term loans, fixed notes, and products that pay out interest rather than reinvesting it.
 - **Compound interest** is how savings accounts, index funds, and most long-term investments grow. Retirement accounts and dividend reinvestment also compound.
-- **Debt compounds too.** Credit card balances accrue interest on unpaid interest. Compound interest is the same mathematics on either side of the ledger — it amplifies what you owe as well as what you own.
+- **Debt compounds too.** Credit card balances accrue interest on unpaid interest. Compound interest is the same mathematics on either side of the ledger â€â€— it amplifies what you owe as well as what you own.
 
 ## Why time matters more than the rate
 
-At 7%, money doubles roughly every 10 years (Rule of 72). The first 10 years grow $10,000 to $20,000; the second 10 years grow it to $40,000; the third, to $80,000. Each decade adds more than the entire decade before it. That is why starting early beats starting bigger later — every year you delay, you give up a doubling cycle.
+At 7%, money doubles roughly every 10 years (Rule of 72). The first 10 years grow $10,000 to $20,000; the second 10 years grow it to $40,000; the third, to $80,000. Each decade adds more than the entire decade before it. That is why starting early beats starting bigger later â€â€— every year you delay, you give up a doubling cycle.
 
 ## See it with your own numbers
 
@@ -48,16 +48,16 @@ Use the [compound interest calculator](calculators/compound-interest.html) above
 
 ## Limitations to keep in mind
 
-- Returns are never guaranteed or constant — markets fluctuate, and past performance does not predict future results.
+- Returns are never guaranteed or constant â€â€— markets fluctuate, and past performance does not predict future results.
 - Interest and gains are taxed in most countries; the figures above are before tax, fees, and inflation.
 - Many real products mix both: loans may compound interest but charge simple interest on arrears, and some accounts compound daily while advertising a nominal rate. Check the terms.
 
 ## Related reading
 
-- [Compound interest calculator](calculators/compound-interest.html) — try your own numbers
-- [DCA calculator](../calculators/dollar-cost-averaging.html) — how monthly contributions interact with compounding
-- [Expense ratio calculator](../calculators/expense-ratio.html) — the fee that quietly reduces what compounding keeps
-- [Index funds vs mutual funds](index-funds-vs-mutual-funds.html) — where most people put money they plan to compound
+- [Compound interest calculator](calculators/compound-interest.html) â€â€— try your own numbers
+- [DCA calculator](../calculators/dollar-cost-averaging.html) â€â€— how monthly contributions interact with compounding
+- [Expense ratio calculator](../calculators/expense-ratio.html) â€â€— the fee that quietly reduces what compounding keeps
+- [Index funds vs mutual funds](index-funds-vs-mutual-funds.html) â€â€— where most people put money they plan to compound
 
 ---
 

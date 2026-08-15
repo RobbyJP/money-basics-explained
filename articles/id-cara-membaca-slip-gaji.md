@@ -19,7 +19,7 @@ Memahami cara membaca slip gaji membantu memastikan pembayaran benar, potongan p
 
 ## Mengapa Memahami Slip Gaji Itu Penting
 
-Slip gaji lebih dari sekadar bukti pembayaran — ia adalah catatan hukum penghasilan, pajak, dan iuran. Memeriksanya secara rutin membantu pekerja:
+Slip gaji lebih dari sekadar bukti pembayaran â€â€— ia adalah catatan hukum penghasilan, pajak, dan iuran. Memeriksanya secara rutin membantu pekerja:
 
 - **Memastikan akurasi:** pembayaran sesuai jumlah hari kerja, termasuk lembur.
 - **Memantau potongan pajak:** menghindari kejutan di kemudian hari dengan memastikan PPh 21 dipotong dengan benar.
@@ -56,10 +56,10 @@ Bagian ini biasanya berada di paling atas slip. Berisi detail identitas seperti:
 
 Penghasilan kotor adalah total uang yang diperoleh sebelum pajak, iuran, dan potongan lain diambil. Komponennya biasanya:
 
-- **Gaji pokok** — komponen tetap utama.
-- **Tunjangan tetap** — tunjangan yang dibayar terlepas dari kehadiran (misal tunjangan jabatan, transportasi tetap).
-- **Tunjangan tidak tetap** — tunjangan berdasarkan kehadiran (misal uang makan harian, uang transport harian).
-- **Lembur dan bonus** — penghasilan tambahan yang tercatat terpisah.
+- **Gaji pokok** â€â€— komponen tetap utama.
+- **Tunjangan tetap** â€â€— tunjangan yang dibayar terlepas dari kehadiran (misal tunjangan jabatan, transportasi tetap).
+- **Tunjangan tidak tetap** â€â€— tunjangan berdasarkan kehadiran (misal uang makan harian, uang transport harian).
+- **Lembur dan bonus** â€â€— penghasilan tambahan yang tercatat terpisah.
 
 **Contoh:** gaji pokok Rp 6.000.000 + tunjangan tetap Rp 1.000.000 + lembur Rp 500.000 = penghasilan kotor **Rp 7.500.000**.
 
@@ -68,8 +68,8 @@ Penghasilan kotor adalah total uang yang diperoleh sebelum pajak, iuran, dan pot
 #### Potongan Wajib
 
 - **PPh 21:** pajak penghasilan karyawan yang dipotong oleh perusahaan. Besarnya tergantung penghasilan dan status PTKP (lihat panduan PPh 21 kami).
-- **BPJS Ketenagakerjaan — JHT (Jaminan Hari Tua):** iuran pensiun; untuk JHT karyawan umumnya menanggung 2% dari upah (dengan batas upah tertentu), sisanya dibayar perusahaan.
-- **BPJS Ketenagakerjaan — JKK/JKM/Jaminan Pensiun:** bagian karyawan umumnya kecil atau ditanggung penuh perusahaan untuk JKK dan JKM.
+- **BPJS Ketenagakerjaan â€â€— JHT (Jaminan Hari Tua):** iuran pensiun; untuk JHT karyawan umumnya menanggung 2% dari upah (dengan batas upah tertentu), sisanya dibayar perusahaan.
+- **BPJS Ketenagakerjaan â€â€— JKK/JKM/Jaminan Pensiun:** bagian karyawan umumnya kecil atau ditanggung penuh perusahaan untuk JKK dan JKM.
 - **BPJS Kesehatan:** umumnya 1% dari upah bulanan ditanggung karyawan, sisanya oleh perusahaan.
 
 #### Potongan Sukarela
@@ -82,7 +82,7 @@ Penghasilan kotor adalah total uang yang diperoleh sebelum pajak, iuran, dan pot
 
 Gaji bersih adalah jumlah yang benar-benar masuk ke rekening: **penghasilan kotor dikurangi seluruh potongan**.
 
-**Contoh:** penghasilan kotor Rp 7.500.000 − potongan PPh 21 Rp 150.000 − BPJS Kesehatan Rp 75.000 − JHT Rp 100.000 = gaji bersih **Rp 7.175.000**.
+**Contoh:** penghasilan kotor Rp 7.500.000 âˆâ€™ potongan PPh 21 Rp 150.000 âˆâ€™ BPJS Kesehatan Rp 75.000 âˆâ€™ JHT Rp 100.000 = gaji bersih **Rp 7.175.000**.
 
 ---
 
@@ -106,10 +106,10 @@ Kesalahan penggajian memang kadang terjadi. Memeriksa slip gaji secara rutin mem
 
 - **Periksa jumlah hari/kehadiran:** bandingkan jumlah hari kerja di slip dengan catatan kehadiran pribadi Anda.
 - **Periksa komponen tunjangan:** pastikan tunjangan tetap dan tidak tetap sesuai dengan kesepakatan kontrak.
-- **Periksa perubahan potongan:** jika status pernikahan, jumlah tanggungan (PTKP), atau jabatan berubah, potongan PPh 21 seharusnya ikut berubah — cari tahu alasannya jika tidak.
+- **Periksa perubahan potongan:** jika status pernikahan, jumlah tanggungan (PTKP), atau jabatan berubah, potongan PPh 21 seharusnya ikut berubah â€â€— cari tahu alasannya jika tidak.
 - **Periksa saldo iuran:** pastikan akumulasi iuran BPJS dari bulan ke bulan meningkat sesuai iuran yang dipotong.
 
-Jika ditemukan selisih, hubungi bagian HR atau penggajian perusahaan dengan membawa slip gaji Anda — ini biasanya cara tercepat untuk menyelesaikan masalah.
+Jika ditemukan selisih, hubungi bagian HR atau penggajian perusahaan dengan membawa slip gaji Anda â€â€— ini biasanya cara tercepat untuk menyelesaikan masalah.
 
 ---
 

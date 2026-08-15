@@ -1,5 +1,5 @@
 ---
-title: "Contact — Money Clarity"
+title: "Contact â€â€— Money Clarity"
 description: "How to get in touch with Money Clarity: corrections, feedback, and questions about the site."
 slug: "contact"
 keyword: "contact"
@@ -35,15 +35,15 @@ Prefer email? Write to **contact@moneyclarity.blog**.
     </div>
     <button type="submit" class="calc-btn">Send message</button>
   </form>
-  <p class="calc-note">The form is free and only sends an email to us — nothing is stored on this site. We cannot respond to every message and cannot provide personalized financial advice by email.</p>
+  <p class="calc-note">The form is free and only sends an email to us â€â€— nothing is stored on this site. We cannot respond to every message and cannot provide personalized financial advice by email.</p>
 </section>
 
 Please include the page you're writing about, if your message relates to one.
 
 ## What we can't help with
 
-- Personalized financial decisions ("should I invest in X?") — see the [disclaimer](disclaimer.html).
-- Account or product support for banks, apps, or funds we mention in guides — contact those providers directly.
+- Personalized financial decisions ("should I invest in X?") â€â€— see the [disclaimer](disclaimer.html).
+- Account or product support for banks, apps, or funds we mention in guides â€â€— contact those providers directly.
 
 ---
 
