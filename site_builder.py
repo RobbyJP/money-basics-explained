@@ -2,20 +2,19 @@
 Build the static site: reads articles/*.md (with frontmatter), converts to
 HTML via the base template, writes to PUBLIC_DIR, plus an index page.
 
-Frontmatter extras:
-  path:        optional URL path (without .html), e.g. "calculators/compound-interest".
-               Defaults to slug or filename. Enables subdirectory pages.
-  calculator:  optional name of a calculator in calculators/<name>.html + .js.
-               The HTML is injected above the article body and the JS is copied
-               next to the built page (for real, client-side interactivity).
+Features:
+- Instant Search / Real-time Filter on Calculator and Index pages.
+- Automatic FAQPage Rich Snippet Schema (JSON-LD) extraction for articles with FAQs.
+- Social Share Bar (WhatsApp, X, Copy Link) on all articles.
+- Bilingual demographic separation (English & Indonesian hubs).
 """
+import datetime
+import json
 import os
 import re
 import shutil
-from pathlib import Path
-import datetime
 import urllib.parse
-import json
+from pathlib import Path
 
 import markdown
 from dotenv import load_dotenv
@@ -71,6 +70,21 @@ def page_url(fm: dict, stem: str) -> str:
     return site_url(page_path(fm, stem))
 
 
+def extract_faqs_from_markdown(body: str) -> list[dict]:
+    """Find H2/H3 question headers (ending with '?') and extract Q&A pairs for FAQPage schema."""
+    faqs = []
+    sections = re.split(r"\n(?=#{2,3}\s+)", body)
+    for sec in sections:
+        match = re.match(r"^#{2,3}\s+(.+?\?)\n+(.+)$", sec.strip(), re.DOTALL)
+        if match:
+            q, a = match.groups()
+            a_clean = re.sub(r"[#*`\[\]]", "", a).strip()
+            first_para = a_clean.split("\n\n")[0].strip()
+            if len(first_para) > 25 and len(q.strip()) > 8:
+                faqs.append({"question": q.strip(), "answer": first_para})
+    return faqs
+
+
 def get_nav_links(prefix: str, html_lang: str, switch_url: str) -> str:
     if html_lang == "id":
         target = switch_url or f"{prefix}index.html"
@@ -111,6 +125,153 @@ def get_footer_links(prefix: str, html_lang: str) -> str:
             f'<a href="{prefix}terms-of-service.html">Terms of Service</a>\n'
             f'<a href="{prefix}id/index.html">🇮🇩 Bahasa Indonesia</a>'
         )
+
+
+def article_social_share_bar(url: str, title: str, lang: str = "en") -> str:
+    encoded_url = urllib.parse.quote(url, safe="")
+    encoded_title = urllib.parse.quote(f"{title} - Money Clarity")
+    share_label = "Bagikan panduan ini:" if lang == "id" else "Share this guide:"
+    copy_label = "Salin Link" if lang == "id" else "Copy link"
+    copied_label = "Tersalin!" if lang == "id" else "Copied!"
+
+    return (
+        f'<div class="article-share-bar">'
+        f'<span class="article-share-title">{share_label}</span>'
+        f'<div class="article-share-buttons">'
+        f'<a class="share-btn share-btn-wa" rel="noopener" target="_blank" '
+        f'href="https://wa.me/?text={encoded_title}%20{encoded_url}">WhatsApp</a>'
+        f'<a class="share-btn share-btn-x" rel="noopener" target="_blank" '
+        f'href="https://twitter.com/intent/tweet?text={encoded_title}&url={encoded_url}">X (Twitter)</a>'
+        f'<button type="button" class="share-btn share-btn-copy article-share-copy" '
+        f'data-url="{url}">{copy_label}</button>'
+        f"</div></div>"
+        f'<script>'
+        f'(function(){{var b=document.querySelector(".article-share-copy");'
+        f"if(b){{b.addEventListener(\"click\",function(){{"
+        f"var u=b.getAttribute(\"data-url\");"
+        f"if(navigator.clipboard&&navigator.clipboard.writeText)"
+        f"{{navigator.clipboard.writeText(u).then(function(){{"
+        f"b.textContent=\"{copied_label}\";setTimeout(function(){{b.textContent=\"{copy_label}\";}},2000);}});}}"
+        f"else{{var t=document.createElement(\"textarea\");t.value=u;"
+        f"document.body.appendChild(t);t.select();document.execCommand(\"copy\");"
+        f"document.body.removeChild(t);b.textContent=\"{copied_label}\";"
+        f"setTimeout(function(){{b.textContent=\"{copy_label}\";}},2000);}}"
+        f"}});}}" + "})();" + "</script>"
+    )
+
+
+def search_filter_widget(placeholder: str = "Search calculators & guides...", no_results_text: str = "No matching tools or guides found.") -> str:
+    return (
+        f'<div class="search-box-wrap">'
+        f'<span class="search-icon">🔍</span>'
+        f'<input type="search" id="tool-search" placeholder="{placeholder}" aria-label="Search">'
+        f'</div>'
+        f'<div id="search-empty" class="search-no-results">{no_results_text}</div>'
+        f'<script>'
+        f'(function(){{'
+        f'var input = document.getElementById("tool-search");'
+        f'var empty = document.getElementById("search-empty");'
+        f'if (!input) return;'
+        f'input.addEventListener("input", function(){{'
+        f'  var q = input.value.toLowerCase().trim();'
+        f'  var cards = document.querySelectorAll(".card-list .card");'
+        f'  var sections = document.querySelectorAll(".section-title");'
+        f'  var visibleCount = 0;'
+        f'  cards.forEach(function(card){{'
+        f'    var text = card.textContent.toLowerCase();'
+        f'    if (!q || text.indexOf(q) !== -1) {{'
+        f'      card.style.display = "";'
+        f'      visibleCount++;'
+        f'    }} else {{'
+        f'      card.style.display = "none";'
+        f'    }}'
+        f'  }});'
+        f'  if (empty) {{ empty.style.display = (visibleCount === 0 && q !== "") ? "block" : "none"; }}'
+        f'}});'
+        f'}})();'
+        f'</script>'
+    )
+
+
+def json_ld_article_with_faqs(title: str, description: str, url: str, date: str, faqs: list[dict] = None) -> str:
+    article_obj = {
+        "@type": "Article",
+        "headline": title,
+        "description": description,
+        "datePublished": date,
+        "dateModified": date,
+        "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"},
+        "publisher": {"@type": "Organization", "name": SITE_NAME},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": url},
+    }
+
+    if faqs and len(faqs) >= 2:
+        faq_obj = {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": f["question"],
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": f["answer"],
+                    },
+                }
+                for f in faqs
+            ],
+        }
+        data = {
+            "@context": "https://schema.org",
+            "@graph": [article_obj, faq_obj],
+        }
+    else:
+        data = {
+            "@context": "https://schema.org",
+            **article_obj,
+        }
+    return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
+
+
+def json_ld_website() -> str:
+    data = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_NAME,
+        "url": SITE_URL,
+        "description": SITE_DESCRIPTION,
+    }
+    return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
+
+
+def load_calculator(name: str) -> tuple[str, str]:
+    if not name:
+        return "", ""
+    html_file = CALCULATORS_DIR / f"{name}.html"
+    if not html_file.exists():
+        print(f"[site_builder] WARNING: calculator '{name}' has no {html_file.name}")
+        return "", ""
+    html = html_file.read_text(encoding="utf-8")
+    scripts = f'<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>\n<script src="{name}.js" defer></script>'
+    return html, scripts
+
+
+def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "Guide") -> str:
+    if not items:
+        return ""
+    chip = kind.lower()
+    entries = "\n".join(
+        f'<li class="card">'
+        f'<a class="card-link" href="{link_base}{a["filename"]}">'
+        f'<span class="chip chip-{chip}">{kind}</span>'
+        f'<span class="card-title">{a.get("title", a["filename"])}</span>'
+        f'<span class="card-desc">{a.get("description", "")}</span>'
+        f"</a></li>"
+        for a in items
+    )
+    return (
+        f'<h2 class="section-title">{title} <span class="count">{len(items)}</span></h2>'
+        f'<ul class="card-list">{entries}</ul>'
+    )
 
 
 def render_page(
@@ -157,88 +318,6 @@ def render_page(
         .replace("{{ og_locale }}", og_locale)
         .replace("{{ hreflang_links }}", hreflang_links)
         .replace("{{ year }}", str(datetime.date.today().year))
-    )
-
-
-def share_bar(url: str, title: str) -> str:
-    text = urllib.parse.quote(f"{title} - a free tool from Money Clarity")
-    return (
-        f'<div class="share-bar">'
-        f'<span class="share-label">Share this tool:</span>'
-        f'<a class="calc-btn calc-btn-small" rel="noopener" target="_blank" '
-        f'href="https://wa.me/?text={text}%20{urllib.parse.quote(url, safe="")}">WhatsApp</a>'
-        f'<button type="button" class="calc-btn calc-btn-small share-copy" '
-        f'data-url="{url}">Copy link</button>'
-        f"</div>"
-        f'<script>'
-        f'(function(){{var b=document.querySelector(".share-copy");'
-        f"if(b){{b.addEventListener(\"click\",function(){{"
-        f"var u=b.getAttribute(\"data-url\");"
-        f"if(navigator.clipboard&&navigator.clipboard.writeText)"
-        f"{{navigator.clipboard.writeText(u).then(function(){{"
-        f"b.textContent=\"Copied!\";setTimeout(function(){{b.textContent=\"Copy link\";}},2000);}});}}"
-        f"else{{var t=document.createElement(\"textarea\");t.value=u;"
-        f"document.body.appendChild(t);t.select();document.execCommand(\"copy\");"
-        f"document.body.removeChild(t);b.textContent=\"Copied!\";"
-        f"setTimeout(function(){{b.textContent=\"Copy link\";}},2000);}}"
-        f"}});}}" + "})();" + "</script>"
-    )
-
-
-def json_ld_article(title: str, description: str, url: str, date: str) -> str:
-    data = {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": title,
-        "description": description,
-        "datePublished": date,
-        "dateModified": date,
-        "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"},
-        "publisher": {"@type": "Organization", "name": SITE_NAME},
-        "mainEntityOfPage": {"@type": "WebPage", "@id": url},
-    }
-    return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
-
-
-def json_ld_website() -> str:
-    data = {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": SITE_NAME,
-        "url": SITE_URL,
-        "description": SITE_DESCRIPTION,
-    }
-    return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
-
-
-def load_calculator(name: str) -> tuple[str, str]:
-    if not name:
-        return "", ""
-    html_file = CALCULATORS_DIR / f"{name}.html"
-    if not html_file.exists():
-        print(f"[site_builder] WARNING: calculator '{name}' has no {html_file.name}")
-        return "", ""
-    html = html_file.read_text(encoding="utf-8")
-    scripts = f'<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>\n<script src="{name}.js" defer></script>'
-    return html, scripts
-
-
-def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "Guide") -> str:
-    if not items:
-        return ""
-    chip = kind.lower()
-    entries = "\n".join(
-        f'<li class="card">'
-        f'<a class="card-link" href="{link_base}{a["filename"]}">'
-        f'<span class="chip chip-{chip}">{kind}</span>'
-        f'<span class="card-title">{a.get("title", a["filename"])}</span>'
-        f'<span class="card-desc">{a.get("description", "")}</span>'
-        f"</a></li>"
-        for a in items
-    )
-    return (
-        f'<h2 class="section-title">{title} <span class="count">{len(items)}</span></h2>'
-        f'<ul class="card-list">{entries}</ul>'
     )
 
 
@@ -335,6 +414,12 @@ def build():
             else:
                 switch_url = f"{base_prefix(p)}id/index.html"
 
+        page_url_full = page_url(fm, md_path.stem)
+        
+        # Social share bar for articles
+        if not is_meta and not calc_html:
+            html_body = html_body + article_social_share_bar(page_url_full, fm.get("title", md_path.stem), lang="id" if is_id else "en")
+
         if not is_meta:
             try:
                 from datetime import datetime as _dt
@@ -383,9 +468,8 @@ def build():
                 )
             html_body = byline + html_body + author_box
 
-        page_url_full = page_url(fm, md_path.stem)
-        if calc_html:
-            calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
+        # Extract FAQs for Google FAQPage Rich Snippet Schema
+        faqs = extract_faqs_from_markdown(body)
 
         hreflang_links = ""
         if is_id:
@@ -417,11 +501,12 @@ def build():
             css_version=css_version,
             calculator_html=calc_html,
             calculator_script=calc_script,
-            json_ld=json_ld_article(
+            json_ld=json_ld_article_with_faqs(
                 fm.get("title", md_path.stem),
                 fm.get("description", SITE_DESCRIPTION),
                 page_url_full,
                 date,
+                faqs=faqs,
             ),
             og_url=page_url_full,
             og_type="article",
@@ -494,6 +579,7 @@ def build():
     index_content = (
         hero
         + id_banner_en
+        + search_filter_widget(placeholder="Search 13 calculators & financial guides...", no_results_text="No matching calculators or guides found.")
         + newsletter
         + link_block("Calculators", calcs, kind="Calculator")
         + link_block("Financial Guides", guides, kind="Guide")
@@ -523,12 +609,13 @@ def build():
     if calcs:
         calc_page = render_page(
             f"<h1>Calculators</h1><p>Free interactive tools to help you explore and plan your personal finances.</p>"
+            + search_filter_widget(placeholder="Filter 13 personal finance calculators...", no_results_text="No matching calculators found.")
             + link_block("Interactive Tools", calcs, link_base="../", kind="Calculator"),
             page_title=f"Calculators | {SITE_NAME}",
             meta_description="Free interactive personal finance calculators for compound interest, debt payoff, APR/APY, and savings rate.",
             prefix="../",
             css_version=css_version,
-            json_ld=json_ld_article(
+            json_ld=json_ld_article_with_faqs(
                 "Calculators — Money Basics Explained",
                 "Free interactive personal finance calculators.",
                 site_url("calculators"),
@@ -576,6 +663,7 @@ def build():
             '<p class="hero-desc">Panduan keuangan praktis, regulasi pajak penghasilan, hak ketenagakerjaan, simulasi KPR, dan riset saham IDX yang objektif dan mudah dipahami.</p>'
             '</section>'
             + en_banner_id
+            + search_filter_widget(placeholder="Cari panduan pajak, KPR, gaji, atau saham...", no_results_text="Panduan atau kalkulator tidak ditemukan.")
             + (link_block("Alat Riset Saham", id_calc_items, kind="Calculator") if id_calc_items else "")
             + link_block("Panduan Keuangan & Regulasi", id_items, kind="Guide")
         )
@@ -586,7 +674,7 @@ def build():
             meta_description="Panduan keuangan pribadi Indonesia: PPh 21, THR, slip gaji, KPR, dan screener saham IDX dalam bahasa yang mudah dipahami.",
             prefix="../",
             css_version=css_version,
-            json_ld=json_ld_article(
+            json_ld=json_ld_article_with_faqs(
                 "Money Clarity — Panduan Keuangan Indonesia",
                 "Panduan keuangan pribadi dalam Bahasa Indonesia.",
                 site_url("id"),

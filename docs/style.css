@@ -660,3 +660,102 @@ textarea:focus {
 .score-hi { background: rgba(30, 142, 62, 0.14); color: var(--ok); }
 .score-mid { background: rgba(31, 95, 191, 0.12); color: var(--accent); }
 .score-lo { background: var(--surface-2); color: var(--muted); }
+
+/* Search Filter Box */
+.search-box-wrap {
+  position: relative;
+  margin: 18px 0 24px;
+}
+.search-box-wrap input[type="search"] {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  font-size: 0.98rem;
+  font-family: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: all 0.15s ease;
+}
+.search-box-wrap input[type="search"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 1.1rem;
+}
+.search-no-results {
+  display: none;
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  margin-top: 14px;
+}
+
+/* Article Social Share Bar */
+.article-share-bar {
+  margin: 32px 0 20px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+.article-share-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.article-share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+.share-btn-wa {
+  background: #25D366;
+  color: #ffffff !important;
+}
+.share-btn-wa:hover { opacity: 0.9; text-decoration: none; }
+.share-btn-x {
+  background: var(--surface-2);
+  color: var(--ink) !important;
+  border-color: var(--line);
+}
+.share-btn-x:hover { border-color: var(--accent); color: var(--accent) !important; text-decoration: none; }
+.share-btn-copy {
+  background: var(--surface-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+.share-btn-copy:hover { border-color: var(--accent); color: var(--accent); }
+
