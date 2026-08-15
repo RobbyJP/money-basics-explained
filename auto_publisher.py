@@ -1,0 +1,308 @@
+"""
+Dynamic Weekly AI Content Publisher for Money Clarity.
+
+1. Discovers fresh search queries / trending personal finance topics for EN and ID.
+2. Checks candidate topics against all existing articles using Gemini semantic deduplication.
+3. Automatically writes a high-quality educational article in Markdown with frontmatter,
+   worked mathematical examples, tables, and compliance disclaimers.
+4. Invokes site_builder to compile the live static site and updates sitemaps.
+"""
+import argparse
+import datetime
+import json
+import os
+import re
+import urllib.parse
+from pathlib import Path
+
+import requests
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
+
+import site_builder
+
+load_dotenv()
+
+ARTICLES_DIR = Path("articles")
+ARTICLES_DIR.mkdir(exist_ok=True)
+
+DISCLAIMER = (
+    "\n\n---\n\n*This article is for general educational purposes only "
+    "and is not personalized financial advice. Consider consulting a "
+    "licensed financial advisor for guidance specific to your situation.*\n"
+)
+
+DISCLAIMER_ID = (
+    "\n\n---\n\n*Artikel ini disusun hanya untuk tujuan edukasi umum "
+    "dan bukan merupakan nasihat keuangan atau investasi pribadi. Pertimbangkan "
+    "untuk berkonsultasi dengan penasihat keuangan berlisensi untuk situasi spesifik Anda.*\n"
+)
+
+# Seed query concepts for discovery
+SEED_EN_TOPICS = [
+    "personal finance basics",
+    "emergency fund high yield savings",
+    "index fund vs etf investing",
+    "debt snowball vs debt avalanche payoff",
+    "budgeting rules for beginners",
+    "how to calculate net worth",
+    "inflation purchasing power savings",
+    "credit score factors explained",
+    "diversification for beginner investors",
+    "dollar cost averaging vs lump sum",
+    "certificate of deposit vs money market",
+    "understanding 401k match and roth",
+]
+
+SEED_ID_TOPICS = [
+    "simulasi perhitungan pph 21 karyawan",
+    "cara hitung thr karyawan kontrak tetap",
+    "tips kpr rumah pertama bunga fixed floating",
+    "cara membaca slip gaji bpjs ketenagakerjaan",
+    "investasi reksadana pasar uang vs obligasi",
+    "screener saham dividen yield ihsg",
+    "cara mengelola gaji umr menabung investasi",
+    "dana darurat ideal keluarga muda indonesia",
+    "pajak penghasilan atas dividen dan saham bei",
+    "keuntungan dan risiko deposito bank digital",
+]
+
+
+def fetch_google_suggestions(query: str, lang: str = "en") -> list[str]:
+    """Fetch real-time search queries from Google Suggest API."""
+    try:
+        url = f"http://suggestqueries.google.com/complete/search?client=chrome&hl={lang}&q={urllib.parse.quote(query)}"
+        resp = requests.get(url, timeout=5, headers={"User-Agent": "Mozilla/5.0"})
+        if resp.status_code == 200:
+            data = resp.json()
+            if len(data) > 1 and isinstance(data[1], list):
+                return [s.strip() for s in data[1] if isinstance(s, str) and len(s.split()) >= 3]
+    except Exception as e:
+        print(f"[auto_publisher] Warning: Google Suggest query failed for '{query}': {e}")
+    return []
+
+
+def get_existing_articles_summary() -> list[dict]:
+    """Gather all existing article titles, descriptions, and slugs to prevent duplicates."""
+    existing = []
+    for md_path in ARTICLES_DIR.glob("*.md"):
+        fm, body = site_builder.parse_frontmatter(md_path.read_text(encoding="utf-8"))
+        if fm.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service"):
+            existing.append({
+                "slug": fm.get("slug", md_path.stem),
+                "title": fm.get("title", md_path.stem),
+                "description": fm.get("description", ""),
+                "lang": fm.get("lang", "en"),
+                "file": md_path.name,
+            })
+    return existing
+
+
+def semantic_dedup_check(client: genai.Client, model: str, candidate_topic: str, lang: str, existing: list[dict]) -> tuple[bool, str]:
+    """Use Gemini to semantically verify if a topic is genuinely new or duplicates existing content."""
+    existing_titles = [f"- [{item.get('lang', 'en').upper()}] {item['title']}: {item['description']}" for item in existing]
+    titles_block = "\n".join(existing_titles)
+
+    prompt = f"""You are an editorial director for a personal finance reference site.
+We have an existing catalog of published articles:
+
+{titles_block}
+
+We are evaluating a new candidate topic:
+Candidate Topic: "{candidate_topic}" (Target Language: {lang})
+
+Question: Does this candidate topic cover the EXACT SAME concept or substantially overlap in primary intent with any existing article listed above?
+Note: Related topics with different specific focuses are ACCEPTABLE. Identical concepts framed slightly differently are DUPLICATES.
+
+Respond with ONLY valid JSON with this exact schema:
+{{
+  "is_duplicate": true or false,
+  "reason": "Brief 1-sentence explanation of why it is unique or what existing article it duplicates",
+  "suggested_title": "A compelling, clear article headline in the target language (no hype, no exclamation marks)",
+  "suggested_slug": "url-friendly-slug-in-kebab-case",
+  "meta_description": "A 1-2 sentence compelling summary (under 160 characters)"
+}}"""
+
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_mime_type="application/json",
+                temperature=0.2,
+            ),
+        )
+        data = json.loads(response.text.strip())
+        is_dup = bool(data.get("is_duplicate", False))
+        return not is_dup, data
+    except Exception as e:
+        print(f"[auto_publisher] Semantic dedup evaluation error: {e}")
+        return False, {}
+
+
+def generate_article_content(client: genai.Client, model: str, topic_info: dict, lang: str) -> str:
+    """Generate comprehensive educational article content in Markdown."""
+    title = topic_info.get("suggested_title", "")
+    description = topic_info.get("meta_description", "")
+    slug = topic_info.get("suggested_slug", "")
+    today = datetime.date.today().isoformat()
+
+    if lang == "id":
+        system_prompt = """Anda adalah penulis edukasi keuangan profesional untuk situs Money Clarity.
+Tugas Anda adalah menjelaskan konsep keuangan dengan jelas, objektif, jujur, dan mudah dipahami oleh masyarakat umum.
+Aturan Penting:
+1. Hindari kalimat menggurui seperti "Anda harus" — gunakan bahasa netral seperti "Pilihan yang umum digunakan adalah" atau "Metode ini efektif bagi orang yang...".
+2. Berikan contoh perhitungan konkret dan realistis dalam Rupiah (Rp) menggunakan tabel Markdown.
+3. Jangan mengarang peraturan resmi — sebutkan dasar aturan jika relevan (misal UU HPP, aturan Depnaker, atau BI/OJK).
+4. JANGAN gunakan markup LaTeX (seperti \\frac, $$, \\times) — tulis rumus dengan teks biasa (misal: "Rumus = (A / B) x C").
+5. Format artikel menggunakan Markdown terstruktur: H1 judul, H2 subjudul, poin tebal, dan tabel ringkasan/perbandingan."""
+
+        user_prompt = f"""Tulis panduan edukasi keuangan lengkap tentang topik: "{title}".
+Ringkasan/Meta Deskripsi: "{description}"
+
+Panduan harus mencakup:
+- Penjelasan konsep dasar tanpa jargon membingungkan.
+- Contoh angka/perhitungan nyata dalam Rupiah (tabel simulasi).
+- Kelebihan, kekurangan, dan pertimbangan praktis.
+- Kesalahan umum yang sering terjadi dan cara menghindarinya.
+- Tanya Jawab (FAQ) singkat yang sering dicari masyarakat.
+
+Tulis dalam Bahasa Indonesia yang profesional dan mengalir (800-1200 kata). Jangan sertakan disclaimer di akhir karena akan ditambahkan otomatis."""
+
+    else:
+        system_prompt = """You are writing educational content for personal finance website Money Clarity.
+Your job is to explain concepts clearly and compare options honestly - NOT to tell readers what they personally should do with their money.
+Critical Guidelines:
+1. Avoid prescriptive phrasing like "you should" - prefer "one common option is" or "this approach tends to work well for people who...".
+2. Be concrete and specific: use realistic example numbers and Markdown tables.
+3. Do not fabricate specific statistics or invented rates - explain principles clearly with labeled example figures.
+4. NEVER use LaTeX or math markup (no \\frac, $$, \\times) - write formulas as plain text using standard symbols (+, -, x, /, =).
+5. Format with clean Markdown: H1 title, clear H2 subheadings, bullet points, and comparative tables."""
+
+        user_prompt = f"""Write a comprehensive educational personal finance guide on the topic: "{title}".
+Summary: "{description}"
+
+The guide must include:
+- Clear explanation of the concept and why it matters.
+- A worked numerical example with a clean Markdown comparison table.
+- Practical pros, cons, and trade-offs.
+- Common mistakes people make and how to avoid them.
+- A concise FAQ section answering 2-3 common practical questions.
+
+Length: 800-1200 words in clear, engaging English. Do not include a closing disclaimer (it is appended automatically)."""
+
+    response = client.models.generate_content(
+        model=model,
+        contents=user_prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            temperature=0.4,
+        ),
+    )
+
+    body = response.text.strip()
+    # Strip any duplicated frontmatter or leading H1 if already provided in body
+    body = re.sub(r"^---.*?---\n+", "", body, flags=re.DOTALL).strip()
+    
+    frontmatter = (
+        f'---\n'
+        f'title: "{title}"\n'
+        f'description: "{description}"\n'
+        f'slug: "{slug}"\n'
+        f'keyword: "{title.lower()}"\n'
+        f'date: "{today}"\n'
+        f'lang: "{lang}"\n'
+        f'---\n\n'
+    )
+
+    disclaimer = DISCLAIMER_ID if lang == "id" else DISCLAIMER
+    return frontmatter + body + disclaimer
+
+
+def run_pipeline(dry_run: bool = False, force_lang: str = None) -> bool:
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        print("[auto_publisher] ERROR: GEMINI_API_KEY environment variable is not set.")
+        return False
+
+    model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    client = genai.Client(api_key=api_key)
+
+    existing = get_existing_articles_summary()
+    print(f"[auto_publisher] Found {len(existing)} existing articles in catalog.")
+
+    # Alternate or choose language
+    # Count existing ID vs EN articles to balance coverage
+    id_count = sum(1 for item in existing if item.get("lang") == "id")
+    en_count = sum(1 for item in existing if item.get("lang") != "id")
+    print(f"[auto_publisher] Catalog balance: {en_count} English vs {id_count} Indonesian.")
+
+    target_lang = force_lang or ("id" if id_count * 2 < en_count else "en")
+    print(f"[auto_publisher] Selected target language for this batch: {target_lang.upper()}")
+
+    seed_list = SEED_ID_TOPICS if target_lang == "id" else SEED_EN_TOPICS
+
+    # 1. Topic discovery via search suggestions
+    candidates = []
+    for seed in seed_list:
+        suggestions = fetch_google_suggestions(seed, lang=target_lang)
+        candidates.extend(suggestions)
+    
+    # Add raw seeds as fallbacks
+    candidates.extend(seed_list)
+    # Deduplicate candidate strings
+    candidates = list(dict.fromkeys(candidates))
+    print(f"[auto_publisher] Harvested {len(candidates)} candidate search queries.")
+
+    # 2. Evaluate candidates against existing catalog
+    approved_topic = None
+    for candidate in candidates:
+        is_approved, info = semantic_dedup_check(client, model_name, candidate, target_lang, existing)
+        if is_approved and info.get("suggested_title") and info.get("suggested_slug"):
+            slug = info["suggested_slug"]
+            target_file = ARTICLES_DIR / f"{slug}.md" if target_lang == "en" else ARTICLES_DIR / f"id-{slug}.md"
+            if not target_file.exists():
+                approved_topic = info
+                print(f"[auto_publisher] Approved Unique Topic: '{info['suggested_title']}' (Slug: {slug})")
+                print(f"  Reason: {info.get('reason', '')}")
+                break
+        else:
+            print(f"[auto_publisher] Skipped duplicate/overlapping topic: '{candidate}' -> {info.get('reason', 'Overlap')}")
+
+    if not approved_topic:
+        print("[auto_publisher] No new unique topic found this round. Catalog is comprehensive!")
+        return False
+
+    if dry_run:
+        print(f"[auto_publisher] [DRY RUN] Would generate article: {approved_topic}")
+        return True
+
+    # 3. Generate article
+    print(f"[auto_publisher] Generating full guide with {model_name}...")
+    full_markdown = generate_article_content(client, model_name, approved_topic, target_lang)
+
+    slug = approved_topic["suggested_slug"]
+    filename = f"{slug}.md" if target_lang == "en" else f"id-{slug}.md"
+    out_file = ARTICLES_DIR / filename
+    out_file.write_text(full_markdown, encoding="utf-8")
+    print(f"[auto_publisher] Wrote new article to {out_file}")
+
+    # 4. Rebuild static site
+    print("[auto_publisher] Rebuilding static site with site_builder...")
+    site_builder.build()
+    print("[auto_publisher] Static site rebuilt successfully!")
+    return True
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Money Clarity Automated Weekly Content Publisher")
+    parser.add_argument("--dry-run", action="store_true", help="Find unique topic without writing or publishing")
+    parser.add_argument("--lang", choices=["en", "id"], default=None, help="Force specific target language")
+    args = parser.parse_args()
+
+    success = run_pipeline(dry_run=args.dry_run, force_lang=args.lang)
+    if success:
+        print("[auto_publisher] Pipeline executed successfully.")
+    else:
+        print("[auto_publisher] Pipeline completed with no new publish.")

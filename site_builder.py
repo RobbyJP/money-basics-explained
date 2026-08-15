@@ -13,6 +13,9 @@ import os
 import re
 import shutil
 from pathlib import Path
+import datetime
+import urllib.parse
+import json
 
 import markdown
 from dotenv import load_dotenv
@@ -25,8 +28,8 @@ TEMPLATES_DIR = Path("templates")
 PUBLIC_DIR = Path(os.getenv("PUBLIC_DIR", "docs"))
 
 SITE_NAME = os.getenv("SITE_NAME", "Money Basics Explained")
-SITE_URL = os.getenv("SITE_URL", "")
-SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "")
+SITE_URL = os.getenv("SITE_URL", "https://moneyclarity.blog")
+SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "Clear explanations of personal finance concepts, smart calculators, and honest financial comparisons.")
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -55,6 +58,61 @@ def base_prefix(path: str) -> str:
     return "../" * (depth - 1)
 
 
+def site_url(path: str) -> str:
+    base = SITE_URL.rstrip("/")
+    if not path:
+        return base + "/"
+    if not path.endswith(".html"):
+        path = path + ".html"
+    return f"{base}/{path}"
+
+
+def page_url(fm: dict, stem: str) -> str:
+    return site_url(page_path(fm, stem))
+
+
+def get_nav_links(prefix: str, html_lang: str, switch_url: str) -> str:
+    if html_lang == "id":
+        target = switch_url or f"{prefix}index.html"
+        return (
+            f'<a href="{prefix}id/index.html">Beranda</a>\n'
+            f'<a href="{prefix}calculators/index.html">Kalkulator</a>\n'
+            f'<a href="{prefix}about.html">Tentang</a>\n'
+            f'<a href="{prefix}contact.html">Kontak</a>\n'
+            f'<a href="{target}" class="lang-switch-btn" title="Switch to English">🇺🇸 English</a>'
+        )
+    else:
+        target = switch_url or f"{prefix}id/index.html"
+        return (
+            f'<a href="{prefix}index.html">Home</a>\n'
+            f'<a href="{prefix}calculators/index.html">Calculators</a>\n'
+            f'<a href="{prefix}about.html">About</a>\n'
+            f'<a href="{prefix}contact.html">Contact</a>\n'
+            f'<a href="{target}" class="lang-switch-btn" title="Ganti ke Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>'
+        )
+
+
+def get_footer_links(prefix: str, html_lang: str) -> str:
+    if html_lang == "id":
+        return (
+            f'<a href="{prefix}about.html">Tentang Kami</a>\n'
+            f'<a href="{prefix}contact.html">Kontak</a>\n'
+            f'<a href="{prefix}disclaimer.html">Disclaimer</a>\n'
+            f'<a href="{prefix}privacy-policy.html">Kebijakan Privasi</a>\n'
+            f'<a href="{prefix}terms-of-service.html">Syarat & Ketentuan</a>\n'
+            f'<a href="{prefix}index.html">🇺🇸 English Version</a>'
+        )
+    else:
+        return (
+            f'<a href="{prefix}about.html">About</a>\n'
+            f'<a href="{prefix}contact.html">Contact</a>\n'
+            f'<a href="{prefix}disclaimer.html">Disclaimer</a>\n'
+            f'<a href="{prefix}privacy-policy.html">Privacy Policy</a>\n'
+            f'<a href="{prefix}terms-of-service.html">Terms of Service</a>\n'
+            f'<a href="{prefix}id/index.html">🇮🇩 Bahasa Indonesia</a>'
+        )
+
+
 def render_page(
     content_html: str,
     page_title: str,
@@ -69,15 +127,23 @@ def render_page(
     html_lang: str = "en",
     og_locale: str = "en_US",
     hreflang_links: str = "",
+    switch_url: str = "",
 ) -> str:
     base = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
-    import datetime
-
     og_image = f"{SITE_URL.rstrip('/')}/og-image.png" if SITE_URL else ""
+    site_home = f"{prefix}id/index.html" if html_lang == "id" else f"{prefix}index.html"
+    nav_html = get_nav_links(prefix, html_lang, switch_url)
+    footer_html = get_footer_links(prefix, html_lang)
+    footer_disc = "Hanya konten edukasi, bukan nasihat keuangan." if html_lang == "id" else "Educational content only, not financial advice."
+
     return (
         base.replace("{{ page_title }}", page_title)
         .replace("{{ meta_description }}", meta_description)
         .replace("{{ site_name }}", SITE_NAME)
+        .replace("{{ site_home_url }}", site_home)
+        .replace("{{ nav_links }}", nav_html)
+        .replace("{{ footer_links }}", footer_html)
+        .replace("{{ footer_disclaimer }}", footer_disc)
         .replace("{{ base_prefix }}", prefix)
         .replace("{{ content }}", content_html)
         .replace("{{ calculator_html }}", calculator_html)
@@ -95,8 +161,6 @@ def render_page(
 
 
 def share_bar(url: str, title: str) -> str:
-    import urllib.parse
-
     text = urllib.parse.quote(f"{title} - a free tool from Money Clarity")
     return (
         f'<div class="share-bar">'
@@ -122,8 +186,6 @@ def share_bar(url: str, title: str) -> str:
 
 
 def json_ld_article(title: str, description: str, url: str, date: str) -> str:
-    import json
-
     data = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -139,8 +201,6 @@ def json_ld_article(title: str, description: str, url: str, date: str) -> str:
 
 
 def json_ld_website() -> str:
-    import json
-
     data = {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -151,21 +211,7 @@ def json_ld_website() -> str:
     return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
 
 
-def site_url(path: str) -> str:
-    base = SITE_URL.rstrip("/")
-    if not path:
-        return base + "/"
-    if not path.endswith(".html"):
-        path = path + ".html"
-    return f"{base}/{path}"
-
-
-def page_url(fm: dict, stem: str) -> str:
-    return site_url(page_path(fm, stem))
-
-
 def load_calculator(name: str) -> tuple[str, str]:
-    """Return (injected HTML, script tags) for a calculator asset pair."""
     if not name:
         return "", ""
     html_file = CALCULATORS_DIR / f"{name}.html"
@@ -197,8 +243,6 @@ def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "
 
 
 def build():
-    import datetime
-
     today = datetime.date.today().isoformat()
     css_version = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     if PUBLIC_DIR.exists():
@@ -240,17 +284,24 @@ def build():
 
     add_sitemap("", today)
 
-    translations = {}
+    # First pass: map translations
+    translations_en_to_id = {}
+    translations_id_to_en = {}
     link_map = {}
+    
     for _md in sorted(ARTICLES_DIR.glob("*.md")):
         _fm, _ = parse_frontmatter(_md.read_text(encoding="utf-8"))
-        if _fm.get("lang") == "id" and _fm.get("translation_of"):
-            translations[_fm["translation_of"]] = page_path(_fm, _md.stem)
         _p = page_path(_fm, _md.stem)
         link_map[os.path.basename(_p) + ".html"] = "/" + _p + ".html"
+        
+        if _fm.get("lang") == "id" and _fm.get("translation_of"):
+            en_stem = _fm["translation_of"]
+            translations_en_to_id[en_stem] = _p
+            translations_id_to_en[_md.stem] = en_stem
 
     articles = []
     calculators = []
+
     for md_path in sorted(ARTICLES_DIR.glob("*.md")):
         raw = md_path.read_text(encoding="utf-8")
         fm, body = parse_frontmatter(raw)
@@ -268,8 +319,22 @@ def build():
         is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")
         is_id = fm.get("lang") == "id"
         stem = md_path.stem
-        en_slug = fm.get("translation_of", "") if is_id else fm.get("slug", stem)
-        id_slug = stem if is_id else translations.get(fm.get("slug", stem), "")
+
+        # Language target switch URL
+        switch_url = ""
+        if is_id:
+            en_stem = translations_id_to_en.get(stem, "")
+            if en_stem:
+                switch_url = f"{base_prefix(p)}articles/{en_stem}.html"
+            else:
+                switch_url = f"{base_prefix(p)}index.html"
+        else:
+            id_p = translations_en_to_id.get(fm.get("slug", stem), "")
+            if id_p:
+                switch_url = f"{base_prefix(p)}{id_p}.html"
+            else:
+                switch_url = f"{base_prefix(p)}id/index.html"
+
         if not is_meta:
             try:
                 from datetime import datetime as _dt
@@ -316,37 +381,34 @@ def build():
                     f'<a href="{base_prefix(p)}about.html">editorial standards</a>.</p>'
                     "</div>"
                 )
-            if id_slug:
-                if is_id:
-                    en_href = link_map.get(en_slug + ".html", "../articles/" + en_slug + ".html")
-                    lang_box = (
-                        f'<p class="lang-switch">English version: '
-                        f'<a href="{en_href}">This article in English</a></p>'
-                    )
-                else:
-                    id_href = link_map.get(os.path.basename(id_slug) + ".html", "../" + id_slug + ".html")
-                    lang_box = (
-                        f'<p class="lang-switch">Versi Bahasa Indonesia: '
-                        f'<a href="{id_href}">Baca artikel ini dalam Bahasa Indonesia</a></p>'
-                    )
-                html_body = lang_box + html_body
             html_body = byline + html_body + author_box
+
         page_url_full = page_url(fm, md_path.stem)
         if calc_html:
             calc_html = calc_html + share_bar(page_url_full, fm.get("title", md_path.stem))
+
         hreflang_links = ""
-        if id_slug:
-            if is_id:
-                en_url = link_map.get(en_slug + ".html", site_url(en_slug))
+        if is_id:
+            en_stem = translations_id_to_en.get(stem, "")
+            if en_stem:
+                en_url = site_url(f"articles/{en_stem}")
                 id_url = site_url(p)
-            else:
+                hreflang_links = (
+                    f'<link rel="alternate" hreflang="en" href="{en_url}">\n'
+                    f'<link rel="alternate" hreflang="id" href="{id_url}">\n'
+                    f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
+                )
+        else:
+            id_p = translations_en_to_id.get(fm.get("slug", stem), "")
+            if id_p:
                 en_url = site_url(p)
-                id_url = link_map.get(os.path.basename(id_slug) + ".html", site_url(id_slug))
-            hreflang_links = (
-                f'<link rel="alternate" hreflang="en" href="{en_url}">'
-                f'<link rel="alternate" hreflang="id" href="{id_url}">'
-                f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
-            )
+                id_url = site_url(id_p)
+                hreflang_links = (
+                    f'<link rel="alternate" hreflang="en" href="{en_url}">\n'
+                    f'<link rel="alternate" hreflang="id" href="{id_url}">\n'
+                    f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
+                )
+
         page_html = render_page(
             html_body,
             page_title=f"{fm.get('title', md_path.stem)} | {SITE_NAME}",
@@ -366,6 +428,7 @@ def build():
             html_lang="id" if is_id else "en",
             og_locale="id_ID" if is_id else "en_US",
             hreflang_links=hreflang_links,
+            switch_url=switch_url,
         )
         out_path = PUBLIC_DIR / f"{p}.html"
         out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -384,8 +447,9 @@ def build():
             articles.append(item)
             print(f"[site_builder] built {out_path}")
 
+    # English hub sorting
     guides = sorted(
-        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")],
+        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service") and a.get("lang") != "id"],
         key=lambda a: a.get("date", ""),
         reverse=True,
     )
@@ -396,16 +460,26 @@ def build():
 
     hero = (
         '<section class="hero">'
-        '<p class="kicker">Independent &middot; Free &middot; Plain language</p>'
+        '<p class="kicker">Independent &middot; Free &middot; Plain Language</p>'
         f"<h1>{SITE_NAME}</h1>"
         f'<p class="hero-desc">{SITE_DESCRIPTION}</p>'
-        '<p class="hero-lang"><a href="id/index.html">Bahasa Indonesia &rarr;</a></p>'
         "</section>"
     )
+
+    id_banner_en = (
+        '<div class="demographic-banner">'
+        '<div class="demographic-banner-text">'
+        '<div class="demographic-banner-title">🇮🇩 Mencari Panduan Keuangan Indonesia?</div>'
+        '<p class="demographic-banner-desc">Kunjungi portal khusus kami untuk panduan Pajak PPh 21, THR, Slip Gaji, KPR, dan Screener Saham IDX.</p>'
+        '</div>'
+        '<a href="id/index.html" class="demographic-banner-btn">Buka Portal Indonesia &rarr;</a>'
+        '</div>'
+    )
+
     newsletter = (
         '<section class="card newsletter-box" aria-label="Newsletter signup">'
         "<h2>Money lessons, once a month</h2>"
-        '<p class="newsletter-desc">One short email a month: a money lesson, the newest calculator, and an honest reminder or two. No spam, unsubscribe any time.</p>'
+        '<p class="newsletter-desc">One short email a month: a practical financial lesson, our newest calculator, and honest money reminders. No spam, unsubscribe any time.</p>'
         '<form class="contact-form newsletter-form" action="https://formsubmit.co/contact@moneyclarity.blog" method="POST">'
         '<input type="hidden" name="_subject" value="Newsletter signup - Money Clarity">'
         '<input type="hidden" name="_next" value="' + site_url("") + '">'
@@ -419,9 +493,10 @@ def build():
     )
     index_content = (
         hero
+        + id_banner_en
         + newsletter
         + link_block("Calculators", calcs, kind="Calculator")
-        + link_block("Guides", guides, kind="Guide")
+        + link_block("Financial Guides", guides, kind="Guide")
     )
     (PUBLIC_DIR / "index.html").write_text(
         render_page(
@@ -434,21 +509,23 @@ def build():
             og_url=site_url(""),
             og_type="website",
             hreflang_links=(
-                f'<link rel="alternate" hreflang="en" href="{site_url("")}">'
-                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">'
+                f'<link rel="alternate" hreflang="en" href="{site_url("")}">\n'
+                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">\n'
                 f'<link rel="alternate" hreflang="x-default" href="{site_url("")}">'
             ),
+            switch_url="id/index.html",
         ),
         encoding="utf-8",
     )
     print(f"[site_builder] built index: {len(calcs)} calculators, {len(guides)} guides")
 
+    # Calculators Index Page
     if calcs:
         calc_page = render_page(
-            f"<h1>Calculators</h1><p>Free interactive tools to help you explore your money.</p>"
-            + link_block("Tools", calcs, link_base="../", kind="Calculator"),
+            f"<h1>Calculators</h1><p>Free interactive tools to help you explore and plan your personal finances.</p>"
+            + link_block("Interactive Tools", calcs, link_base="../", kind="Calculator"),
             page_title=f"Calculators | {SITE_NAME}",
-            meta_description="Free interactive personal finance calculators.",
+            meta_description="Free interactive personal finance calculators for compound interest, debt payoff, APR/APY, and savings rate.",
             prefix="../",
             css_version=css_version,
             json_ld=json_ld_article(
@@ -459,6 +536,7 @@ def build():
             ),
             og_url=site_url("calculators"),
             og_type="website",
+            switch_url="../id/index.html",
         )
         calc_dir = PUBLIC_DIR / "calculators"
         calc_dir.mkdir(parents=True, exist_ok=True)
@@ -466,6 +544,7 @@ def build():
         add_sitemap("calculators/index", today)
         print(f"[site_builder] built calculators index with {len(calcs)} calculators")
 
+    # Indonesian Hub Page
     id_guides = sorted(
         [a for a in articles if a.get("lang") == "id"],
         key=lambda a: a.get("date", ""),
@@ -475,21 +554,40 @@ def build():
         [c for c in calculators if c.get("lang") == "id"],
         key=lambda c: c.get("title", ""),
     )
+
     if id_guides or id_calcs:
         id_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in id_guides]
         id_calc_items = [dict(c, filename=c["filename"].split("/")[-1]) for c in id_calcs]
+        
+        en_banner_id = (
+            '<div class="demographic-banner">'
+            '<div class="demographic-banner-text">'
+            '<div class="demographic-banner-title">🇺🇸 Looking for Global Calculators & Guides?</div>'
+            '<p class="demographic-banner-desc">Access our complete library of 13 interactive financial calculators, debt simulation tools, and investing guides.</p>'
+            '</div>'
+            '<a href="../index.html" class="demographic-banner-btn">Explore English Hub &rarr;</a>'
+            '</div>'
+        )
+
+        id_hub_content = (
+            '<section class="hero">'
+            '<p class="kicker">Independen &middot; Gratis &middot; Bahasa Sederhana</p>'
+            '<h1>Money Clarity — Indonesia</h1>'
+            '<p class="hero-desc">Panduan keuangan praktis, regulasi pajak penghasilan, hak ketenagakerjaan, simulasi KPR, dan riset saham IDX yang objektif dan mudah dipahami.</p>'
+            '</section>'
+            + en_banner_id
+            + (link_block("Alat Riset Saham", id_calc_items, kind="Calculator") if id_calc_items else "")
+            + link_block("Panduan Keuangan & Regulasi", id_items, kind="Guide")
+        )
+
         id_hub = render_page(
-            "<h1>Money Clarity — Bahasa Indonesia</h1>"
-            "<p>Panduan keuangan pribadi yang jelas, jujur, dan gratis dalam Bahasa Indonesia.</p>"
-            + (link_block("Alat Riset", id_calc_items, kind="Calculator") if id_calc_items else "")
-            + link_block("Panduan Bahasa Indonesia", id_items, kind="Guide")
-            + '<p><a href="../index.html">English version &rarr;</a></p>',
-            page_title=f"Money Clarity — Bahasa Indonesia | {SITE_NAME}",
-            meta_description="Panduan keuangan pribadi dalam Bahasa Indonesia: THR, slip gaji, PPh 21, KPR, dan screener saham IDX, dijelaskan dengan bahasa yang sederhana.",
+            id_hub_content,
+            page_title=f"Money Clarity — Panduan Keuangan Indonesia | {SITE_NAME}",
+            meta_description="Panduan keuangan pribadi Indonesia: PPh 21, THR, slip gaji, KPR, dan screener saham IDX dalam bahasa yang mudah dipahami.",
             prefix="../",
             css_version=css_version,
             json_ld=json_ld_article(
-                "Money Clarity — Bahasa Indonesia",
+                "Money Clarity — Panduan Keuangan Indonesia",
                 "Panduan keuangan pribadi dalam Bahasa Indonesia.",
                 site_url("id"),
                 today,
@@ -499,10 +597,11 @@ def build():
             html_lang="id",
             og_locale="id_ID",
             hreflang_links=(
-                f'<link rel="alternate" hreflang="en" href="{site_url("")}">'
-                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">'
+                f'<link rel="alternate" hreflang="en" href="{site_url("")}">\n'
+                f'<link rel="alternate" hreflang="id" href="{site_url("id")}">\n'
                 f'<link rel="alternate" hreflang="x-default" href="{site_url("")}">'
             ),
+            switch_url="../index.html",
         )
         id_dir = PUBLIC_DIR / "id"
         id_dir.mkdir(parents=True, exist_ok=True)

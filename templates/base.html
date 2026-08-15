@@ -27,12 +27,9 @@
 </head>
 <body>
 <header class="site-header">
-  <a href="{{ base_prefix }}index.html" class="site-title">{{ site_name }}</a>
+  <a href="{{ site_home_url }}" class="site-title">{{ site_name }}</a>
   <nav class="site-nav" aria-label="Site">
-    <a href="{{ base_prefix }}index.html">Home</a>
-    <a href="{{ base_prefix }}calculators/index.html">Calculators</a>
-    <a href="{{ base_prefix }}about.html">About</a>
-    <a href="{{ base_prefix }}contact.html">Contact</a>
+    {{ nav_links }}
   </nav>
 </header>
 <main>
@@ -41,15 +38,10 @@
 </main>
 <footer class="site-footer">
   <div class="footer-links">
-    <a href="{{ base_prefix }}about.html">About</a>
-    <a href="{{ base_prefix }}contact.html">Contact</a>
-    <a href="{{ base_prefix }}disclaimer.html">Disclaimer</a>
-    <a href="{{ base_prefix }}privacy-policy.html">Privacy Policy</a>
-    <a href="{{ base_prefix }}terms-of-service.html">Terms of Service</a>
-    <a href="{{ base_prefix }}id/index.html">Bahasa Indonesia</a>
+    {{ footer_links }}
   </div>
   <p class="footer-badge"><a href="https://www.directree.io" target="_blank" rel="noopener" aria-label="Verified on directree"><img class="badge-light" src="https://www.directree.io/badge/directree-badge-lightmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"><img class="badge-dark" src="https://www.directree.io/badge/directree-badge-darkmode.svg" alt="Verified on directree" width="200" height="37" loading="lazy"></a></p>
-  <p class="footer-note">&copy; {{ year }} {{ site_name }}. Educational content only, not financial advice.</p>
+  <p class="footer-note">&copy; {{ year }} {{ site_name }}. {{ footer_disclaimer }}</p>
 </footer>
 <div id="consent-banner" class="consent-banner" role="region" aria-label="Cookie consent" hidden>
   <p>We may use cookies, including advertising cookies from Google once ads are live, to keep this site free. You can accept or decline personalized advertising. See our <a href="{{ base_prefix }}privacy-policy.html">Privacy Policy</a>.</p>

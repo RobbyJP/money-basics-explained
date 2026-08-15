@@ -78,13 +78,66 @@ body {
   letter-spacing: -0.01em;
 }
 .site-title::first-letter { color: var(--accent); }
-.site-nav { display: flex; gap: 18px; font-size: 0.95rem; }
+.site-nav { display: flex; align-items: center; gap: 16px; font-size: 0.95rem; }
 .site-nav a {
   color: var(--ink-soft);
   text-decoration: none;
   font-weight: 500;
 }
 .site-nav a:hover { color: var(--accent); }
+
+.lang-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--ink) !important;
+  font-size: 0.85rem;
+  font-weight: 600 !important;
+  transition: all 0.15s ease;
+}
+.lang-switch-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent) !important;
+  text-decoration: none;
+}
+
+/* Demographic Banner */
+.demographic-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  margin: 20px 0 30px;
+  box-shadow: var(--shadow);
+  flex-wrap: wrap;
+}
+.demographic-banner-text { flex: 1; min-width: 240px; }
+.demographic-banner-title { font-weight: 700; font-size: 1.05rem; margin: 0 0 4px; color: var(--ink); }
+.demographic-banner-desc { margin: 0; font-size: 0.9rem; color: var(--muted); }
+.demographic-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: var(--accent-ink) !important;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.demographic-banner-btn:hover { opacity: 0.92; text-decoration: none; }
 
 /* Type */
 h1 {

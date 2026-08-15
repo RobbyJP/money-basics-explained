@@ -1,8 +1,5 @@
 """
-Commit and push the built public/ dir. Assumes this repo is already
-connected to GitHub Pages / Cloudflare Pages pointing at PUBLIC_DIR (or a
-dedicated branch - adjust GIT_REMOTE_BRANCH in .env if you deploy from a
-separate branch like gh-pages instead of committing public/ to main).
+Commit and push the built docs/ dir to GitHub main branch.
 """
 import os
 import subprocess
@@ -13,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BRANCH = os.getenv("GIT_REMOTE_BRANCH", "main")
-PUBLIC_DIR = os.getenv("PUBLIC_DIR", "public")
+PUBLIC_DIR = os.getenv("PUBLIC_DIR", "docs")
 
 
 def run(cmd: list[str]):
@@ -41,4 +38,5 @@ def publish():
 
 
 if __name__ == "__main__":
-    sys.exit(0 if publish() else 1)
+    if not publish():
+        sys.exit(1)
