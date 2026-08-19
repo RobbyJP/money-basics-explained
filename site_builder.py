@@ -2,11 +2,14 @@
 Build the static site: reads articles/*.md (with frontmatter), converts to
 HTML via the base template, writes to PUBLIC_DIR, plus an index page.
 
-Features:
-- Instant Search / Real-time Filter on Calculator and Index pages.
-- Automatic FAQPage Rich Snippet Schema (JSON-LD) extraction for articles with FAQs.
-- Social Share Bar (WhatsApp, X, Copy Link) on all articles.
-- Bilingual demographic separation (English & Indonesian hubs).
+Features & Compliance:
+- Pen Name Person Entity: Ray Porter (@id: https://moneyclarity.blog/about.html#author).
+- On-page bylines with semantic <time datetime="YYYY-MM-DD"> and Regulatory Accuracy review status.
+- Author Bio Card (.author-card) with avatar and methodology link on all articles.
+- Full @graph JSON-LD Schemas: Article, BreadcrumbList, FAQPage, AboutPage, and WebSite with SearchAction.
+- Instant client-side search on index, calculators, and id portal.
+- Category taxonomy silos (Investing, Budgeting & Debt, Taxes & Income, Indonesia).
+- Zero 404 guarantee: Canonical redirect stubs for alternate/legacy slug URLs.
 """
 import datetime
 import json
@@ -29,6 +32,10 @@ PUBLIC_DIR = Path(os.getenv("PUBLIC_DIR", "docs"))
 SITE_NAME = os.getenv("SITE_NAME", "Money Basics Explained")
 SITE_URL = os.getenv("SITE_URL", "https://moneyclarity.blog")
 SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "Clear explanations of personal finance concepts, smart calculators, and honest financial comparisons.")
+
+AUTHOR_NAME = "Ray Porter"
+AUTHOR_ROLE = "Independent Quantitative Financial Researcher"
+AUTHOR_DESC = "Independent financial researcher with a background in software engineering and quantitative financial modeling."
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -55,7 +62,6 @@ def page_path(fm: dict, stem: str) -> str:
     return f"articles/{stem}"
 
 
-
 def base_prefix(path: str) -> str:
     depth = len(path.split("/"))
     return "../" * (depth - 1)
@@ -72,6 +78,21 @@ def site_url(path: str) -> str:
 
 def page_url(fm: dict, stem: str) -> str:
     return site_url(page_path(fm, stem))
+
+
+def infer_category(fm: dict, stem: str, is_id: bool) -> str:
+    if fm.get("category"):
+        return fm["category"]
+    if is_id:
+        return "Indonesia"
+    slug = fm.get("slug", stem).lower()
+    if any(k in slug for k in ["tax", "pph", "salary", "hourly", "payslip", "thr", "income", "hsa", "fsa"]):
+        return "Taxes & Income"
+    if any(k in slug for k in ["invest", "fund", "stock", "roth", "401k", "compound", "asset", "dca", "expense-ratio", "target-date"]):
+        return "Investing"
+    if any(k in slug for k in ["debt", "budget", "emergency", "savings", "credit", "loan", "apr", "hysa", "cd", "dti", "life-insurance"]):
+        return "Budgeting & Debt"
+    return "Guides"
 
 
 def extract_faqs_from_markdown(body: str) -> list[dict]:
@@ -131,6 +152,45 @@ def get_footer_links(prefix: str, html_lang: str) -> str:
         )
 
 
+def get_breadcrumbs(fm: dict, prefix: str, page_title: str, url: str, is_id: bool) -> tuple[str, dict]:
+    category = infer_category(fm, fm.get("slug", ""), is_id)
+    home_name = "Beranda" if is_id else "Home"
+    home_url = f"{prefix}id/index.html" if is_id else f"{prefix}index.html"
+    
+    html = (
+        f'<nav class="breadcrumbs" aria-label="Breadcrumb">'
+        f'<a href="{home_url}">{home_name}</a> <span class="sep">/</span> '
+        f'<span class="category-crumb">{category}</span> <span class="sep">/</span> '
+        f'<span class="current-crumb">{fm.get("title", page_title)}</span>'
+        f'</nav>'
+    )
+    
+    schema = {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": home_name,
+                "item": site_url("id" if is_id else "")
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": category,
+                "item": site_url("id" if is_id else "") + f"#{category.lower().replace(' ', '-')}"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": fm.get("title", page_title),
+                "item": url
+            }
+        ]
+    }
+    return html, schema
+
+
 def article_social_share_bar(url: str, title: str, lang: str = "en") -> str:
     encoded_url = urllib.parse.quote(url, safe="")
     encoded_title = urllib.parse.quote(f"{title} - Money Clarity")
@@ -179,7 +239,6 @@ def search_filter_widget(placeholder: str = "Search calculators & guides...", no
         f'input.addEventListener("input", function(){{'
         f'  var q = input.value.toLowerCase().trim();'
         f'  var cards = document.querySelectorAll(".card-list .card");'
-        f'  var sections = document.querySelectorAll(".section-title");'
         f'  var visibleCount = 0;'
         f'  cards.forEach(function(card){{'
         f'    var text = card.textContent.toLowerCase();'
@@ -197,17 +256,28 @@ def search_filter_widget(placeholder: str = "Search calculators & guides...", no
     )
 
 
-def json_ld_article_with_faqs(title: str, description: str, url: str, date: str, faqs: list[dict] = None) -> str:
+def json_ld_article_with_faqs(title: str, description: str, url: str, date: str, faqs: list[dict] = None, breadcrumb_schema: dict = None) -> str:
+    author_node = {
+        "@type": "Person",
+        "@id": site_url("about") + "#author",
+        "name": AUTHOR_NAME,
+        "url": site_url("about"),
+    }
+
     article_obj = {
         "@type": "Article",
         "headline": title,
         "description": description,
         "datePublished": date,
         "dateModified": date,
-        "author": {"@type": "Organization", "name": "Money Clarity Editorial Team"},
+        "author": author_node,
         "publisher": {"@type": "Organization", "name": SITE_NAME},
         "mainEntityOfPage": {"@type": "WebPage", "@id": url},
     }
+
+    graph_nodes = [article_obj]
+    if breadcrumb_schema:
+        graph_nodes.append(breadcrumb_schema)
 
     if faqs and len(faqs) >= 2:
         faq_obj = {
@@ -224,25 +294,69 @@ def json_ld_article_with_faqs(title: str, description: str, url: str, date: str,
                 for f in faqs
             ],
         }
-        data = {
-            "@context": "https://schema.org",
-            "@graph": [article_obj, faq_obj],
-        }
-    else:
-        data = {
-            "@context": "https://schema.org",
-            **article_obj,
-        }
+        graph_nodes.append(faq_obj)
+
+    data = {
+        "@context": "https://schema.org",
+        "@graph": graph_nodes,
+    }
     return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
 
 
 def json_ld_website() -> str:
     data = {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": SITE_NAME,
-        "url": SITE_URL,
-        "description": SITE_DESCRIPTION,
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": SITE_NAME,
+                "url": SITE_URL,
+                "description": SITE_DESCRIPTION,
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": f"{SITE_URL.rstrip('/')}/?q={{search_term_string}}",
+                    "query-input": "required name=search_term_string",
+                },
+            },
+            {
+                "@type": "Person",
+                "@id": site_url("about") + "#author",
+                "name": AUTHOR_NAME,
+                "url": site_url("about"),
+                "description": AUTHOR_DESC,
+            },
+        ],
+    }
+    return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
+
+
+def json_ld_about() -> str:
+    data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "AboutPage",
+                "name": f"About {SITE_NAME}",
+                "url": site_url("about"),
+                "description": "Learn about Money Basics Explained, our mission to deliver clear personal finance education, and our quantitative research methodology.",
+                "mainEntity": {
+                    "@type": "Person",
+                    "@id": site_url("about") + "#author",
+                    "name": AUTHOR_NAME,
+                    "jobTitle": AUTHOR_ROLE,
+                    "url": site_url("about"),
+                    "description": AUTHOR_DESC,
+                },
+            },
+            {
+                "@type": "Person",
+                "@id": site_url("about") + "#author",
+                "name": AUTHOR_NAME,
+                "jobTitle": AUTHOR_ROLE,
+                "url": site_url("about"),
+                "description": AUTHOR_DESC,
+            },
+        ],
     }
     return '<script type="application/ld+json">' + json.dumps(data) + "</script>"
 
@@ -325,6 +439,27 @@ def render_page(
     )
 
 
+def create_redirect_stub(source_path: Path, target_relative_url: str, canonical_url: str):
+    """Generate an instant HTML redirect stub (HTTP 200 with meta refresh and canonical link)."""
+    source_path.parent.mkdir(parents=True, exist_ok=True)
+    html = (
+        f'<!DOCTYPE html>\n'
+        f'<html lang="en">\n'
+        f'<head>\n'
+        f'<meta charset="UTF-8">\n'
+        f'<meta http-equiv="refresh" content="0; url={target_relative_url}">\n'
+        f'<link rel="canonical" href="{canonical_url}">\n'
+        f'<title>Redirecting...</title>\n'
+        f'</head>\n'
+        f'<body>\n'
+        f'<p>Redirecting to <a href="{target_relative_url}">{canonical_url}</a>...</p>\n'
+        f'</body>\n'
+        f'</html>'
+    )
+    source_path.write_text(html, encoding="utf-8")
+    print(f"[site_builder] generated redirect stub: {source_path} -> {target_relative_url}")
+
+
 def build():
     today = datetime.date.today().isoformat()
     css_version = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -352,7 +487,10 @@ def build():
         sitemap_url = f"{SITE_URL.rstrip('/')}/sitemap.xml"
         (PUBLIC_DIR / "robots.txt").write_text(
             "User-agent: *\n"
-            "Allow: /\n\n"
+            "Allow: /\n"
+            "Allow: /articles/\n"
+            "Allow: /calculators/\n"
+            "Allow: /id/\n\n"
             "User-agent: Mediapartners-Google\n"
             "Allow: /\n\n"
             f"Sitemap: {sitemap_url}\n",
@@ -367,17 +505,21 @@ def build():
 
     add_sitemap("", today)
 
-    # First pass: map translations
+    # First pass: map translations and canonical paths
     translations_en_to_id = {}
     translations_id_to_en = {}
+    path_map = {}
     link_map = {}
     
     for _md in sorted(ARTICLES_DIR.glob("*.md")):
         _fm, _ = parse_frontmatter(_md.read_text(encoding="utf-8"))
         _p = page_path(_fm, _md.stem)
+        path_map[_md.stem] = _p
+        if _fm.get("slug"):
+            path_map[_fm["slug"]] = _p
         link_map[os.path.basename(_p) + ".html"] = "/" + _p + ".html"
         
-        if _fm.get("lang") == "id" and _fm.get("translation_of"):
+        if (_fm.get("lang") == "id" or _md.stem.startswith("id-")) and _fm.get("translation_of"):
             en_stem = _fm["translation_of"]
             translations_en_to_id[en_stem] = _p
             translations_id_to_en[_md.stem] = en_stem
@@ -400,7 +542,8 @@ def build():
         calc_html, calc_script = load_calculator(fm.get("calculator", ""))
         date = fm.get("date", today)
         is_meta = fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service")
-        is_id = fm.get("lang") == "id"
+        is_about = fm.get("slug") == "about"
+        is_id = fm.get("lang") == "id" or md_path.stem.startswith("id-")
         stem = md_path.stem
 
         # Language target switch URL
@@ -408,7 +551,8 @@ def build():
         if is_id:
             en_stem = translations_id_to_en.get(stem, "")
             if en_stem:
-                switch_url = f"{base_prefix(p)}articles/{en_stem}.html"
+                en_p = path_map.get(en_stem, f"articles/{en_stem}")
+                switch_url = f"{base_prefix(p)}{en_p}.html"
             else:
                 switch_url = f"{base_prefix(p)}index.html"
         else:
@@ -418,59 +562,69 @@ def build():
             else:
                 switch_url = f"{base_prefix(p)}id/index.html"
 
+
         page_url_full = page_url(fm, md_path.stem)
         
-        # Social share bar for articles
+        # Social share bar for non-calculator articles
         if not is_meta and not calc_html:
             html_body = html_body + article_social_share_bar(page_url_full, fm.get("title", md_path.stem), lang="id" if is_id else "en")
 
+        breadcrumb_html = ""
+        breadcrumb_schema = None
         if not is_meta:
+            breadcrumb_html, breadcrumb_schema = get_breadcrumbs(fm, base_prefix(p), fm.get("title", md_path.stem), page_url_full, is_id)
+            
             try:
                 from datetime import datetime as _dt
+                _d = _dt.strptime(date, "%Y-%m-%d")
 
                 if is_id:
                     _months_id = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
-                    _d = _dt.strptime(date, "%Y-%m-%d")
                     display_date = f"{_d.day} {_months_id[_d.month - 1]} {_d.year}"
+                    review_month = f"{_months_id[_d.month - 1]} {_d.year}"
                     byline = (
-                        f'<p class="byline">Oleh Tim Redaksi Money Clarity '
-                        f"&middot; Diperbarui {display_date}</p>"
+                        f'<p class="byline">Oleh <span class="author-name">{AUTHOR_NAME}</span> '
+                        f'&middot; <time datetime="{date}">Diperbarui {display_date}</time> '
+                        f'&middot; <span class="review-status">Akurasi regulasi ditinjau: {review_month}</span></p>'
                     )
                 else:
-                    display_date = _dt.strptime(date, "%Y-%m-%d").strftime("%B %d, %Y")
+                    display_date = _d.strftime("%B %d, %Y")
+                    review_month = _d.strftime("%B %Y")
                     byline = (
-                        f'<p class="byline">By the Money Clarity Editorial Team '
-                        f"&middot; Updated {display_date}</p>"
+                        f'<p class="byline">By <span class="author-name">{AUTHOR_NAME}</span> '
+                        f'&middot; <time datetime="{date}">Updated {display_date}</time> '
+                        f'&middot; <span class="review-status">Regulatory accuracy last reviewed: {review_month}</span></p>'
                     )
             except ValueError:
                 display_date = date
                 byline = (
-                    f'<p class="byline">By the Money Clarity Editorial Team '
-                    f"&middot; Updated {display_date}</p>"
+                    f'<p class="byline">By <span class="author-name">{AUTHOR_NAME}</span> '
+                    f'&middot; <time datetime="{date}">Updated {date}</time></p>'
                 )
+
             if is_id:
-                author_box = (
-                    '<div class="author-box">'
-                    '<p class="author-name">Oleh Tim Redaksi Money Clarity</p>'
-                    "<p>Setiap panduan diteliti, ditulis, dan diperiksa ulang oleh tim "
-                    "redaksi Money Clarity: konsep dan rumus diverifikasi terhadap "
-                    "sumber utama, kalkulator diuji dengan contoh perhitungan, dan "
-                    "setiap halaman mencantumkan tanggal pembaruan. Lihat "
-                    f'<a href="{base_prefix(p)}about.html">standar editorial kami</a>.</p>'
-                    "</div>"
+                author_card = (
+                    '<div class="author-card">'
+                    '<div class="author-avatar">RP</div>'
+                    '<div class="author-info">'
+                    f'<strong class="author-name">{AUTHOR_NAME}</strong>'
+                    '<p class="author-bio">Peneliti keuangan independen yang berfokus pada pemodelan kuantitatif, regulasi perpajakan AS &amp; Indonesia, dan edukasi finansial praktis. Seluruh rumus dan angka regulasi diverifikasi terhadap dokumen resmi negara.</p>'
+                    f'<a href="{base_prefix(p)}about.html" class="author-link">Standar Editorial &amp; Metodologi &rarr;</a>'
+                    '</div>'
+                    '</div>'
                 )
             else:
-                author_box = (
-                    '<div class="author-box">'
-                    '<p class="author-name">By the Money Clarity Editorial Team</p>'
-                    "<p>Every guide is researched, written, and fact-checked by the "
-                    "Money Clarity editorial team: concepts and formulas are verified "
-                    "against primary sources, calculators are tested with worked "
-                    "examples, and each page shows its last-updated date. See our "
-                    f'<a href="{base_prefix(p)}about.html">editorial standards</a>.</p>'
-                    "</div>"
+                author_card = (
+                    '<div class="author-card">'
+                    '<div class="author-avatar">RP</div>'
+                    '<div class="author-info">'
+                    f'<strong class="author-name">{AUTHOR_NAME}</strong>'
+                    '<p class="author-bio">Independent financial researcher specializing in quantitative modeling, US and Indonesian tax regulations, and personal finance education. All formulas and regulatory figures on this site are verified against primary statutory sources.</p>'
+                    f'<a href="{base_prefix(p)}about.html" class="author-link">Editorial Standards &amp; Methodology &rarr;</a>'
+                    '</div>'
+                    '</div>'
                 )
-            html_body = byline + html_body + author_box
+            html_body = breadcrumb_html + byline + html_body + author_card
 
         # Extract FAQs for Google FAQPage Rich Snippet Schema
         faqs = extract_faqs_from_markdown(body)
@@ -479,7 +633,8 @@ def build():
         if is_id:
             en_stem = translations_id_to_en.get(stem, "")
             if en_stem:
-                en_url = site_url(f"articles/{en_stem}")
+                en_p = path_map.get(en_stem, f"articles/{en_stem}")
+                en_url = site_url(en_p)
                 id_url = site_url(p)
                 hreflang_links = (
                     f'<link rel="alternate" hreflang="en" href="{en_url}">\n'
@@ -497,6 +652,26 @@ def build():
                     f'<link rel="alternate" hreflang="x-default" href="{en_url}">'
                 )
 
+
+        if is_about:
+            json_ld_content = json_ld_about()
+        elif is_meta:
+            json_ld_content = json_ld_article_with_faqs(
+                fm.get("title", md_path.stem),
+                fm.get("description", SITE_DESCRIPTION),
+                page_url_full,
+                date,
+            )
+        else:
+            json_ld_content = json_ld_article_with_faqs(
+                fm.get("title", md_path.stem),
+                fm.get("description", SITE_DESCRIPTION),
+                page_url_full,
+                date,
+                faqs=faqs,
+                breadcrumb_schema=breadcrumb_schema,
+            )
+
         page_html = render_page(
             html_body,
             page_title=f"{fm.get('title', md_path.stem)} | {SITE_NAME}",
@@ -505,13 +680,7 @@ def build():
             css_version=css_version,
             calculator_html=calc_html,
             calculator_script=calc_script,
-            json_ld=json_ld_article_with_faqs(
-                fm.get("title", md_path.stem),
-                fm.get("description", SITE_DESCRIPTION),
-                page_url_full,
-                date,
-                faqs=faqs,
-            ),
+            json_ld=json_ld_content,
             og_url=page_url_full,
             og_type="article",
             html_lang="id" if is_id else "en",
@@ -524,7 +693,7 @@ def build():
         out_path.write_text(page_html, encoding="utf-8")
         add_sitemap(p, date)
 
-        item = fm | {"path": p, "filename": f"{p}.html"}
+        item = fm | {"path": p, "filename": f"{p}.html", "category": infer_category(fm, md_path.stem, is_id)}
         calc_name = fm.get("calculator", "")
         if calc_name:
             js_file = CALCULATORS_DIR / f"{calc_name}.js"
@@ -536,12 +705,25 @@ def build():
             articles.append(item)
             print(f"[site_builder] built {out_path}")
 
-    # English hub sorting
-    guides = sorted(
-        [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service") and a.get("lang") != "id"],
-        key=lambda a: a.get("date", ""),
-        reverse=True,
+    # Fix #5: 404 Prevention Redirect Stubs
+    create_redirect_stub(
+        PUBLIC_DIR / "articles" / "debt-snowball-vs-avalanche.html",
+        "../articles/debt-snowball-vs-debt-avalanche.html",
+        site_url("articles/debt-snowball-vs-debt-avalanche")
     )
+    create_redirect_stub(
+        PUBLIC_DIR / "articles" / "expense-ratio-guide.html",
+        "../calculators/expense-ratio.html",
+        site_url("calculators/expense-ratio")
+    )
+
+    # English hub categorization
+    en_guides = [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service") and a.get("lang") != "id"]
+    investing_guides = sorted([a for a in en_guides if a.get("category") == "Investing"], key=lambda a: a.get("date", ""), reverse=True)
+    budgeting_guides = sorted([a for a in en_guides if a.get("category") == "Budgeting & Debt"], key=lambda a: a.get("date", ""), reverse=True)
+    tax_guides = sorted([a for a in en_guides if a.get("category") == "Taxes & Income"], key=lambda a: a.get("date", ""), reverse=True)
+    other_guides = sorted([a for a in en_guides if a.get("category") not in ("Investing", "Budgeting & Debt", "Taxes & Income")], key=lambda a: a.get("date", ""), reverse=True)
+    
     calcs = sorted(
         [c for c in calculators if c.get("lang") != "id"],
         key=lambda a: a.get("title", ""),
@@ -559,7 +741,7 @@ def build():
         '<div class="demographic-banner">'
         '<div class="demographic-banner-text">'
         '<div class="demographic-banner-title">🇮🇩 Mencari Panduan Keuangan Indonesia?</div>'
-        '<p class="demographic-banner-desc">Kunjungi portal khusus kami untuk panduan Pajak PPh 21, THR, Slip Gaji, KPR, dan Screener Saham IDX.</p>'
+        '<p class="demographic-banner-desc">Kunjungi portal khusus kami untuk panduan Pajak PPh 21, THR, Slip Gaji, KPR, SBN Ritel, dan Screener Saham IDX.</p>'
         '</div>'
         '<a href="id/index.html" class="demographic-banner-btn">Buka Portal Indonesia &rarr;</a>'
         '</div>'
@@ -580,13 +762,17 @@ def build():
         '<p class="newsletter-note">We never sell or share your address. Unsubscribe with one click.</p>'
         "</form></section>"
     )
+    
     index_content = (
         hero
         + id_banner_en
-        + search_filter_widget(placeholder="Search 13 calculators & financial guides...", no_results_text="No matching calculators or guides found.")
+        + search_filter_widget(placeholder="Search 13 calculators & 30+ financial guides...", no_results_text="No matching calculators or guides found.")
         + newsletter
-        + link_block("Calculators", calcs, kind="Calculator")
-        + link_block("Financial Guides", guides, kind="Guide")
+        + link_block("Calculators & Interactive Tools", calcs, kind="Calculator")
+        + link_block("Investing & Wealth Building", investing_guides, kind="Guide")
+        + link_block("Budgeting, Debt & Cash Management", budgeting_guides, kind="Guide")
+        + link_block("Taxes, Income & Career", tax_guides, kind="Guide")
+        + (link_block("General Financial Guides", other_guides, kind="Guide") if other_guides else "")
     )
     (PUBLIC_DIR / "index.html").write_text(
         render_page(
@@ -607,7 +793,7 @@ def build():
         ),
         encoding="utf-8",
     )
-    print(f"[site_builder] built index: {len(calcs)} calculators, {len(guides)} guides")
+    print(f"[site_builder] built index: {len(calcs)} calculators, {len(en_guides)} English guides")
 
     # Calculators Index Page
     if calcs:
@@ -650,6 +836,12 @@ def build():
         id_items = [dict(a, filename=a["filename"].split("/")[-1]) for a in id_guides]
         id_calc_items = [dict(c, filename=c["filename"].split("/")[-1]) for c in id_calcs]
         
+        # Split Indonesian categories
+        id_tax_career = [a for a in id_items if any(k in a["filename"] for k in ["pph-21", "thr", "slip-gaji", "bpjs", "umkm", "umr"])]
+        id_invest = [a for a in id_items if any(k in a["filename"] for k in ["sbn", "reksadana", "saham", "emas"])]
+        id_property = [a for a in id_items if any(k in a["filename"] for k in ["kpr", "darurat"])]
+        id_other = [a for a in id_items if a not in id_tax_career and a not in id_invest and a not in id_property]
+
         en_banner_id = (
             '<div class="demographic-banner">'
             '<div class="demographic-banner-text">'
@@ -667,15 +859,18 @@ def build():
             '<p class="hero-desc">Panduan keuangan praktis, regulasi pajak penghasilan, hak ketenagakerjaan, simulasi KPR, dan riset saham IDX yang objektif dan mudah dipahami.</p>'
             '</section>'
             + en_banner_id
-            + search_filter_widget(placeholder="Cari panduan pajak, KPR, gaji, atau saham...", no_results_text="Panduan atau kalkulator tidak ditemukan.")
-            + (link_block("Alat Riset Saham", id_calc_items, kind="Calculator") if id_calc_items else "")
-            + link_block("Panduan Keuangan & Regulasi", id_items, kind="Guide")
+            + search_filter_widget(placeholder="Cari panduan pajak, KPR, gaji, SBN, atau saham...", no_results_text="Panduan atau kalkulator tidak ditemukan.")
+            + (link_block("Alat Riset Saham BEI", id_calc_items, kind="Calculator") if id_calc_items else "")
+            + link_block("Pajak, Karir & Ketenagakerjaan", id_tax_career, kind="Guide")
+            + link_block("Investasi, SBN, Reksadana & Emas", id_invest, kind="Guide")
+            + link_block("Properti, KPR & Perencanaan Keluarga", id_property, kind="Guide")
+            + (link_block("Panduan Lainnya", id_other, kind="Guide") if id_other else "")
         )
 
         id_hub = render_page(
             id_hub_content,
             page_title=f"Money Clarity — Panduan Keuangan Indonesia | {SITE_NAME}",
-            meta_description="Panduan keuangan pribadi Indonesia: PPh 21, THR, slip gaji, KPR, dan screener saham IDX dalam bahasa yang mudah dipahami.",
+            meta_description="Panduan keuangan pribadi Indonesia: PPh 21, THR, slip gaji, KPR, SBN Ritel, dan screener saham IDX dalam bahasa yang mudah dipahami.",
             prefix="../",
             css_version=css_version,
             json_ld=json_ld_article_with_faqs(

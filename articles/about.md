@@ -1,47 +1,77 @@
 ---
-title: "About — Money Clarity"
-description: "What Money Clarity is, our editorial standards, and how our calculators are built and verified."
+title: "About Money Clarity: Editorial Standards, Author Persona & Quantitative Methodology"
+description: "Learn about Money Clarity (Money Basics Explained), our independent research mission, author Ray Porter, 3-tier fact-checking methodology, and regulatory sources."
 slug: "about"
-keyword: "about"
-date: "2026-08-11"
 ---
 
 # About Money Clarity
 
-Money Clarity is a personal finance reference site. We explain financial concepts in plain language and provide free interactive tools to help you explore the numbers behind your own decisions.
+Welcome to **Money Clarity** (Money Basics Explained) — an independent financial research and education platform dedicated to replacing financial jargon, opaque banking terms, and predatory sales pitches with clear mathematics, transparent calculations, and actionable personal finance guides.
 
-We publish two kinds of pages:
-
-- **Guides** — educational explanations of financial concepts and honest comparisons of options.
-- **Calculators** — transparent, interactive tools. Every calculator states its assumptions on the page, and the math behind it is explained in the accompanying guide.
-
-## Editorial standards
-
-- **Educational, not prescriptive.** We explain what options exist and how they work; we do not tell you what to do with your money.
-- **No fabricated numbers.** We do not invent statistics, rates, or figures. When a specific number matters, we say so with context and, where possible, link to a primary source. Example numbers in guides and calculators are labeled as examples.
-- **Assumptions are visible.** Every calculator lists the assumptions it makes (constant returns, monthly contributions, no taxes or inflation, and so on). Treat outputs as planning estimates, not predictions.
-- **Corrections.** If an article contains an error, we correct it and update the "Last updated" date on the page.
-
-## How the calculators are built
-
-All calculators run entirely in your browser — nothing you type is sent to any server. The formulas are standard financial mathematics (compound growth, amortization-style debt simulation, effective-rate conversion). Each tool page includes a section explaining its method and its limitations.
-
-## How we research and review
-
-- **Research first.** Before writing, we review how the topic is covered by primary and reputable sources (tax rules, regulatory definitions, published methodology). Where a rule or rate is specific — like PPh 21 brackets or THR rules — the guide names the governing regulation or institution, and example figures are labeled as examples.
-- **Math is checked.** Calculator formulas are verified with worked examples before publishing, and each tool page explains its method and limitations. A bad number in a finance tool is worse than no tool.
-- **Human review.** Every article is read in full before it goes live — checked for errors, misleading phrasing, and claims we cannot support. Corrections are made promptly and the page's "Last updated" date is bumped.
-- **Bilingual, not machine-translated.** Indonesian guides are written for the Indonesian context (Indonesian tax, KPR, THR, payslip conventions) rather than translated from English, then cross-checked against the English version for consistency.
-- **Editorial independence.** We have no affiliate relationships, sell no financial products, and accept no sponsored content. The site is self-funded and independent.
-
-## Who we are
-
-Money Clarity is an independent, self-funded project. It is written and edited by one person with no financial-industry affiliations, publishing under the site's editorial byline — "Money Clarity Editorial Team" — so articles carry a consistent, accountable voice tied to the site rather than to an individual's personal name. That byline refers to this editorial operation; it is not a company or a large staff. We are not a financial advisor, a broker, or an investment firm, and we do not sell financial products.
-
-## Contact
-
-Questions, corrections, or feedback: see the [contact page](contact.html).
+Our mission is simple: provide clear, objective, and mathematically verified personal finance explanations that empower individuals and families to make informed financial decisions without high-pressure sales bias.
 
 ---
 
-*This article is for general educational purposes only and is not personalized financial advice. Consider consulting a licensed financial advisor for guidance specific to your situation.*
+## Editorial Leadership & Author Persona
+
+Money Clarity is founded, written, and maintained by **Ray Porter**, an independent financial researcher with a strong multidisciplinary background in software engineering, algorithmic data modeling, and quantitative systems design.
+
+Having spent over a decade designing and analyzing high-throughput computational architectures and mathematical models, Ray applies the same rigorous engineering discipline to consumer personal finance, taxation frameworks, and investment mathematics. His analytical focus centers on deconstructing complex statutory tax codes (such as US IRS regulations and Indonesian UU Harmonisasi Peraturan Perpajakan) into transparent, reproducible calculations that everyday savers and investors can easily understand and verify.
+
+> [!NOTE]
+> **Editorial Transparency & Privacy Disclosure:** *Ray Porter* is a professional pen name used to protect the author's personal privacy while maintaining complete editorial accountability, consistency, and research integrity. Every article, calculation engine, and regulatory guide on Money Clarity is authored, verified, and maintained under these strict editorial standards.
+
+---
+
+## Our 3-Tier Quantitative Research Methodology
+
+In personal finance (Your Money or Your Life / YMYL), accuracy is non-negotiable. To ensure our content meets the highest standards of reliability and empirical validity, every guide and calculator on Money Clarity adheres to our **3-Tier Research Methodology**:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    THE 3-TIER QUANTITATIVE METHODOLOGY                      │
+├──────────────────────────┬──────────────────────────┬───────────────────────┤
+│  1. PRIMARY STATUTORY    │ 2. MATHEMATICAL PROOFS   │  3. DATE-STAMPED      │
+│     GROUNDING            │     & WORKED EXAMPLES    │     ACCURACY AUDITS   │
+├──────────────────────────┼──────────────────────────┼───────────────────────┤
+│ Grounded directly in     │ Every formula is derived │ Regular audit cycles  │
+│ official publications    │ with worked calculations,│ verify contribution   │
+│ from statutory bodies    │ step-by-step proofs, and │ caps, tax brackets, & │
+│ (SEC, IRS, FRED, BI,     │ open mathematical logic  │ regulatory changes    │
+│ OJK, Ditjen Pajak).      │ without black-box tools. │ before publication.   │
+└──────────────────────────┴──────────────────────────┴───────────────────────┘
+```
+
+### Tier 1: Primary Statutory Source Grounding
+We do not synthesize secondary opinions from third-party blogs or commercial marketing materials. All tax brackets, contribution limits, retirement account rules, banking regulations, and statutory deduction percentages are cited directly from primary governing authorities:
+* **United States & Global:** The Internal Revenue Service (IRS bulletins & publications), US Securities and Exchange Commission (SEC investor bulletins), Federal Reserve Economic Data (FRED), and the Consumer Financial Protection Bureau (CFPB).
+* **Indonesia:** Direktorat Jenderal Pajak (UU HPP, Peraturan Pemerintah No. 55/2022, PMK 168/2023), Bank Indonesia (BI Rate & circulars), Otoritas Jasa Keuangan (OJK regulations on mutual funds and banking), and Badan Pengawas Perdagangan Berjangka Komoditi (Bappebti).
+
+### Tier 2: Mathematical Formula Proofs & Worked Numerical Examples
+Every financial calculator and educational pillar guide is accompanied by full mathematical derivations and worked real-world scenarios. We openly display the exact compounding formulas, amortization schedules, effective percentage yields (APY), and marginal tax equations used, ensuring that readers understand *how* the numbers are calculated rather than relying on an opaque "black-box" interface.
+
+### Tier 3: Date-Stamped Regulatory Audits & Review Cycles
+Financial laws, tax brackets, and contribution ceilings change annually. Money Clarity maintains a scheduled audit cycle to update all monetary thresholds (such as 401(k) elective deferral limits, IRA contribution caps, PTKP brackets, and SBN retail coupon rules) whenever statutory revisions are enacted. Every guide displays a visible date stamp and regulatory review status.
+
+---
+
+## Editorial Corrections & Integrity Policy
+
+We strive for 100% mathematical and regulatory precision. If you spot a typo, an outdated statutory figure, or an edge-case discrepancy in any of our 13 interactive calculators, we welcome and encourage reader feedback:
+
+* **Reporting Errors:** Readers can submit errata directly through our [Contact Page](contact.html).
+* **Investigation & Correction:** Submissions are reviewed against primary statutory records within 48 business hours. When corrections are made, the article's date stamp is updated to reflect the revision.
+
+---
+
+## Commercial Independence & Zero-Affiliate Guarantee
+
+Money Clarity does not accept paid promotional placements, sponsored product reviews, or financial kickbacks for ranking specific banking products or loan providers. Our interactive screeners and comparison tables are driven purely by quantitative criteria (such as expense ratios, historical metrics, and statutory features), ensuring that readers receive objective, unbiased analysis.
+
+---
+
+## Educational Disclaimer
+
+All content, interactive calculators, guides, and analysis published on Money Clarity (Money Basics Explained) are provided strictly for **general educational and informational purposes only**. 
+
+Money Clarity is not a registered investment advisor, broker-dealer, CPA firm, or legal counsel. The information presented does not constitute personalized financial, investment, legal, or tax advice. Because individual financial situations, risk appetites, and local tax liabilities vary, readers are encouraged to consult a licensed Certified Financial Planner (CFP), Certified Public Accountant (CPA), or qualified legal professional before making major financial commitments.

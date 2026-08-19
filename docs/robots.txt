@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /articles/
+Allow: /calculators/
+Allow: /id/
 
 User-agent: Mediapartners-Google
 Allow: /
