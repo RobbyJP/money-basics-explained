@@ -49,7 +49,11 @@ def page_path(fm: dict, stem: str) -> str:
         return fm["path"].strip("/")
     if fm.get("slug") in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service"):
         return fm.get("slug") or stem
+    if fm.get("lang") == "id" or stem.startswith("id-"):
+        clean_stem = stem[3:] if stem.startswith("id-") else stem
+        return f"id/{clean_stem}"
     return f"articles/{stem}"
+
 
 
 def base_prefix(path: str) -> str:
