@@ -30,18 +30,28 @@ Rumus budgeting populer dari Barat (50% Kebutuhan, 30% Keinginan, 20% Tabungan) 
 
 Untuk pekerja bergaji UMR (misalkan **Rp5.000.000 / bulan**), gunakan model proporsi 4 pos pengeluaran ini:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                 RUMUS ALOKASI 60 - 20 - 10 - 10 (GAJI RP5 JUTA)             │
-├──────────────────────────┬──────────────┬───────────────────────────────────┤
-│           POS            │  PERSENTASE  │          NOMINAL ALOKASI          │
-├──────────────────────────┼──────────────┼───────────────────────────────────┤
-│ 1. Kebutuhan Pokok (Living│ **60%**     │ **Rp3.000.000** (Kos, Makan, Listrik)
-│ 2. Tabungan & Dana Darurat│ **20%**     │ **Rp1.000.000** (Disisihkan diawal)│
-│ 3. Biaya Sosial & Keluarga│ **10%**     │ **Rp500.000** (Kirim ortu/sedekah) │
-│ 4. Hiburan & Self-Reward  │ **10%**     │ **Rp500.000** (Nongkrong, kuota)  │
-└──────────────────────────┴──────────────┴───────────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">60% (Rp3.000.000)</div>
+    <div class="title">Kebutuhan Hidup Pokok</div>
+    <div class="desc">Sewa kos/kontrakan, makan pokok, listrik, air, pulsa/internet, transportasi harian.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">20% (Rp1.000.000)</div>
+    <div class="title">Dana Darurat & Investasi</div>
+    <div class="desc">Reksadana pasar uang, tabungan darurat, emas digital (jangan disentuh untuk gaya hidup).</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">10% (Rp500.000)</div>
+    <div class="title">Self-Reward & Hiburan</div>
+    <div class="desc">Nongkrong bersama teman, langganan streaming, hobi sederhana (jaga kesehatan mental).</div>
+  </div>
+  <div class="flow-card accent-amber">
+    <div class="badge">10% (Rp500.000)</div>
+    <div class="title">Keluarga & Sosial</div>
+    <div class="desc">Kirim orang tua di kampung halaman, zakat, infak, atau sedekah rutin.</div>
+  </div>
+</div>
 
 ---
 

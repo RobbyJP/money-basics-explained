@@ -31,18 +31,23 @@ Kementerian Keuangan menerbitkan 4 instrumen SBN Ritel sepanjang tahun kalender:
 
 ## Keuntungan Utama Investasi SBN Ritel
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       3 KEUNGGULAN UTAMA SBN RITEL                          │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│    1. JAMINAN APBN 100%  │ 2. PAJAK LEBIH RENDAH    │  3. PASSIVE INCOME    │
-├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ Pokok dan kupon dijamin  │ Pajak kupon obligasi     │ Kupon ditransfer rutin│
-│ 100% oleh Undang-Undang  │ hanya **10%**, jauh      │ setiap bulan tanggal  │
-│ (UU No. 24/2002 & 19/2008│ lebih hemat dibanding    │ 10 atau 15 langsung ke│
-│ tanpa batas nominal maks.│ pajak deposito (20%).    │ rekening bank Anda.   │
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">100% Dijamin</div>
+    <div class="title">Pasti Dibayar Negara</div>
+    <div class="desc">Pokok dan kupon dijamin UU No. 24/2002 tanpa batasan maksimal plafon Rp2 Miliar LPS.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Pajak 10%</div>
+    <div class="title">Pajak Kupon Lebih Rendah</div>
+    <div class="desc">Pajak final kupon obligasi hanya 10% (jauh lebih hemat dibanding pajak bunga deposito 20%).</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Kupon Bulanan</div>
+    <div class="title">Passive Income Rutin</div>
+    <div class="desc">Kupon ditransfer langsung setiap tanggal 10 atau 15 ke rekening bank investor.</div>
+  </div>
+</div>
 
 ---
 

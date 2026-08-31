@@ -884,4 +884,55 @@ textarea:focus {
   }
 }
 
+/* Visual Ratio / Flow Cards (Replacing ASCII Boxes) */
+.flow-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.flow-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-card.accent-blue   { border-top: 4px solid #1f5fbf; }
+.flow-card.accent-purple { border-top: 4px solid #7c3aed; }
+.flow-card.accent-emerald{ border-top: 4px solid #1e8e3e; }
+.flow-card.accent-amber  { border-top: 4px solid #b06000; }
+
+.flow-card .badge {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.flow-card.accent-blue .badge   { color: var(--accent); }
+.flow-card.accent-purple .badge { color: #7c3aed; }
+.flow-card.accent-emerald .badge{ color: var(--ok); }
+.flow-card.accent-amber .badge  { color: var(--warn); }
+
+.flow-card .title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.flow-card .desc {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+
 

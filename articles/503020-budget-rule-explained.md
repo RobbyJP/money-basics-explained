@@ -20,15 +20,23 @@ The 50/30/20 rule is based on after-tax income—often referred to as take-home 
 
 Once the total take-home pay is determined, the rule suggests allocating it into three distinct categories:
 
-```
-                  [ After-Tax Income ]
-                           │
-         ┌─────────────────┼─────────────────┐
-         ▼                 ▼                 ▼
-     50% Needs         30% Wants        20% Savings
-  (Housing, Bills,  (Dining, Travel,  (Emergency Fund,
-     Groceries)        Hobbies)         Retirement)
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">50%</div>
+    <div class="title">Essential Needs</div>
+    <div class="desc">Housing, utilities, groceries, basic transport, minimum loan payments</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">30%</div>
+    <div class="title">Lifestyle Wants</div>
+    <div class="desc">Dining out, entertainment, subscriptions, vacations, shopping</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">20%</div>
+    <div class="title">Savings & Debt</div>
+    <div class="desc">Emergency fund, Roth IRA/401(k), extra principal payments</div>
+  </div>
+</div>
 
 ### 1. 50% for "Needs"
 Needs are the essential expenses that must be paid to maintain basic living standards. These are obligations that cannot be easily avoided without serious consequences. 

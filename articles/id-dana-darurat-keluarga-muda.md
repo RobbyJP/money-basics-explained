@@ -20,17 +20,23 @@ Tanpa bantalan dana darurat yang memadai, keluarga muda sangat rentan terjeremba
 
 ## Berapa Target Dana Darurat yang Ideal untuk Keluarga Muda?
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                 RUMUS TARGET DANA DARURAT BERDASARKAN STATUS                │
-├──────────────────────────────┬──────────────────────────────┬───────────────┤
-│       STATUS KELUARGA        │  SUMBER PENGHASILAN UTAMA    │  TARGET DANA  │
-├──────────────────────────────┼──────────────────────────────┼───────────────┤
-│ 1. Menikah Tanpa Anak        │ Gaji Karyawan Tetap          │ **6 Bulan**   │
-│ 2. Menikah + 1 Anak / KPR    │ Gaji Karyawan Tetap          │ **9 Bulan**   │
-│ 3. Menikah + Anak + KPR      │ Freelancer / Wiraswasta      │ **12 Bulan**  │
-└──────────────────────────────┴──────────────────────────────┴───────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">3 – 6 Bulan</div>
+    <div class="title">Lajang (Single)</div>
+    <div class="desc">Tanpa tanggungan keluarga. Cukup untuk mengcover masa tunggu transisi kerja baru.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">6 – 9 Bulan</div>
+    <div class="title">Menikah (Belum Punya Anak)</div>
+    <div class="desc">Tanggungan pasangan atau memiliki cicilan KPR / kendaraan aktif.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">9 – 12 Bulan</div>
+    <div class="title">Keluarga dengan Anak / Freelancer</div>
+    <div class="desc">Pendapatan fluktuatif atau memiliki anak balita dengan kebutuhan medis/susu rutin.</div>
+  </div>
+</div>
 
 > [!TIP]
 > **Hitung dari Pengeluaran Pokok, Bukan Gaya Hidup:** Jika pengeluaran rutin bulanan keluarga untuk makan, popok anak, susu, listrik, internet, dan cicilan KPR adalah **Rp8.000.000 / bulan**, maka target dana darurat 6 bulan Anda adalah **Rp48.000.000** (bukan dihitung dari gaji kotor).

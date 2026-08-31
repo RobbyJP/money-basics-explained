@@ -33,19 +33,50 @@ Memahami hak-hak jaminan sosial ketenagakerjaan ini sangat penting agar Anda dap
 
 Untuk pekerja penerima upah (PU), berikut rincian 5 program perlindungan BPJS Ketenagakerjaan:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    RINCIAN IURAN BPJS KETENAGAKERJAAN                       │
-├──────────────────────────┬──────────────────┬────────────────┬──────────────┤
-│         PROGRAM          │ DIBAYAR KARYAWAN │ DIBAYAR KANTOR │ TOTAL IURAN  │
-├──────────────────────────┼──────────────────┼────────────────┼──────────────┤
-│ 1. Jaminan Hari Tua (JHT)│ **2,0%**         │ **3,7%**       │ **5,7%**     │
-│ 2. Jaminan Pensiun (JP)  │ **1,0%**         │ **2,0%**       │ **3,0%**     │
-│ 3. JKK (Kecelakaan Kerja)│ 0,0%             │ 0,24% - 1,74%  │ 0,24% - 1,74%│
-│ 4. JKM (Kematian)        │ 0,0%             │ **0,30%**      │ **0,30%**    │
-│ 5. JKP (Kehilangan Kerja)│ 0,0%             │ Rekomposisi APBN│ 0,46%        │
-└──────────────────────────┴──────────────────┴────────────────┴──────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Program Perlindungan</th>
+      <th>Dibayar Karyawan</th>
+      <th>Dibayar Kantor</th>
+      <th>Total Iuran</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1. Jaminan Hari Tua (JHT)</strong></td>
+      <td><strong>2,0%</strong></td>
+      <td><strong>3,7%</strong></td>
+      <td><strong>5,7%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>2. Jaminan Pensiun (JP)</strong></td>
+      <td><strong>1,0%</strong></td>
+      <td><strong>2,0%</strong></td>
+      <td><strong>3,0%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>3. JKK (Kecelakaan Kerja)</strong></td>
+      <td>0,0%</td>
+      <td>0,24% – 1,74%</td>
+      <td>0,24% – 1,74%</td>
+    </tr>
+    <tr>
+      <td><strong>4. JKM (Kematian)</strong></td>
+      <td>0,0%</td>
+      <td><strong>0,30%</strong></td>
+      <td><strong>0,30%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>5. JKP (Kehilangan Kerja)</strong></td>
+      <td>0,0%</td>
+      <td>Rekomposisi APBN</td>
+      <td>0,46%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ---
 

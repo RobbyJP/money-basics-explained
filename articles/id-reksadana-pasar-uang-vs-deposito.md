@@ -32,17 +32,32 @@ Meskipun keduanya sama-sama memiliki profil risiko yang sangat rendah dan fluktu
 
 Berdasarkan Undang-Undang Pajak Penghasilan (UU PPh) di Indonesia, keuntungan atau kenaikan Nilai Aktiva Bersih (NAB) dari reksa dana **bukan merupakan objek pajak**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                 SIMULASI IMBAL HASIL BERSIH ATAS MODAL RP50.000.000         │
-├────────────────────────────────────────┬────────────────────────────────────┤
-│         DEPOSITO BANK (BUNGA 5,00%)    │            RDPU (RETURN 5,50%)     │
-├────────────────────────────────────────┼────────────────────────────────────┤
-│ • Bunga Kotor: Rp2.500.000 / tahun     │ • Return Kotor: Rp2.750.000 / tahun│
-│ • Pajak Bunga 20%: -Rp500.000          │ • Pajak Reksa Dana (0%): -Rp0      │
-│ • **Hasil Bersih: Rp2.000.000 (4,00%)**│ • **Hasil Bersih: Rp2.750.000 (+37%)
-└────────────────────────────────────────┴────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Instrumen Finansial</th>
+      <th>Imbal Hasil Gross</th>
+      <th>Tarif Pajak Penghasilan</th>
+      <th>Hasil Bersih (Netto) 1 Tahun</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Reksadana Pasar Uang (RDPU)</strong></td>
+      <td>5,50% / tahun</td>
+      <td><strong>0% (Bukan Objek Pajak)</strong></td>
+      <td><strong>Rp2.750.000</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Deposito Bank Konvensional</strong></td>
+      <td>5,50% / tahun</td>
+      <td><strong>20% (PPh Final Bunga)</strong></td>
+      <td><strong>Rp2.200.000</strong> (Terpotong pajak Rp550.000)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 Dengan nominal modal yang sama, RDPU menghasilkan **keuntungan bersih 37% lebih besar** karena tidak tergerus potongan pajak 20% dan memiliki imbal hasil dasar yang lebih kompetitif.
 

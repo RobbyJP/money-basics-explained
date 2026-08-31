@@ -34,19 +34,29 @@ Both cash management strategies are backed by federal insurance (FDIC in the US 
 
 A **CD Ladder** is a structured savings strategy where you divide a single pool of cash into equal portions and invest each portion into a CD with a different maturity date (e.g., 3-month, 6-month, 9-month, and 12-month CDs):
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      HOW A 1-YEAR CD LADDER OPERATES                        │
-├─────────────────┬─────────────────┬─────────────────┬───────────────────────┤
-│   CD 1: 3 MONTHS│   CD 2: 6 MONTHS│   CD 3: 9 MONTHS│   CD 4: 12 MONTHS     │
-│       ($5,000)  │       ($5,000)  │       ($5,000)  │       ($5,000)        │
-└─────────────────┴─────────────────┴─────────────────┴───────────────────────┘
-         │
-         ▼ (After 3 Months)
-   CD 1 Matures!
-   • Need cash? Withdraw $5,000 + interest.
-   • Don't need cash? Roll over into a new 12-Month CD to keep the ladder going!
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">CD 1 (3 Mo)</div>
+    <div class="title">$5,000 Allocation</div>
+    <div class="desc">Matures after 3 months. Cash out if needed, or roll over into a new 12-month CD.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">CD 2 (6 Mo)</div>
+    <div class="title">$5,000 Allocation</div>
+    <div class="desc">Matures after 6 months. Provides second tranche of liquidity.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">CD 3 (9 Mo)</div>
+    <div class="title">$5,000 Allocation</div>
+    <div class="desc">Matures after 9 months. Third quarterly liquidity checkpoint.</div>
+  </div>
+  <div class="flow-card accent-amber">
+    <div class="badge">CD 4 (12 Mo)</div>
+    <div class="title">$5,000 Allocation</div>
+    <div class="desc">Matures after 12 months at maximum locked annual yield.</div>
+  </div>
+</div>
+
 
 ---
 

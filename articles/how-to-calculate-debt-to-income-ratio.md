@@ -17,19 +17,18 @@ Your DTI ratio measures the percentage of your **gross monthly income** that goe
 
 ## Front-End DTI vs. Back-End DTI Explained
 
-```
-┌────────────────────────────────────────┬────────────────────────────────────────┐
-│           FRONT-END DTI (HOUSING)      │           BACK-END DTI (TOTAL DEBT)    │
-├────────────────────────────────────────┼────────────────────────────────────────┤
-│ Measures **ONLY** housing expenses:    │ Measures **ALL** monthly debt payments │
-│ • Mortgage Principal & Interest        │ combined:                              │
-│ • Property Taxes                       │ • Total Housing (Front-End DTI)        │
-│ • Homeowners Insurance                 │ • Minimum Credit Card Payments         │
-│ • HOA / Condo Fees                     │ • Auto Loan Payments & Student Loans   │
-│                                        │ • Personal Loans & Child Support       │
-│ **Target Limit:** **28% or lower**     │ **Target Limit:** **36% to 43% max**   │
-└────────────────────────────────────────┴────────────────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">&le; 28%</div>
+    <div class="title">Front-End DTI (Housing Only)</div>
+    <div class="desc">Includes Mortgage Principal, Interest, Property Taxes, and Home Insurance divided by Gross Monthly Income.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">&le; 36% – 43%</div>
+    <div class="title">Back-End DTI (Total Debt)</div>
+    <div class="desc">Includes Housing plus Auto Loans, Student Debt, Credit Card minimums divided by Gross Monthly Income.</div>
+  </div>
+</div>
 
 ---
 

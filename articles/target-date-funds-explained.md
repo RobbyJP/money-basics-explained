@@ -17,17 +17,23 @@ When you invest in a Target-Date Fund (e.g., *Vanguard Target Retirement 2060 Fu
 
 ## How the Target-Date Glide Path Works
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    THE LIFECYCLE TARGET-DATE GLIDE PATH                     │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│  EARLY CAREER (AGE 25)   │   MID CAREER (AGE 45)    │ AT RETIREMENT (AGE 65)│
-├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ • 90% Equities (Stocks)  │ • 70% Equities (Stocks)  │ • 50% Equities (Stocks│
-│ • 10% Bonds & Cash       │ • 30% Bonds & Cash       │ • 50% Bonds & Cash    │
-│ • Focus: Maximum Growth  │ • Focus: Growth & Safety │ • Focus: Capital Pres.│
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Early Career (Age 20–40)</div>
+    <div class="title">90% Stocks / 10% Bonds</div>
+    <div class="desc">Aggressive accumulation prioritizing long-term geometric compounding.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Mid Career (Age 40–55)</div>
+    <div class="title">75% Stocks / 25% Bonds</div>
+    <div class="desc">Gradual shift to reduce portfolio volatility and preserve accumulated capital.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Retirement (Age 65+)</div>
+    <div class="title">40% Stocks / 60% Bonds</div>
+    <div class="desc">Income generation and defense against sequence-of-returns drawdowns.</div>
+  </div>
+</div>
 
 ---
 

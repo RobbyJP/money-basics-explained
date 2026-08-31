@@ -16,14 +16,12 @@ However, because everyone interacts with money differently, a tool that works pe
 
 To understand which tool fits best, it helps to look at the distinct philosophy behind each platform.
 
-```markdown
 | Budgeting App | Best For | Budgeting Philosophy | Syncing Style | Cost Tier |
 | :--- | :--- | :--- | :--- | :--- |
 | **YNAB (You Need A Budget)** | Active habit-builders | Zero-Based Budgeting | Automated or Manual | Paid Subscription |
 | **Monarch Money** | Households and couples | Cash Flow Tracking | Automated | Paid Subscription |
 | **Goodbudget** | Visual envelope budgeters | Digital Envelope System | Manual (Shared Syncing) | Free & Paid Tiers |
 | **Empower** | Net worth and investment tracking | High-Level Cash Flow | Automated | Free |
-```
 
 ---
 

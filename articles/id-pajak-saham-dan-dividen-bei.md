@@ -22,17 +22,34 @@ Setiap kali Anda **menjual saham** melalui aplikasi sekuritas di BEI, Anda akan 
 
 $$\text{PPh Final Penjualan Saham} = 0,1\% \times \text{Nilai Bruto Penjualan}$$
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    KETENTUAN PAJAK TRANSAKSI SAHAM BEI                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Pajak 0,1% dipotong **otomatis oleh broker/sekuritas** saat settlement. │
-│ 2. Dikenakan hanya atas transaksi **JUAL** (transaksi BELI tidak kena PPh). │
-│ 3. Berlaku baik saat Anda untung (*capital gain*) maupun saat rugi.         │
-│ 4. Karena bersifat FINAL, Anda tidak perlu membayar pajak tambahan saat     │
-│    lapor SPT Tahunan.                                                       │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Jenis Transaksi Saham</th>
+      <th>Tarif Pajak Final</th>
+      <th>Mekanisme Pemotongan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Penjualan Saham di Bursa (BEI)</strong></td>
+      <td><strong>0,1%</strong> dari nilai bruto penjualan</td>
+      <td>Dipotong otomatis oleh sekuritas saat transaksi jual (PPh Final Ps 4 ayat 2)</td>
+    </tr>
+    <tr>
+      <td><strong>Dividen Saham (Diinvestasikan Kembali)</strong></td>
+      <td><strong>0% (Bebas Pajak)</strong></td>
+      <td>Syarat UU Cipta Kerja: Diinvestasikan kembali di instrumen NKRI minimal 3 tahun</td>
+    </tr>
+    <tr>
+      <td><strong>Dividen Saham (Ditarik Tunai)</strong></td>
+      <td><strong>10%</strong> PPh Final</td>
+      <td>Disetor sendiri atau dipotong pemungut pajak</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ---
 

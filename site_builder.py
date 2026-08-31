@@ -29,7 +29,7 @@ CALCULATORS_DIR = Path("calculators")
 TEMPLATES_DIR = Path("templates")
 PUBLIC_DIR = Path(os.getenv("PUBLIC_DIR", "docs"))
 
-SITE_NAME = os.getenv("SITE_NAME", "Money Basics Explained")
+SITE_NAME = os.getenv("SITE_NAME", "Money Clarity")
 SITE_URL = os.getenv("SITE_URL", "https://moneyclarity.blog")
 SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "Clear explanations of personal finance concepts, smart calculators, and honest financial comparisons.")
 
@@ -338,7 +338,7 @@ def json_ld_about() -> str:
                 "@type": "AboutPage",
                 "name": f"About {SITE_NAME}",
                 "url": site_url("about"),
-                "description": "Learn about Money Basics Explained, our mission to deliver clear personal finance education, and our quantitative research methodology.",
+                "description": f"Learn about {SITE_NAME}, our mission to deliver clear personal finance education, and our quantitative research methodology.",
                 "mainEntity": {
                     "@type": "Person",
                     "@id": site_url("about") + "#author",
@@ -468,7 +468,7 @@ def build():
     PUBLIC_DIR.mkdir(parents=True)
     shutil.copy(TEMPLATES_DIR / "style.css", PUBLIC_DIR / "style.css")
     (PUBLIC_DIR / ".nojekyll").write_text("", encoding="utf-8")
-    cname = os.getenv("CNAME", "")
+    cname = os.getenv("CNAME", "moneyclarity.blog")
     if cname:
         (PUBLIC_DIR / "CNAME").write_text(cname.strip(), encoding="utf-8")
     ads_src = Path("ads") / "ads.txt"
@@ -806,7 +806,7 @@ def build():
             prefix="../",
             css_version=css_version,
             json_ld=json_ld_article_with_faqs(
-                "Calculators — Money Basics Explained",
+                f"Calculators — {SITE_NAME}",
                 "Free interactive personal finance calculators.",
                 site_url("calculators"),
                 today,

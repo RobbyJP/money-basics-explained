@@ -22,16 +22,38 @@ Selain itu, bagi Wajib Pajak Orang Pribadi, pemerintah memberikan fasilitas **Be
 
 Untuk Wajib Pajak Orang Pribadi UMKM, PPh Final 0,5% **hanya dikenakan atas bagian omzet kumulatif yang melebihi Rp500 juta dalam 1 tahun pajak**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    SKEMA OMZET TIDAK KENA PAJAK RP500 JUTA                  │
-├────────────────────────────────────────┬────────────────────────────────────┤
-│      OMZET KUMULATIF BULANAN           │           STATUS PAJAK             │
-├────────────────────────────────────────┼────────────────────────────────────┤
-│ • Omzet Bulan 1 s.d. batas Rp500 Juta  │ **BEBAS PAJAK (PPh Final = Rp0)**  │
-│ • Bagian Omzet yang MELEBIHI Rp500 Jt  │ **Dikenakan Tarif PPh Final 0,5%** │
-└────────────────────────────────────────┴────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Bulan Berjalan</th>
+      <th>Omzet Bulanan</th>
+      <th>Akumulasi Omzet Tahunan</th>
+      <th>Pajak PPh Final 0,5%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Januari – Mei</td>
+      <td>Rp100.000.000 / bln</td>
+      <td>Rp500.000.000</td>
+      <td><strong>Rp 0 (Bebas Pajak)</strong></td>
+    </tr>
+    <tr>
+      <td>Juni</td>
+      <td>Rp100.000.000</td>
+      <td>Rp600.000.000</td>
+      <td><strong>Rp500.000</strong> (0,5% x Rp100 Juta yang melebihi batas)</td>
+    </tr>
+    <tr>
+      <td>Juli – Desember</td>
+      <td>Rp100.000.000 / bln</td>
+      <td>Rp1.200.000.000</td>
+      <td><strong>Rp500.000 / bulan</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 > [!IMPORTANT]
 > Fasilitas batas bebas pajak Rp500 juta ini **hanya berlaku untuk Wajib Pajak Orang Pribadi**. Bagi Wajib Pajak Badan (CV, PT, Koperasi), seluruh omzet dari bulan pertama langsung dikenakan tarif 0,5% tanpa batasan pembebasan Rp500 juta.

@@ -45,17 +45,29 @@ Keduanya memiliki perbedaan mendasar bukan hanya dari segi landasan hukum dan fa
 
 Banyak debitur KPR Konvensional terjebak saat masa promosi suku bunga murah berakhir:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                     ANATOMI JEBAKAN BUNGA KPR FLOATING                      │
-├────────────────────────────────────────┬────────────────────────────────────┤
-│       TAHUN 1 - 3 (MASA PROMO FIXED)   │       TAHUN 4 - 20 (MASA FLOATING) │
-├────────────────────────────────────────┼────────────────────────────────────┤
-│ • Suku Bunga: **4,50% Fixed**          │ • Suku Bunga: **11,50% - 13,50%**  │
-│ • Cicilan Pokok + Bunga:               │ • Cicilan Pokok + Bunga:           │
-│   **Rp4.800.000 / bulan**              │   **Rp7.900.000 / bulan! (+64%)**  │
-└────────────────────────────────────────┴────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Periode KPR</th>
+      <th>Suku Bunga Berlaku</th>
+      <th>Estimasi Angsuran Bulanan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Tahun 1 – 3 (Fixed Promo)</strong></td>
+      <td>4,50% per tahun</td>
+      <td><strong>Rp3.800.000 / bulan</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Tahun 4 – 15 (Floating Market)</strong></td>
+      <td>11,50% – 13,50% per tahun</td>
+      <td><strong>Rp6.200.000 – Rp7.100.000 / bulan</strong> (Lonjakan +70%!)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 Kenaikan angsuran drastis pasca masa fixed dapat mengacaukan arus kas keluarga apabila kenaikan gaji tidak mampu mengimbangi lonjakan cicilan tersebut.
 

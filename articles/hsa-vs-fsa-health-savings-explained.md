@@ -34,18 +34,23 @@ Understanding how these accounts work can turn a basic healthcare buffer into on
 
 The Health Savings Account is unique in the entire United States tax code because it is the **only account that offers a Triple Tax Advantage**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          THE HSA TRIPLE TAX SHIELD                          │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│    1. TAX-FREE DEPOSIT   │    2. TAX-FREE GROWTH    │  3. TAX-FREE WITHDRAW │
-├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ Contributions are 100%   │ All interest, dividends, │ Withdrawals used for  │
-│ tax-deductible (pre-tax),│ and capital gains grow   │ qualified healthcare  │
-│ reducing current income. │ completely tax-free.     │ expenses are 100% free│
-│ Also exempt from FICA.   │                          │ of federal/state tax. │
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Shield 1</div>
+    <div class="title">100% Tax-Deductible</div>
+    <div class="desc">Contributions lower your current taxable income dollar-for-dollar (or pre-tax via payroll).</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Shield 2</div>
+    <div class="title">Tax-Free Growth</div>
+    <div class="desc">All dividends, interest, and capital gains compound with zero federal or state taxation.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Shield 3</div>
+    <div class="title">Tax-Free Withdrawals</div>
+    <div class="desc">Withdrawals for qualified medical, dental, and vision expenses are 100% tax-free at any age.</div>
+  </div>
+</div>
 
 By comparison:
 * A **Traditional 401(k) / IRA** gives you pre-tax contributions and tax-deferred growth, but withdrawals in retirement are taxed as ordinary income.
@@ -58,18 +63,23 @@ By comparison:
 
 Because HSA funds never expire and can be invested in broad-market index funds, savvy financial planners use the HSA as an auxiliary **Stealth Retirement Account**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                       THE HSA STEALTH INVESTING CYCLE                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Max out annual HSA contributions each year.                              │
-│ 2. Invest the full balance into low-cost broad-market index funds.          │
-│ 3. Pay current out-of-pocket medical bills using cash / regular checking.   │
-│ 4. Scan and digitally store all medical receipts and invoices.              │
-│ 5. Let the invested HSA compound tax-free for 20 to 30 years.               │
-│ 6. Reimburse yourself tax-free decades later in retirement for past claims! │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Step 1</div>
+    <div class="title">Max HSA Contributions</div>
+    <div class="desc">Contribute the maximum annual IRS limit and invest 100% into broad-market index funds.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Step 2</div>
+    <div class="title">Pay Out-of-Pocket</div>
+    <div class="desc">Pay current medical bills from checking/cash and store receipts digitally in a cloud folder.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Step 3</div>
+    <div class="title">Compounded Reimbursement</div>
+    <div class="desc">Let funds compound for 20–30 years, then reimburse yourself tax-free with saved receipts.</div>
+  </div>
+</div>
 
 > [!TIP]
 > **No Time Limit on Reimbursement:** Current IRS regulations impose **no deadline** on when you must reimburse yourself for an eligible medical expense, as long as the expense was incurred after the HSA was established. A medical procedure paid out-of-pocket in 2026 can be reimbursed tax-free from your HSA in 2056!

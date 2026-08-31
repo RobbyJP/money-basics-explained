@@ -35,17 +35,18 @@ Memahami kelebihan dan batasan dari masing-masing sistem proteksi ini memungkink
 
 Banyak masyarakat belum menyadari bahwa Anda dapat **mengombinasikan BPJS Kesehatan dan Asuransi Swasta** secara sinergis melalui skema **Coordination of Benefit (COB)**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    SKEMA KERJA CO-BENEFIT (COB) DI RUMAH SAKIT              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Masuk Rumah Sakit menggunakan rujukan BPJS Kesehatan untuk kamar standar.│
-│ 2. Mengajukan naik kelas kamar (misal ke VIP/VVIP) saat rawat inap.         │
-│ 3. BPJS Kesehatan menanggung biaya dasar sesuai paket tarif resmi INA-CBGs. │
-│ 4. Selisih biaya (*excess bill*) akibat naik kelas kamar diklaimkan ke      │
-│    kartu Asuransi Swasta Anda!                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Lapisan 1</div>
+    <div class="title">BPJS Kesehatan</div>
+    <div class="desc">Membayar seluruh biaya perawatan dasar, obat formularium, dan tarif INA-CBGs rumah sakit.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Lapisan 2</div>
+    <div class="title">Asuransi Swasta (COB)</div>
+    <div class="desc">Mengcover selisih biaya naik kelas rawat inap (VIP/VVIP) dan obat non-formularium.</div>
+  </div>
+</div>
 
 Dengan skema COB ini, Anda mendapatkan kenyamanan fasilitas kamar VIP tanpa harus membayar selisih biaya dari kantong pribadi.
 

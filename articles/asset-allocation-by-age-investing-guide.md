@@ -23,19 +23,45 @@ Historically, financial advisors used the traditional **"Rule of 100"** (subtrac
 
 $$\text{Stock Allocation Percentage} = 110 - \text{Your Current Age}$$
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    THE MODERN ASSET ALLOCATION GLIDE PATH                   │
-├─────────────┬───────────────────────────┬───────────────────────────────────┤
-│     AGE     │      STOCKS (EQUITIES)    │       BONDS (FIXED INCOME)        │
-├─────────────┼───────────────────────────┼───────────────────────────────────┤
-│ **20s**     │ **90% - 100%**            │ **0% - 10%**                      │
-│ **30s**     │ **80% - 90%**             │ **10% - 20%**                     │
-│ **40s**     │ **70% - 80%**             │ **20% - 30%**                     │
-│ **50s**     │ **60% - 70%**             │ **30% - 40%**                     │
-│ **60s+**    │ **40% - 60%**             │ **40% - 60% (+ Cash Buffer)**     │
-└─────────────┴───────────────────────────┴───────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Age Bracket</th>
+      <th>Stocks (Equities)</th>
+      <th>Bonds (Fixed Income)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>20s</strong></td>
+      <td><strong>90% – 100%</strong></td>
+      <td><strong>0% – 10%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>30s</strong></td>
+      <td><strong>80% – 90%</strong></td>
+      <td><strong>10% – 20%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>40s</strong></td>
+      <td><strong>70% – 80%</strong></td>
+      <td><strong>20% – 30%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>50s</strong></td>
+      <td><strong>60% – 70%</strong></td>
+      <td><strong>30% – 40%</strong></td>
+    </tr>
+    <tr>
+      <td><strong>60s+</strong></td>
+      <td><strong>40% – 60%</strong></td>
+      <td><strong>40% – 60% (+ Cash Buffer)</strong></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 ---
 
@@ -89,17 +115,19 @@ $$\text{Stock Allocation Percentage} = 110 - \text{Your Current Age}$$
 
 Over time, different asset classes grow at different rates. If a bull market causes your stocks to surge by 25% in a year while bonds return 4%, your target **80/20 portfolio will drift into an 88/12 allocation**, exposing you to significantly more downside risk than intended.
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          HOW REBALANCING ENFORCES                           │
-│                         "BUY LOW AND SELL HIGH"                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. When stocks rally dramatically: You trim a small portion of equities and │
-│    purchase undervalued fixed income bonds.                                 │
-│ 2. When stocks crash in a bear market: You reallocate fixed income gains to │
-│    buy discounted equities at market bottoms.                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Rallies</div>
+    <div class="title">When Equities Surge</div>
+    <div class="desc">Trim a portion of oversized equities and purchase fixed income to lock in gains and reset risk.</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Drawdowns</div>
+    <div class="title">When Markets Drop</div>
+    <div class="desc">Reallocate stable bond reserves to purchase discounted equities at market bottoms.</div>
+  </div>
+</div>
+
 
 > [!TIP]
 > **Tax-Efficient Rebalancing:** To avoid triggering capital gains taxes in taxable brokerage accounts, rebalance using **new ongoing contributions** (directing new monthly savings into the underweight asset class) rather than selling existing appreciated shares.

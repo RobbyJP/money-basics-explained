@@ -32,19 +32,39 @@ When shopping for coverage, consumers are faced with two fundamentally different
 
 ## The Math Behind "Buy Term and Invest the Difference" (BTID)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    30-YEAR WORKED COMPARISON: $500,000 COVERAGE             │
-│                        (30-Year-Old Healthy Non-Smoker)                     │
-├────────────────────────────────────────┬────────────────────────────────────┤
-│           WHOLE LIFE POLICY            │    BUY TERM & INVEST DIFFERENCE    │
-├────────────────────────────────────────┼────────────────────────────────────┤
-│ • Monthly Premium: **$450 / month**    │ • Term Premium: **$40 / month**    │
-│ • Guaranteed Cash Value after 30 Yrs:  │ • Invests: **$410 / month @ 8%**   │
-│   **~$260,000 - $310,000**             │ • Portfolio Value after 30 Yrs:    │
-│                                        │   **~$610,000 in Liquid Wealth!**  │
-└────────────────────────────────────────┴────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Comparison Metric</th>
+      <th>30-Year Level Term Life</th>
+      <th>Whole Life (Permanent Insurance)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Monthly Premium</strong></td>
+      <td><strong>$35 / month</strong></td>
+      <td><strong>$450 / month</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Death Benefit Coverage</strong></td>
+      <td>$500,000 guaranteed for 30 years</td>
+      <td>$500,000 guaranteed for lifetime</td>
+    </tr>
+    <tr>
+      <td><strong>Annual Cost Difference</strong></td>
+      <td>$420 / year</td>
+      <td>$5,400 / year</td>
+    </tr>
+    <tr>
+      <td><strong>"Invest the Difference" Result (7% Return)</strong></td>
+      <td><strong>$498,000 in personal investment portfolio</strong></td>
+      <td>~$185,000 cash value (after agent fees & admin load)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ---
 

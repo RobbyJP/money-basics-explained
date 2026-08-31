@@ -19,17 +19,23 @@ Financial planners universally describe an employer 401(k) match as **the closes
 
 Employers structure their matching formulas in several standard ways:
 
-```
-┌──────────────────────────────┬──────────────────────────────┬──────────────────────────────┐
-│  1. DOLLAR-FOR-DOLLAR MATCH  │   2. 50% PARTIAL MATCH       │   3. TIERED / HYBRID MATCH   │
-├──────────────────────────────┼──────────────────────────────┼──────────────────────────────┤
-│ "100% match up to 4% salary" │ "50% match up to 6% salary"  │ "100% on first 3%, plus      │
-│                              │                              │  50% on next 2%"             │
-│ • You contribute: 4%         │ • You contribute: 6%         │ • You contribute: 5%         │
-│ • Employer adds: **4%**      │ • Employer adds: **3%**      │ • Employer adds: **4%**      │
-│ • **Instant Return: +100%**  │ • **Instant Return: +50%**   │ • **Instant Return: +80%**   │
-└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">1:1 Match</div>
+    <div class="title">Dollar-for-Dollar</div>
+    <div class="desc">Employer contributes 100% of your contributions up to a cap (e.g., dollar-for-dollar up to 5% of salary).</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">50% Match</div>
+    <div class="title">Partial 50% Match</div>
+    <div class="desc">Employer contributes $0.50 per $1.00 you contribute (e.g., 50% match on first 6% of salary = 3% total match).</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Tiered Match</div>
+    <div class="title">Tiered / Hybrid Match</div>
+    <div class="desc">Employer matches 100% on first 3% of salary plus 50% on next 2% (4% total employer match on 5% contribution).</div>
+  </div>
+</div>
 
 ### Worked Example: The $80,000 Salary Scenario
 Suppose your annual salary is **$80,000** and your company offers a **50% match on up to 6% of your salary**:
@@ -44,17 +50,30 @@ Suppose your annual salary is **$80,000** and your company offers a **50% match 
 
 While **100% of your own payroll contributions are always immediately yours (100% vested)**, the money contributed by your employer may be subject to a **Vesting Schedule**:
 
-```
-┌────────────────────────────────────────┬────────────────────────────────────────┐
-│             CLIFF VESTING              │             GRADED VESTING             │
-├────────────────────────────────────────┼────────────────────────────────────────┤
-│ You own **0%** of the employer match   │ You gain ownership of the match        │
-│ until you complete a specific period   │ gradually over several years.          │
-│ (e.g., 3 years).                       │                                        │
-│ • Leave at 2 years: Keep $0 match.     │ • Year 1: 20% vested                   │
-│ • Leave at 3 years: Keep 100% match.   │ • Year 2: 40% vested (Year 5: 100%)    │
-└────────────────────────────────────────┴────────────────────────────────────────┘
-```
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Cliff Vesting</th>
+      <th>Graded Vesting</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>0% Vested:</strong> Years 0 to 2</td>
+      <td><strong>20% Vested:</strong> After Year 2</td>
+    </tr>
+    <tr>
+      <td><strong>0% Vested:</strong> Year 2.99</td>
+      <td><strong>40% Vested:</strong> After Year 3</td>
+    </tr>
+    <tr>
+      <td><strong>100% Vested:</strong> Exactly at Year 3.0</td>
+      <td><strong>60% – 100% Vested:</strong> Increases by 20% annually through Year 6</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ---
 

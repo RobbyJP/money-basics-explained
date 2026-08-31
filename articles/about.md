@@ -1,12 +1,12 @@
 ---
 title: "About Money Clarity: Editorial Standards, Author Persona & Quantitative Methodology"
-description: "Learn about Money Clarity (Money Basics Explained), our independent research mission, author Ray Porter, 3-tier fact-checking methodology, and regulatory sources."
+description: "Learn about Money Clarity, our independent research mission, author Ray Porter, 3-tier fact-checking methodology, and regulatory sources."
 slug: "about"
 ---
 
 # About Money Clarity
 
-Welcome to **Money Clarity** (Money Basics Explained) — an independent financial research and education platform dedicated to replacing financial jargon, opaque banking terms, and predatory sales pitches with clear mathematics, transparent calculations, and actionable personal finance guides.
+Welcome to **Money Clarity** — an independent financial research and education platform dedicated to replacing financial jargon, opaque banking terms, and predatory sales pitches with clear mathematics, transparent calculations, and actionable personal finance guides.
 
 Our mission is simple: provide clear, objective, and mathematically verified personal finance explanations that empower individuals and families to make informed financial decisions without high-pressure sales bias.
 
@@ -27,20 +27,24 @@ Having spent over a decade designing and analyzing high-throughput computational
 
 In personal finance (Your Money or Your Life / YMYL), accuracy is non-negotiable. To ensure our content meets the highest standards of reliability and empirical validity, every guide and calculator on Money Clarity adheres to our **3-Tier Research Methodology**:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    THE 3-TIER QUANTITATIVE METHODOLOGY                      │
-├──────────────────────────┬──────────────────────────┬───────────────────────┤
-│  1. PRIMARY STATUTORY    │ 2. MATHEMATICAL PROOFS   │  3. DATE-STAMPED      │
-│     GROUNDING            │     & WORKED EXAMPLES    │     ACCURACY AUDITS   │
-├──────────────────────────┼──────────────────────────┼───────────────────────┤
-│ Grounded directly in     │ Every formula is derived │ Regular audit cycles  │
-│ official publications    │ with worked calculations,│ verify contribution   │
-│ from statutory bodies    │ step-by-step proofs, and │ caps, tax brackets, & │
-│ (SEC, IRS, FRED, BI,     │ open mathematical logic  │ regulatory changes    │
-│ OJK, Ditjen Pajak).      │ without black-box tools. │ before publication.   │
-└──────────────────────────┴──────────────────────────┴───────────────────────┘
-```
+<div class="flow-container">
+  <div class="flow-card accent-blue">
+    <div class="badge">Tier 1</div>
+    <div class="title">Primary Statutory Grounding</div>
+    <div class="desc">Grounded directly in official statutory sources (SEC, IRS, Federal Reserve, Bank Indonesia, OJK, Ditjen Pajak).</div>
+  </div>
+  <div class="flow-card accent-purple">
+    <div class="badge">Tier 2</div>
+    <div class="title">Mathematical Proofs & Examples</div>
+    <div class="desc">Every formula is derived with worked calculations, step-by-step proofs, and open mathematical logic.</div>
+  </div>
+  <div class="flow-card accent-emerald">
+    <div class="badge">Tier 3</div>
+    <div class="title">Date-Stamped Accuracy Audits</div>
+    <div class="desc">Regular audit cycles verify contribution caps, tax brackets, and regulatory changes before publication.</div>
+  </div>
+</div>
+
 
 ### Tier 1: Primary Statutory Source Grounding
 We do not synthesize secondary opinions from third-party blogs or commercial marketing materials. All tax brackets, contribution limits, retirement account rules, banking regulations, and statutory deduction percentages are cited directly from primary governing authorities:
@@ -72,6 +76,6 @@ Money Clarity does not accept paid promotional placements, sponsored product rev
 
 ## Educational Disclaimer
 
-All content, interactive calculators, guides, and analysis published on Money Clarity (Money Basics Explained) are provided strictly for **general educational and informational purposes only**. 
+All content, interactive calculators, guides, and analysis published on Money Clarity are provided strictly for **general educational and informational purposes only**. 
 
 Money Clarity is not a registered investment advisor, broker-dealer, CPA firm, or legal counsel. The information presented does not constitute personalized financial, investment, legal, or tax advice. Because individual financial situations, risk appetites, and local tax liabilities vary, readers are encouraged to consult a licensed Certified Financial Planner (CFP), Certified Public Accountant (CPA), or qualified legal professional before making major financial commitments.

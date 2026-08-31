@@ -231,10 +231,12 @@ def generate_article_content(client: genai.Client, model: str, topic_info: dict,
 Tugas Anda adalah menjelaskan konsep keuangan dengan jelas, objektif, jujur, dan mudah dipahami oleh masyarakat umum.
 Aturan Penting:
 1. Hindari kalimat menggurui seperti "Anda harus" — gunakan bahasa netral seperti "Pilihan yang umum digunakan adalah" atau "Metode ini efektif bagi orang yang...".
-2. Berikan contoh perhitungan konkret dan realistis dalam Rupiah (Rp) menggunakan tabel Markdown.
-3. Jangan mengarang peraturan resmi — sebutkan dasar aturan jika relevan (misal UU HPP, aturan Depnaker, atau BI/OJK).
-4. JANGAN gunakan markup LaTeX (seperti \\frac, $$, \\times) — tulis rumus dengan teks biasa (misal: "Rumus = (A / B) x C").
-5. Format artikel menggunakan Markdown terstruktur: H1 judul, H2 subjudul, poin tebal, dan tabel ringkasan/perbandingan."""
+2. Berikan contoh perhitungan konkret dan realistis dalam Rupiah (Rp) menggunakan tabel Markdown standar.
+3. JANGAN PERNAH membungkus tabel Markdown di dalam blok kode (```markdown atau ```). Tulis tabel langsung dengan baris pipa (| Kolom | Kolom |).
+4. JANGAN PERNAH menggambar diagram dengan karakter kotak ASCII (┌, ─, │, └).
+5. Jangan mengarang peraturan resmi — sebutkan dasar aturan jika relevan (misal UU HPP, aturan Depnaker, atau BI/OJK).
+6. JANGAN gunakan markup LaTeX (seperti \\frac, $$, \\times) — tulis rumus dengan teks biasa (misal: "Rumus = (A / B) x C").
+7. Format artikel menggunakan Markdown terstruktur: H1 judul, H2 subjudul, poin tebal, dan tabel ringkasan/perbandingan."""
 
         user_prompt = f"""Tulis panduan edukasi keuangan lengkap tentang topik: "{title}".
 Ringkasan/Meta Deskripsi: "{description}"
@@ -253,10 +255,13 @@ Tulis dalam Bahasa Indonesia yang profesional dan mengalir (800-1200 kata). Jang
 Your job is to explain concepts clearly and compare options honestly - NOT to tell readers what they personally should do with their money.
 Critical Guidelines:
 1. Avoid prescriptive phrasing like "you should" - prefer "one common option is" or "this approach tends to work well for people who...".
-2. Be concrete and specific: use realistic example numbers and Markdown tables.
-3. Do not fabricate specific statistics or invented rates - explain principles clearly with labeled example figures.
-4. NEVER use LaTeX or math markup (no \\frac, $$, \\times) - write formulas as plain text using standard symbols (+, -, x, /, =).
-5. Format with clean Markdown: H1 title, clear H2 subheadings, bullet points, and comparative tables."""
+2. Be concrete and specific: use realistic example numbers and standard Markdown tables.
+3. NEVER wrap Markdown tables inside code fences (```markdown or ```) - write tables directly in standard markdown syntax (| Column | Column |).
+4. NEVER draw diagrams using ASCII line/box characters (┌, ─, │, └, ▼).
+5. Do not fabricate specific statistics or invented rates - explain principles clearly with labeled example figures.
+6. NEVER use LaTeX or math markup (no \\frac, $$, \\times) - write formulas as plain text using standard symbols (+, -, x, /, =).
+7. Format with clean Markdown: H1 title, clear H2 subheadings, bullet points, and comparative tables."""
+
 
         user_prompt = f"""Write a comprehensive educational personal finance guide on the topic: "{title}".
 Summary: "{description}"
