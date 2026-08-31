@@ -712,7 +712,20 @@ def build():
             articles.append(item)
             print(f"[site_builder] built {out_path}")
 
-    # Fix #5: 404 Prevention Redirect Stubs
+    # Automatic Legacy 404 Prevention: Create root redirect stubs for all nested articles/calculators
+    for item in articles + calculators:
+        slug = item.get("slug", "")
+        p = item.get("path", "")
+        if "/" in p and slug not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service", "index"):
+            root_stub_path = PUBLIC_DIR / f"{slug}.html"
+            if not root_stub_path.exists():
+                create_redirect_stub(
+                    root_stub_path,
+                    f"{p}.html",
+                    site_url(p)
+                )
+
+    # Legacy specific alias redirect stubs
     create_redirect_stub(
         PUBLIC_DIR / "articles" / "debt-snowball-vs-avalanche.html",
         "../articles/debt-snowball-vs-debt-avalanche.html",
@@ -723,6 +736,7 @@ def build():
         "../calculators/expense-ratio.html",
         site_url("calculators/expense-ratio")
     )
+
 
     # English hub categorization
     en_guides = [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service") and a.get("lang") != "id"]
