@@ -527,13 +527,20 @@ def build():
     articles = []
     calculators = []
 
+    def sanitize_markdown(text: str) -> str:
+        # Automatically unwrap markdown tables that an LLM might wrap in code blocks
+        text = re.sub(r"```(?:markdown)?\s*\n(\|[^\n]+\n(?:\|[^\n]+\n)+)```", r"\1", text)
+        return text
+
     for md_path in sorted(ARTICLES_DIR.glob("*.md")):
         raw = md_path.read_text(encoding="utf-8")
         fm, body = parse_frontmatter(raw)
+        body = sanitize_markdown(body)
         p = page_path(fm, md_path.stem)
         html_body = markdown.markdown(body, extensions=["tables", "fenced_code"])
         html_body = re.sub(r"<table>", '<div class="table-wrap"><table>', html_body)
         html_body = re.sub(r"</table>", "</table></div>", html_body)
+
         html_body = re.sub(
             r'href="(?:\.\./|\./)*(?:[a-z0-9-]+/)*([a-z0-9-]+\.html)"',
             lambda m: f'href="{link_map[m.group(1)]}"' if m.group(1) in link_map else m.group(0),

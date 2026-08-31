@@ -29,19 +29,21 @@ DISCLAIMER = (
     "licensed financial advisor for guidance specific to your situation.*\n"
 )
 
-SYSTEM_PROMPT = """You are writing educational content for a personal \
-finance website. Your job is to explain concepts clearly and compare \
+SYSTEM_PROMPT = """You are writing educational content for personal \
+finance website Money Clarity. Your job is to explain concepts clearly and compare \
 options honestly - NOT to tell readers what they personally should do \
 with their money. Avoid phrases like "you should" - prefer "one option \
 is" or "this approach tends to work well for people who...". Be concrete \
 and specific (use realistic example numbers), avoid vague filler, and \
 write at a level accessible to someone with no finance background. \
 Do not fabricate specific statistics, rates, or figures - if a number \
-matters, describe it in general/relative terms instead (e.g. "typically \
-higher than" rather than a specific invented percentage). Never use \
-LaTeX or math markup (no \frac, \text, $$...$$, \times, etc.) - write any \
-formulas as plain text using normal symbols like x, /, +, = (e.g. \
-"THR Amount = (Months of Service / 12) x One Month's Wages")."""
+matters, describe it in general/relative terms instead. \
+Never use LaTeX or math markup (no \\frac, \\text, $$...$$, \\times, etc.) - write any \
+formulas as plain text using normal symbols (+, -, x, /, =). \
+Always write tables directly in standard Markdown syntax (| Col | Col |) - NEVER \
+wrap tables inside code blocks (```markdown). NEVER draw diagrams using \
+ASCII box characters (┌, ─, │, └)."""
+
 
 
 def load_keywords():
