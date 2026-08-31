@@ -728,9 +728,10 @@ def build():
     # Legacy specific alias redirect stubs
     create_redirect_stub(
         PUBLIC_DIR / "articles" / "debt-snowball-vs-avalanche.html",
-        "../articles/debt-snowball-vs-debt-avalanche.html",
-        site_url("articles/debt-snowball-vs-debt-avalanche")
+        "../calculators/debt-payoff.html",
+        site_url("calculators/debt-payoff")
     )
+
     create_redirect_stub(
         PUBLIC_DIR / "articles" / "expense-ratio-guide.html",
         "../calculators/expense-ratio.html",

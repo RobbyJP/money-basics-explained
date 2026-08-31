@@ -29,3 +29,5 @@ jobs:
           SITE_NAME: ${{ vars.SITE_NAME }}
           SITE_URL: ${{ vars.SITE_URL }}
           SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION }}
+      - run: python verify_links.py
+
