@@ -1033,7 +1033,4 @@ textarea:focus {
   margin-bottom: 16px;
 }
 
-.site-title::before {
-  content: "🔧";
-  font-size: 1.4rem;
-}
+.site-title::before { content: "🔧"; font-size: 1.4rem; }
