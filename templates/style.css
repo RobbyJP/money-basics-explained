@@ -1010,7 +1010,7 @@ textarea:focus {
   border: 1px solid var(--line);
 }
 
-.tool-card-title {
+.tool-card-title { display: block;
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 8px 0;
@@ -1018,7 +1018,7 @@ textarea:focus {
   line-height: 1.3;
 }
 
-.tool-card-desc {
+.tool-card-desc { display: block;
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.4;
