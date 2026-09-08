@@ -24,18 +24,60 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ARTICLES_DIR = Path("articles")
+ARTICLES_DIR = Path("content")
 CALCULATORS_DIR = Path("calculators")
 TEMPLATES_DIR = Path("templates")
 PUBLIC_DIR = Path(os.getenv("PUBLIC_DIR", "docs"))
 
 SITE_NAME = os.getenv("SITE_NAME", "Money Clarity")
 SITE_URL = os.getenv("SITE_URL", "https://moneyclarity.blog")
-SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "Clear explanations of personal finance concepts, smart calculators, and honest financial comparisons.")
+SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION", "A suite of free, interactive financial calculators and quantitative tools for personal finance, debt payoff, and investing.")
 
 AUTHOR_NAME = "Ray Porter"
 AUTHOR_ROLE = "Independent Quantitative Financial Researcher"
 AUTHOR_DESC = "Independent financial researcher with a background in software engineering and quantitative financial modeling."
+
+ARCHIVED_SLUGS = [
+    'articles/503020-budget-rule-explained',
+    'articles/asset-allocation-by-age-investing-guide',
+    'articles/assets-vs-liabilities-explained',
+    'articles/backdoor-roth-ira-step-by-step-guide',
+    'articles/budgeting-apps-compared',
+    'articles/cd-ladder-vs-high-yield-savings',
+    'articles/good-debt-vs-bad-debt',
+    'articles/high-yield-savings-account-vs-regular-savings',
+    'articles/how-401k-employer-match-works',
+    'articles/how-to-build-credit-from-zero',
+    'articles/how-to-calculate-debt-to-income-ratio',
+    'articles/how-to-read-your-payslip-salary-slip',
+    'articles/hsa-vs-fsa-health-savings-explained',
+    'id/apa-itu-thr-dan-cara-menghitungnya',
+    'id/asuransi-kesehatan-swasta-vs-bpjs',
+    'id/bpjs-ketenagakerjaan-jht-jp-dijelaskan',
+    'id/cara-membaca-slip-gaji',
+    'id/cara-mengatur-keuangan-gaji-umr',
+    'id/dana-darurat-keluarga-muda',
+    'id/investasi-emas-batangan-vs-digital',
+    'id/investasi-sbn-ori-sukuk-ritel',
+    'id/kpr-syariah-vs-konvensional',
+    'id/kpr-vs-sewa-rumah-di-indonesia',
+    'id/pajak-saham-dan-dividen-bei',
+    'id/pajak-umkm-pph-final-setengah-persen',
+    'id/pph-21-pajak-penghasilan-indonesia-dijelaskan',
+    'id/reksadana-pasar-uang-vs-deposito',
+    'articles/index-funds-vs-mutual-funds',
+    'articles/kpr-mortgage-vs-renting-in-indonesia',
+    'articles/pph-21-income-tax-in-indonesia-explained',
+    'articles/roth-vs-traditional-retirement-accounts',
+    'articles/sinking-fund-vs-emergency-fund',
+    'articles/target-date-funds-explained',
+    'articles/term-life-vs-whole-life-insurance',
+    'articles/what-is-a-credit-utilization-ratio',
+    'articles/what-is-thr-and-how-is-it-calculated',
+    'articles/zero-based-budgeting-vs-503020',
+    'articles/compound-interest-vs-simple-interest',
+    'articles/how-compound-interest-works'
+]
 
 
 def parse_frontmatter(text: str) -> tuple[dict, str]:
@@ -115,7 +157,6 @@ def get_nav_links(prefix: str, html_lang: str, switch_url: str) -> str:
         target = switch_url or f"{prefix}index.html"
         return (
             f'<a href="{prefix}id/index.html">Beranda</a>\n'
-            f'<a href="{prefix}calculators/index.html">Kalkulator</a>\n'
             f'<a href="{prefix}about.html">Tentang</a>\n'
             f'<a href="{prefix}contact.html">Kontak</a>\n'
             f'<a href="{target}" class="lang-switch-btn" title="Switch to English">🇺🇸 English</a>'
@@ -124,7 +165,6 @@ def get_nav_links(prefix: str, html_lang: str, switch_url: str) -> str:
         target = switch_url or f"{prefix}id/index.html"
         return (
             f'<a href="{prefix}index.html">Home</a>\n'
-            f'<a href="{prefix}calculators/index.html">Calculators</a>\n'
             f'<a href="{prefix}about.html">About</a>\n'
             f'<a href="{prefix}contact.html">Contact</a>\n'
             f'<a href="{target}" class="lang-switch-btn" title="Ganti ke Bahasa Indonesia">🇮🇩 Bahasa Indonesia</a>'
@@ -238,7 +278,7 @@ def search_filter_widget(placeholder: str = "Search calculators & guides...", no
         f'if (!input) return;'
         f'input.addEventListener("input", function(){{'
         f'  var q = input.value.toLowerCase().trim();'
-        f'  var cards = document.querySelectorAll(".card-list .card");'
+        f'  var cards = document.querySelectorAll(".tool-grid .tool-card");'
         f'  var visibleCount = 0;'
         f'  cards.forEach(function(card){{'
         f'    var text = card.textContent.toLowerCase();'
@@ -373,22 +413,44 @@ def load_calculator(name: str) -> tuple[str, str]:
     return html, scripts
 
 
-def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "Guide") -> str:
+def get_icon_for_calculator(slug: str) -> str:
+    slug = slug.lower()
+    if "compound" in slug: return "\U0001F4C8"
+    if "debt" in slug: return "\U0001F4B3"
+    if "emergency" in slug: return "\U0001F6E1\uFE0F"
+    if "savings-rate" in slug: return "\U0001F3E6"
+    if "loan" in slug or "mortgage" in slug: return "\U0001F3E0"
+    if "salary" in slug or "hourly" in slug: return "\u23F1\uFE0F"
+    if "goal" in slug: return "\U0001F3AF"
+    if "expense" in slug: return "\U0001F4C9"
+    if "apr" in slug or "apy" in slug: return "\U0001F504"
+    if "dollar-cost" in slug or "dca" in slug: return "\U0001F4C5"
+    if "screen" in slug or "saham" in slug: return "\U0001F4CA"
+    return "\U0001F527"
+
+def link_block(title: str, items: list[dict], link_base: str = "", kind: str = "") -> str:
     if not items:
         return ""
-    chip = kind.lower()
-    entries = "\n".join(
-        f'<li class="card">'
-        f'<a class="card-link" href="{link_base}{a["filename"]}">'
-        f'<span class="chip chip-{chip}">{kind}</span>'
-        f'<span class="card-title">{a.get("title", a["filename"])}</span>'
-        f'<span class="card-desc">{a.get("description", "")}</span>'
-        f"</a></li>"
-        for a in items
-    )
+    
+    entries = ""
+    for a in items:
+        slug = a.get("slug", a["filename"].replace(".html", ""))
+        icon = get_icon_for_calculator(slug)
+        entries += (
+            f'<li class="tool-card">'
+            f'<a class="tool-card-link" href="{link_base}{a["filename"]}">'
+            f'<div class="tool-icon">{icon}</div>'
+            f'<div class="tool-card-content">'
+            f'<span class="tool-card-title">{a.get("title", a["filename"])}</span>'
+            f'<span class="tool-card-desc">{a.get("description", "")}</span>'
+            f'</div>'
+            f"</a></li>\n"
+        )
+        
+    title_html = f'<h2 class="section-title">{title} <span class="count">{len(items)}</span></h2>' if title else ""
     return (
-        f'<h2 class="section-title">{title} <span class="count">{len(items)}</span></h2>'
-        f'<ul class="card-list">{entries}</ul>'
+        f'{title_html}'
+        f'<ul class="tool-grid">{entries}</ul>'
     )
 
 
@@ -631,7 +693,7 @@ def build():
                     '</div>'
                     '</div>'
                 )
-            html_body = breadcrumb_html + byline + html_body + author_card
+            html_body = breadcrumb_html + html_body
 
         # Extract FAQs for Google FAQPage Rich Snippet Schema
         faqs = extract_faqs_from_markdown(body)
@@ -738,6 +800,20 @@ def build():
         site_url("calculators/expense-ratio")
     )
 
+    # Create redirect stubs for all sunsetted articles to point back to the homepage
+    for slug in ARCHIVED_SLUGS:
+        is_id = slug.startswith("id/")
+        target = site_url("id/index.html") if is_id else site_url("")
+        # Determine nesting to properly set relative paths
+        depth = len(slug.split("/"))
+        # depth 2 (e.g. articles/foo) means we need ../ to get to root
+        target_relative = "../" * (depth - 1) + ("id/index.html" if is_id else "index.html")
+        create_redirect_stub(
+            PUBLIC_DIR / f"{slug}.html",
+            target_relative,
+            target
+        )
+
 
     # English hub categorization
     en_guides = [a for a in articles if a.get("slug") not in ("privacy-policy", "about", "disclaimer", "contact", "terms-of-service") and a.get("lang") != "id"]
@@ -753,26 +829,26 @@ def build():
 
     hero = (
         '<section class="hero">'
-        '<p class="kicker">Independent &middot; Free &middot; Plain Language</p>'
-        f"<h1>{SITE_NAME}</h1>"
-        f'<p class="hero-desc">{SITE_DESCRIPTION}</p>'
-        "</section>"
+        '<div class="hero-icon">\U0001F6E0\uFE0F</div>'
+        '<h1>Money Clarity Tools</h1>'
+        '<p class="hero-desc">A professional suite of free, client-side financial calculators and quantitative models. No ads, no data collection, just math.</p>'
+        '</section>'
     )
 
     id_banner_en = (
         '<div class="demographic-banner">'
         '<div class="demographic-banner-text">'
-        '<div class="demographic-banner-title">🇮🇩 Mencari Panduan Keuangan Indonesia?</div>'
-        '<p class="demographic-banner-desc">Kunjungi portal khusus kami untuk panduan Pajak PPh 21, THR, Slip Gaji, KPR, SBN Ritel, dan Screener Saham IDX.</p>'
+        '<div class="demographic-banner-title">🇮🇩 Indonesian Tools?</div>'
+        '<p class="demographic-banner-desc">Access the IDX Stock Screener and Indonesian market tools.</p>'
         '</div>'
-        '<a href="id/index.html" class="demographic-banner-btn">Buka Portal Indonesia &rarr;</a>'
+        '<a href="id/index.html" class="demographic-banner-btn">Open ID Tools &rarr;</a>'
         '</div>'
     )
 
     newsletter = (
-        '<section class="card newsletter-box" aria-label="Newsletter signup">'
-        "<h2>Money lessons, once a month</h2>"
-        '<p class="newsletter-desc">One short email a month: a practical financial lesson, our newest calculator, and honest money reminders. No spam, unsubscribe any time.</p>'
+        '<section class="card newsletter-box" aria-label="Product updates">'
+        '<h2>Get Tool Updates</h2>'
+        '<p class="newsletter-desc">Join our mailing list to get notified when we release new financial calculators or major updates to our existing tools. No spam, just release notes.</p>'
         '<form class="contact-form newsletter-form" action="https://formsubmit.co/contact@moneyclarity.blog" method="POST">'
         '<input type="hidden" name="_subject" value="Newsletter signup - Money Clarity">'
         '<input type="hidden" name="_next" value="' + site_url("") + '">'
@@ -780,21 +856,18 @@ def build():
         '<div class="newsletter-row">'
         '<input type="email" name="email" placeholder="you@example.com" required aria-label="Email address">'
         '<button type="submit" class="calc-btn">Subscribe</button>'
-        "</div>"
-        '<p class="newsletter-note">We never sell or share your address. Unsubscribe with one click.</p>'
-        "</form></section>"
+        '</div>'
+        '<p class="newsletter-note">Unsubscribe with one click.</p>'
+        '</form>'
+        '</section>'
     )
     
     index_content = (
         hero
+        + search_filter_widget(placeholder="Search 11 calculators & tools...", no_results_text="No matching calculators found.")
+        + link_block("", calcs, kind="")
         + id_banner_en
-        + search_filter_widget(placeholder="Search 13 calculators & 30+ financial guides...", no_results_text="No matching calculators or guides found.")
         + newsletter
-        + link_block("Calculators & Interactive Tools", calcs, kind="Calculator")
-        + link_block("Investing & Wealth Building", investing_guides, kind="Guide")
-        + link_block("Budgeting, Debt & Cash Management", budgeting_guides, kind="Guide")
-        + link_block("Taxes, Income & Career", tax_guides, kind="Guide")
-        + (link_block("General Financial Guides", other_guides, kind="Guide") if other_guides else "")
     )
     (PUBLIC_DIR / "index.html").write_text(
         render_page(
@@ -876,17 +949,13 @@ def build():
 
         id_hub_content = (
             '<section class="hero">'
-            '<p class="kicker">Independen &middot; Gratis &middot; Bahasa Sederhana</p>'
-            '<h1>Money Clarity — Indonesia</h1>'
-            '<p class="hero-desc">Panduan keuangan praktis, regulasi pajak penghasilan, hak ketenagakerjaan, simulasi KPR, dan riset saham IDX yang objektif dan mudah dipahami.</p>'
+            '<div class="hero-icon">\U0001F6E0\uFE0F</div>'
+            '<h1>Money Clarity Tools — ID</h1>'
+            '<p class="hero-desc">Kumpulan kalkulator keuangan dan screener saham BEI gratis. Berjalan 100% di browser Anda tanpa pengumpulan data pribadi.</p>'
             '</section>'
             + en_banner_id
-            + search_filter_widget(placeholder="Cari panduan pajak, KPR, gaji, SBN, atau saham...", no_results_text="Panduan atau kalkulator tidak ditemukan.")
-            + (link_block("Alat Riset Saham BEI", id_calc_items, kind="Calculator") if id_calc_items else "")
-            + link_block("Pajak, Karir & Ketenagakerjaan", id_tax_career, kind="Guide")
-            + link_block("Investasi, SBN, Reksadana & Emas", id_invest, kind="Guide")
-            + link_block("Properti, KPR & Perencanaan Keluarga", id_property, kind="Guide")
-            + (link_block("Panduan Lainnya", id_other, kind="Guide") if id_other else "")
+            + search_filter_widget(placeholder="Cari alat investasi dan saham...", no_results_text="Kalkulator tidak ditemukan.")
+            + link_block("", id_calc_items, kind="")
         )
 
         id_hub = render_page(
